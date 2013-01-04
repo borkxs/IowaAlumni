@@ -1,17 +1,26 @@
-
+var DateObject = require('ui/common/DateObject'),
+	Description = require('ui/common/Description');
 /*
  * Post Object
  * Essential attributes
  */
 
+/*
 function Post(title,description,timestring,image,url) {
     this.title = title;
     this.description = description;
     this.timestring = timestring;
     this.image = image;
     this.url = url;
-}
+}*/
 
+function Post(item) {
+    this.title = item.title;
+    this.description = (new Description(item.description)).getDescription();
+    this.timestring = (new DateObject(item.pubDate)).dateString();
+    this.image = (new Description(item.description)).getImage();
+    this.url = item.link;
+}
 
 // Refactor featureRow and thumbRow to 
 // Row with various subtypes
