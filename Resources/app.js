@@ -32,12 +32,16 @@ else {
 		var tgrp = Ti.UI.createTabGroup();
 		var win1 = new Window('http://iowalum.com/blog/?feed=rss2','Iowa Insider');
 		var win2 = new Window('http://iowalum.com/magazine/feed_xml.cfm?start=1&end=10','Alumni Magazine');
+		//var win3 = new Window('http://now.uiowa.edu/recent/feed','Iowa Now');
 		win1.navBarHidden = true;
 		win2.navBarHidden = true;
+		//win3.navBarHidden = true;
 		var tab1 = Ti.UI.createTab({window:win1,titleid:'Iowa Insider'});
 		var tab2 = Ti.UI.createTab({window:win2,titleid:'Alumni Magazine'});
+		//var tab3 = Ti.UI.createTab({window:win3,titleid:'Iowa Now'});
 		tgrp.addTab(tab1);
 		tgrp.addTab(tab2);
+		//tgrp.addTab(tab3);
 		tgrp.open();
 	})();
 }

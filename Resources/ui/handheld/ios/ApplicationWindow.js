@@ -5,7 +5,7 @@ function ApplicationWindow(feed,windowtitle) {
 		MasterView = require('ui/common/MasterView'),
 		DetailView = require('ui/common/DetailView');
 		
-	var rssfeed = new RSS(feed);
+	//var rssfeed = new RSS(feed);
 
 	//create object instance
 	var self = Ti.UI.createWindow({
@@ -14,14 +14,17 @@ function ApplicationWindow(feed,windowtitle) {
 	});
 
 	//construct UI
-	var masterView = new MasterView(),
+	var masterView = new MasterView(feed),
 		detailView = new DetailView();
 
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
 		title:windowtitle,
-		barImage: 'navbar.png'
+		navBarHidden:true
+		//barImage: 'navbar.png'
+
 	});
+	/*
 	var button = Ti.UI.createButton({
 		systemButton: Ti.UI.iPhone.SystemButton.REFRESH
 	});
@@ -29,10 +32,12 @@ function ApplicationWindow(feed,windowtitle) {
 		refreshRSS();
 	});
 	masterContainerWindow.rightNavButton = button;
+	*/
 	masterContainerWindow.add(masterView);
 
+
 	//create detail view container
-	var detailContainerWindow = Ti.UI.createWindow({barImage: 'navbar.png'});
+	var detailContainerWindow = Ti.UI.createWindow({barImage: 'navbar.png',navBarHidden:false});
 	detailContainerWindow.add(detailView);
 
 	//create iOS specific NavGroup UI
@@ -47,16 +52,6 @@ function ApplicationWindow(feed,windowtitle) {
 		navGroup.open(detailContainerWindow);
 	});
 	
-	function refreshRSS() {
-		rssfeed.loadRssFeed({
-			success: function(data) {
-	    		masterView.refreshRssTable(data);
-	    	}
-		});
-	}
-	
-	// load initial rss feed
-	refreshRSS();
 	
 	return self;
 };

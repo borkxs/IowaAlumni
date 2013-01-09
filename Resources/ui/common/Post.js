@@ -116,7 +116,7 @@ Post.prototype.featureRow = function() {
 		height: 200,
 		hires: true,
 		top: daheight-200,
-		image: 'overshadow.png'
+		image: 'overshadow2.png'
 	});
 	container.add(imagebox);
 	container.add(overlay);
@@ -219,9 +219,9 @@ function getTitleLabel(title,postheight) {
 		textAlign:'left',
 		width: 270,
 		color:'#efc006',
-		//shadowColor:'#896e03',
-        //shadowOpacity:0.5,
-        //shadowOffset:{x:0, y:-1},
+		shadowColor:'#896e03',
+        shadowOpacity:0.5,
+        shadowOffset:{x:0, y:-1},
 		font:{fontFamily:'HelveticaNeue-Light',fontSize:25,fontWeight:'bold'}
 	});
 	

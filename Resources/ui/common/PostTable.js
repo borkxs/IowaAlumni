@@ -3,12 +3,13 @@
  *		Creates table for each Row object
  */
 
-function PostTable(self) {
+function PostTable() {
 
-	var table = Ti.UI.createTableView({separatorColor: 'transparent'});
+	this.pulling = false;
+	this.reloading = false;
 
-	table.addEventListener('click', function(e) {
-		self.fireEvent('itemSelected', { link: e.row.link });
+	var self = Ti.UI.createTableView({
+		separatorColor: 'transparent'
 	});
 	
 	var border = Ti.UI.createView({
@@ -28,7 +29,7 @@ function PostTable(self) {
 	tableHeader.add(border);
 
 	var statusLabel = Ti.UI.createLabel({
-		text:"Pull to reload",
+		text:"Pull down to refresh...",
 		left:55,
 		width:200,
 		bottom:30,
@@ -36,7 +37,7 @@ function PostTable(self) {
 		color:"#576c89",
 		textAlign:"center",
 		font:{fontSize:13,fontWeight:"bold"},
-		shadowColor:"#999",
+		shadowColor:"#fff",
 		shadowOffset:{x:0,y:1}
 	});
 
@@ -49,7 +50,7 @@ function PostTable(self) {
 		color:"#576c89",
 		textAlign:"center",
 		font:{fontSize:12},
-		shadowColor:"#999",
+		shadowColor:"#fff",
 		shadowOffset:{x:0,y:1}
 	});
 
@@ -64,71 +65,29 @@ function PostTable(self) {
 	tableHeader.add(lastUpdatedLabel);
 	tableHeader.add(actInd);
 
-	table.headerPullView = tableHeader;
+	self.headerPullView = tableHeader;
 
-
-	var pulling = false;
-	var reloading = false;
-
-	function beginReloading() {
-		// just mock out the reload
-		setTimeout(endReloading,2000);
+	self.updateLabelText = function(text) {
+		statusLabel.text = text;
+	}
+	self.updateDateText = function(text) {
+		lastUpdatedLabel.text = text;
 	}
 
-	function endReloading() {
-		// simulate loading
-		for (var c=lastRow;c<lastRow+10;c++)
-		{
-			table.appendRow({title:"Row "+c});
-		}
-		lastRow += 10;
-
-		// when you're done, just reset
-		table.setContentInsets({top:0},{animated:true});
-		reloading = false;
-		lastUpdatedLabel.text = "Last Updated: "+formatDate();
-		statusLabel.text = "Pull down to refresh...";
+	self.hideActInd = function() {
 		actInd.hide();
-		//arrow.show();
+	}
+	self.showActInd = function() {
+		actInd.show();
 	}
 
-
-	table.addEventListener('scroll',function(e) {
-		var offset = e.contentOffset.y;
-		if (offset <= -65.0 && !pulling)
-		{
-			//var t = Ti.UI.create2DMatrix();
-			//t = t.rotate(-180);
-			//pulling = true;
-			//arrow.animate({transform:t,duration:180});
-			statusLabel.text = "Release to refresh...";
-		}
-		else if (pulling && offset > -65.0 && offset < 0)
-		{
-			pulling = false;
-			//var t = Ti.UI.create2DMatrix();
-			//arrow.animate({transform:t,duration:180});
-			statusLabel.text = "Pull down to refresh...";
-		}
-	});
-	table.addEventListener('scrollEnd',function(e) {
-		if (pulling && !reloading && e.contentOffset.y <= -65.0)
-		{
-			reloading = true;
-			pulling = false;
-			//arrow.hide();
-			actInd.show();
-			statusLabel.text = "Reloading...";
-			table.setContentInsets({top:60},{animated:true});
-			//arrow.transform=Ti.UI.create2DMatrix();
-			beginReloading();
-		}
-	});
-
-	this.table = table;
+	return self;
 
 }
+
 module.exports = PostTable;
+
+
 
 function formatDate()
 {
