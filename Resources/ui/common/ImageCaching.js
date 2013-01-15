@@ -10,16 +10,17 @@
 
 
 
-function ImageCaching(imageDirectoryName, url, imageViewObject) {
+function ImageCaching(imageDirectoryName, url) {
 	// Grab the filename
 	var filename = url.split('/');
 	filename = filename[filename.length - 1];
 	// Try and get the file that has been previously cached
 	var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, imageDirectoryName, filename);
-	
+	var path = '';
 	if (file.exists()) {
 		// If it has been cached, assign the local asset path to the image view object.
-		imageViewObject.image = file.nativePath;
+		//imageViewObject.image = file.nativePath;
+		path = file.nativePath;
 		//To release memory
 		file = null;
 	} else {
@@ -39,7 +40,8 @@ function ImageCaching(imageDirectoryName, url, imageViewObject) {
 				// save the remote image data to it.
 				file.write(xhr.responseData);
 				// Assign the local asset path to the image view object.
-				imageViewObject.image = file.nativePath;
+				//imageViewObject.image = file.nativePath;
+				path = file.nativePath;
 				//To release memory
 				file = null;
 			};
@@ -50,6 +52,7 @@ function ImageCaching(imageDirectoryName, url, imageViewObject) {
 		// Finally, sending the request out.
 		xhr.send();
 	};
+	return path;
 };
 
 

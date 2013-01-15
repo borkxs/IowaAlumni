@@ -9,24 +9,14 @@ function PostTable() {
 	this.reloading = false;
 
 	var self = Ti.UI.createTableView({
-		separatorColor: 'transparent'
-	});
-	
-	var border = Ti.UI.createView({
-		backgroundColor:"#576c89",
-		height:2,
-		bottom:0
+		separatorColor: '#d5d5d5'
 	});
 
 	var tableHeader = Ti.UI.createView({
-		backgroundColor:"#e2e7ed",
+		backgroundColor:"#e2e2e2",
 		width:320,
 		height:60
 	});
-
-	// fake it til ya make it..  create a 2 pixel
-	// bottom border
-	tableHeader.add(border);
 
 	var statusLabel = Ti.UI.createLabel({
 		text:"Pull down to refresh...",

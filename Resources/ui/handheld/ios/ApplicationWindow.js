@@ -20,19 +20,21 @@ function ApplicationWindow(feed,windowtitle) {
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
 		title:windowtitle,
-		navBarHidden:true
-		//barImage: 'navbar.png'
-
+		navBarHidden:true,
+		//barImage:'navbar.png',
+		//hires:true,
+		moving:false, // Custom property for movement
+		    axis:0 // Custom property for X axis
+	});/*
+	var menuButton = Ti.UI.createButton({
+		backgroundImage: 'menubutton.png',
+		backgroundSelectedImage: 'menubuttonselected.png',
+		title: '',
+		height: 22,
+		width: 37,
+    	toggle:false // Custom property for menu toggle
 	});
-	/*
-	var button = Ti.UI.createButton({
-		systemButton: Ti.UI.iPhone.SystemButton.REFRESH
-	});
-	button.addEventListener('click', function(e) {
-		refreshRSS();
-	});
-	masterContainerWindow.rightNavButton = button;
-	*/
+	masterContainerWindow.setLeftNavButton(menuButton);*/
 	masterContainerWindow.add(masterView);
 
 

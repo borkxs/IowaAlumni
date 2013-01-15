@@ -5,166 +5,82 @@ var DateObject = require('ui/common/DateObject'),
  * Essential attributes
  */
 
-/*
-function Post(title,description,timestring,image,url) {
-    this.title = title;
-    this.description = description;
-    this.timestring = timestring;
-    this.image = image;
-    this.url = url;
-}*/
-
-function Post(item) {
+function TextPost(item) {
     this.title = item.title;
     this.description = (new Description(item.description)).getDescription();
     this.timestring = (new DateObject(item.pubDate)).dateString();
     this.image = (new Description(item.description)).getImage();
     this.url = item.link;
-    //Ti.API.info(this.image);
-    /*
-
-	
-	
-    */
+    this.containerheight = 0;
 }
-
-
-/*
-function hasImage(item) {
-	var type = false //default
-
-	// Check item.image
-	if(item.image!='') type = true;
-	else {
-		// Check item.description
-		var temp = (new Description(item.description)).hasImage(feed);
-		if(temp==false) {
-			type = temp;
-
-	}
-
-	return type;
-}
-
-function Post(item) {
-
-	var self = getRow(item,hasImage(item));
-
-	...
-
-	return self;
-
-
-}
-
-
-
-function getRow(item,type) {
-
-}
-
-// Refactor featureRow and thumbRow to 
-// Row with various subtypes
-
-Post.prototype.row = function() {
-
-
-
-}*/
 
 Post.prototype.featureRow = function() {
 	
 	var row = Ti.UI.createTableViewRow({
 		hasChild:true,
 		link: this.url,
-		height: 250,
+		height: 355,
 		padding: 0,
 		top: 0,
 		bottom: 0,
 		layout: 'vertical',
-		backgroundColor: 'efc006',
+		backgroundColor: 'e2e2e2',
 		borderRadius: 0.5
 	});
 	row.rightImage = null;
 	row.backgroundSelectedImage = null;
 	row.backgroundFocusImage = null;
-	
+
 	var container =  Titanium.UI.createView({
 		backgroundColor: 'transparent',
-			height:			250,
-			width: 			320,
-			left: 			0,
-			top:			0,
+			height:			300,
+			width: 			300,
+			left: 			10,
+			top:			10,
 			bottom:			0,
 			padding:		0,
-			borderRadius:	0
+			borderRadius:	5
+			//borderColor: 	'#d5d5d5',
+			//borderWidth: 	2
 	});
-	var tempimagebox = Ti.UI.createImageView({
-		//image: this.image,
-		width: 'auto',
-		height: 'auto',
-		hires: true,
-		//top: -10, // this works for some reason
-	});
-	
 
+	//cacheImage(this.image);
+	this.containerheight = getContainerHeight(this.image);
+	//Ti.API.info(this.containerheight);
+	container.height 	 = this.containerheight + 65;
+	row.height 			 = this.containerheight + 105;
 
-    cachedImageView('imageDirectoryName', this.image, tempimagebox);
-	
-	aheight = tempimagebox.toImage().height;
-	dawidth = tempimagebox.toImage().width;
-	
-	//Ti.API.info(awidth + ' ' + aheight);
-	imgratio = dawidth / aheight;
-	//Ti.API.info(imgratio);
-	//Ti.API.info( '[' + dawidth + ' x ' + aheight + '] ' + this.image );
-	daheight = (dawidth>320) ? (Math.floor((320 / dawidth) * aheight)) : (Math.floor(dawidth / 320) * aheight);
-	//Ti.API.info(daheight);
-	//min height
-	if(daheight<200) {
-		daheight = 200;
-		dawidth = Math.floor(200 * imgratio);
-	}
-	else {
-		dawidth = 320;
-	}
-	
-	Ti.API.info(dawidth + ' ' + daheight);
-	
-	container.height = daheight;
-	row.height=daheight;
-	//Ti.API.info( '[' + dawidth + ' x ' + daheight + '] ' + this.image );
-	
 	var imagebox = Ti.UI.createImageView({
-		width: dawidth,
-		height: daheight,
+		width: 300,
+		height: this.containerheight,
 		hires: true,
+		top: 0
 		//top: -10, // this works for some reason
 		//url: this.image
 	});
 	cachedImageView('imageDirectoryName', this.image, imagebox);
 	var overlay = Ti.UI.createImageView({
-		width: 320,
-		height: 36,
+		width: 300,
+		height: 40,
 		hires: true,
 		top: 0,
-		image: 'goldover.png'
+		image: 'gold.png'
 	});
 	var shadow = Ti.UI.createImageView({
-		width: 320,
-		height: 200,
+		width: 300,
+		height: 150,
 		hires: true,
-		top: daheight-200,
-		image: 'overshadow2.png'
+		top: this.containerheight-150,
+		image: 'shadow.png'
 	});
 	container.add(imagebox);
 	container.add(shadow);
 	container.add(overlay);
 	
-	titlelbl = getTitleLabel(this.title,daheight);
+	titlelbl = getTitleLabel(this.title,this.containerheight);
 	container.add(titlelbl);
-	
-	desclbl  = getDescriptionLabel(this.description,daheight);
+
+	desclbl  = getDescriptionLabel(this.description,this.containerheight);
 	container.add(desclbl);
 
 	/*
@@ -177,58 +93,56 @@ Post.prototype.featureRow = function() {
 	container.add(icon); */
 
 	var date = Ti.UI.createLabel({
-		text: this.timestring,
-		top: 5,
-		left:10,
-		textAlign:'left',
-		width:200,
-		color:'#222222',
-		shadowColor:'#f0da72',
-		shadowOffset:{x:0,y:1},
-		font:{fontFamily:'HelveticaNeue-CondensedBold',fontSize:14,fontWeight:'bold'}
+		text: 			this.timestring,
+		top: 			7,
+		left: 			15,
+		textAlign: 		'left',
+		width: 			200,
+		color: 			'#222222',
+		shadowColor: 	'#f0da72',
+		shadowOffset:   {x:0,y:1},
+		font: 			{fontFamily:'HelveticaNeue-CondensedBold',fontSize:13,fontWeight:'bold'}
 	});
 	container.add(date);
 
 	row.add(container);
-	
-	return row;
-	
-};
 
-Post.prototype.thumbRow = function() {
-	
-	var row = Ti.UI.createTableViewRow({
-		hasChild:true,
-		link: this.url,
-		height: 165,
-		padding: 0,
-		top: 0,
-		bottom: 0,
-		layout: 'vertical',
-		backgroundColor: 'ffffff'
-	});
-	row.rightImage = null;
-	row.backgroundSelectedImage = null;
-	row.backgroundFocusImage = null;
-
-	var date = Ti.UI.createLabel({
-		text: 'this.title',
-		top: 5,
-		left:10,
+	var posted = Ti.UI.createLabel({
+		text: 'Posted 2 hours ago in Kudos to Iowa People',
+		top: 7,
+		left: 25,
+		bottom: 10,
+		height: 15,
 		textAlign:'left',
-		width:200,
-		color:'#222222',
-		font:{fontFamily:'HelveticaNeue-CondensedBold',fontSize:14,fontWeight:'bold'}
-	});	
-
-	row.add(date);
-	Ti.API.info(this.title);
+		width: 270,
+		color:'#616161',
+		shadowColor:'#ffffff',
+        shadowOpacity:0.5,
+        shadowOffset:{x:0, y:1},
+		font:{fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
+	});
+	row.add(posted);
 	
 	return row;
 	
 };
 
+function getContainerHeight(img) {
+	var tempimagebox = Ti.UI.createImageView({
+		image: img,
+		width: 'auto',
+		height: 'auto',
+		hires: true,
+		//top: -10, // this works for some reason
+	});
+    cachedImageView('imageDirectoryName', img, tempimagebox);
+	
+	var height = tempimagebox.toImage().height;
+	var width = tempimagebox.toImage().width;
+	var ratio = height / width;
 
+	return Math.floor( 300 * ratio );
+}
 
 function getTitleLabel(title,postheight) {
 
@@ -237,26 +151,26 @@ function getTitleLabel(title,postheight) {
 	var temp = Ti.UI.createLabel({
 		text: title,
 		height:'auto',
-		width: 270,
+		width: 250,
 		color:'#efc006',
 		font:{fontFamily:'HelveticaNeue-Light',fontSize:25,fontWeight:'bold'}
 	});
 	var view = Ti.UI.createView({
-		width: 270,
+		width: 250,
 		height:'auto'
-	})
+	});
 	view.add(temp);
 	theheight = view.toImage().height;
 	//Ti.API.info('[' + view.toImage().width + ' x ' + view.toImage().height + '][' + view.toImage().size + '] ' + title);
 
 	var titlelbl = Ti.UI.createLabel({
 		text: title,
-		left: 10,
+		left: 15,
 		top: 140,
 		bottom:10,
 		height:theheight,
 		textAlign:'left',
-		width: 270,
+		width: 250,
 		color:'#efc006',
 		shadowColor:'#000000',
         shadowOpacity:0.5,
@@ -264,7 +178,7 @@ function getTitleLabel(title,postheight) {
 		font:{fontFamily:'HelveticaNeue-Light',fontSize:25,fontWeight:'bold'}
 	});
 	
-	titlelbl.top = postheight - theheight - 70;
+	titlelbl.top = postheight - theheight - 5;
 	
 	return titlelbl;
 
@@ -272,23 +186,30 @@ function getTitleLabel(title,postheight) {
 
 function getDescriptionLabel(description,postheight) {
 
+	var view = Ti.UI.createView({
+		backgroundColor: '#0c0c0c',
+		width: 300,
+		height: 65,
+		top: postheight
+	});
+
 	var text = Ti.UI.createLabel({
 		text: description,
-		left: 10,
+		left: 15,
+		top: 0,
 		bottom: 10,
 		height: 55,
 		textAlign:'left',
-		width: 270,
+		width: 260,
 		color:'#ffffff',
 		shadowColor:'#000000',
         shadowOpacity:0.5,
         shadowOffset:{x:0, y:1},
 		font:{fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
 	});
-	
-	text.top = postheight - 70;
+	view.add(text);
 
-	return text;
+	return view;
 
 }
 

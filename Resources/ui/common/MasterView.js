@@ -1,4 +1,5 @@
-var Post = require('ui/common/Post'),
+var Post = require('ui/common/NewPost'),
+	PostGroup = require('ui/common/TextPost'),
 	PostTable = require('ui/common/PostTable'),
 	RSS = require('services/rss');
 
@@ -36,7 +37,6 @@ function MasterView(feed) {
 			table.updateLabelText("Pull down to refresh...");
 		}    
 	});
-
 	table.addEventListener('dragEnd', function()
 	{	
 		if(table.pulling && !table.reloading)
@@ -49,29 +49,17 @@ function MasterView(feed) {
 			beginReloading();
 		}
 	});
-
 	function beginReloading() {
 		// just mock out the reload
 		refreshRSS();
 		endReloading();
 	}
-
 	function endReloading() {
 		table.setContentInsets({top:60},{animated:true});
 		table.reloading = false;
 		table.updateLabelText("Refreshing...");
 		setTimeout(resetTable,700);
 	}
-
-	function refreshRssTable(data) {
-		if (Object.prototype.toString.apply(data) === '[object Array]') {
-			var rows = [];
-			for (var i = 0; i < data.length; i++) {
-				rows.push((new Post(data[i])).featureRow());
-			}
-			table.setData(rows);
-		}
-	};
 	function resetTable() { 
 		table.setContentInsets({top:0},{animated:true});
 		table.updateDateText("Last Updated: "+formatDate());
@@ -79,6 +67,17 @@ function MasterView(feed) {
 		table.updateLabelText("Pull down to refresh...");
 	}
 
+
+	function refreshRssTable(data) {
+		if (Object.prototype.toString.apply(data) === '[object Array]') {
+			var rows = [];
+			rows.push((new Post(data[0],feed)).featureRow());
+			for (var i = 1; i < data.length; i++) {
+				rows.push((new PostGroup(data[i],feed)).featureRow());
+			}
+			table.setData(rows);
+		}
+	}
 	function refreshRSS() {
 		rssfeed.loadRssFeed({
 			success: function(data) {
