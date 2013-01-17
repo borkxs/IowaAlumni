@@ -1,5 +1,7 @@
-var Post = require('ui/common/NewPost'),
-	PostGroup = require('ui/common/TextPost'),
+var Post = require('ui/common/Post'),
+	FeatureRow = require('ui/common/FeatureRow'),
+	Row = require('ui/common/Row'),
+	PostGroup = require('ui/common/PostGroup'),
 	PostTable = require('ui/common/PostTable'),
 	RSS = require('services/rss');
 
@@ -7,6 +9,8 @@ var Post = require('ui/common/NewPost'),
  * Master View Component Constructor
  */
 function MasterView(feed) {
+
+	var minheight = 200;
 
 	var rssfeed = new RSS(feed);
 
@@ -18,11 +22,11 @@ function MasterView(feed) {
 
 	/*
 	 * PostTable Event Listeners
-	 */
+	 
 	table.addEventListener('click', function(e) {
 		self.fireEvent('itemSelected', { link: e.row.link });
 	});
-	
+	*/
 	table.addEventListener('scroll',function(e)
 	{
 		var offset = e.contentOffset.y;
@@ -71,10 +75,27 @@ function MasterView(feed) {
 	function refreshRssTable(data) {
 		if (Object.prototype.toString.apply(data) === '[object Array]') {
 			var rows = [];
-			rows.push((new Post(data[0],feed)).featureRow());
-			for (var i = 1; i < data.length; i++) {
-				rows.push((new PostGroup(data[i],feed)).featureRow());
+			var group = [];
+			var featureSet = false;
+			for (var i = 0; i < data.length; i++) {
+				var post = new Post(data[i]);
+				if(post.imageheight > 150 && featureSet == false) {
+					var row = new FeatureRow(post);
+					featureSet = true;
+					row.addEventListener('click', function(e) {
+						self.fireEvent('itemSelected', { link: e.row.link });
+					});
+					rows.push(row);
+				}
+				else {
+					var row = new Row(post);
+					row.addEventListener('click', function(e) {
+						self.fireEvent('itemSelected', { link: e.row.link });
+					});
+					group.push(row);
+				}
 			}
+			rows.push(new PostGroup(group));
 			table.setData(rows);
 		}
 	}
@@ -85,7 +106,7 @@ function MasterView(feed) {
 	    	}
 		});
 	}
-	
+
 	// load initial rss feed
 	refreshRSS();
 

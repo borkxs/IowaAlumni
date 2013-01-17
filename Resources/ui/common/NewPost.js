@@ -1,22 +1,13 @@
-var DateObject = require('ui/common/DateObject'),
-	Description = require('ui/common/Description');
 /*
  * Post Object
  * Essential attributes
  */
 
-function Post(item) {
-    this.title = item.title;
-    this.description = (new Description(item.description)).getDescription();
-    this.timestring = (new DateObject(item.pubDate)).dateString();
-    this.image = (new Description(item.description)).getImage();
-    this.url = item.link;
-    this.containerheight = 0;
-}
+function FeatureRow(post) {
 
-Post.prototype.featureRow = function() {
-	
-	var row = Ti.UI.createTableViewRow({
+	this.containerheight = 0;
+
+    var row = Ti.UI.createTableViewRow({
 		hasChild:true,
 		link: this.url,
 		height: 355,
@@ -45,7 +36,7 @@ Post.prototype.featureRow = function() {
 	});
 
 	//cacheImage(this.image);
-	this.containerheight = getContainerHeight(this.image);
+	this.containerheight = getContainerHeight(post.image);
 	//Ti.API.info(this.containerheight);
 	container.height 	 = this.containerheight + 65;
 	row.height 			 = this.containerheight + 105;
@@ -58,7 +49,7 @@ Post.prototype.featureRow = function() {
 		//top: -10, // this works for some reason
 		//url: this.image
 	});
-	cachedImageView('imageDirectoryName', this.image, imagebox);
+	cachedImageView('imageDirectoryName', post.image, imagebox);
 	var overlay = Ti.UI.createImageView({
 		width: 300,
 		height: 40,
@@ -77,10 +68,10 @@ Post.prototype.featureRow = function() {
 	container.add(shadow);
 	container.add(overlay);
 	
-	titlelbl = getTitleLabel(this.title,this.containerheight);
+	titlelbl = getTitleLabel(post.title,this.containerheight);
 	container.add(titlelbl);
 
-	desclbl  = getDescriptionLabel(this.description,this.containerheight);
+	desclbl  = getDescriptionLabel(post.description,this.containerheight);
 	container.add(desclbl);
 
 	/*
@@ -93,7 +84,7 @@ Post.prototype.featureRow = function() {
 	container.add(icon); */
 
 	var date = Ti.UI.createLabel({
-		text: 			this.timestring,
+		text: 			post.timestring,
 		top: 			7,
 		left: 			15,
 		textAlign: 		'left',
@@ -124,8 +115,10 @@ Post.prototype.featureRow = function() {
 	row.add(posted);
 	
 	return row;
-	
-};
+
+}
+
+
 
 function getContainerHeight(img) {
 	var tempimagebox = Ti.UI.createImageView({
@@ -166,7 +159,6 @@ function getTitleLabel(title,postheight) {
 	var titlelbl = Ti.UI.createLabel({
 		text: title,
 		left: 15,
-		top: 140,
 		bottom:10,
 		height:theheight,
 		textAlign:'left',
@@ -188,6 +180,7 @@ function getDescriptionLabel(description,postheight) {
 
 	var view = Ti.UI.createView({
 		backgroundColor: '#0c0c0c',
+		backgroundImage: 'dark.jpg',
 		width: 300,
 		height: 65,
 		top: postheight

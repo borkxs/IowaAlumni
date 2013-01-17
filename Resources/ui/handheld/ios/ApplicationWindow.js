@@ -3,7 +3,8 @@ function ApplicationWindow(feed,windowtitle) {
 	//declare module dependencies
 	var RSS = require('services/rss'),
 		MasterView = require('ui/common/MasterView'),
-		DetailView = require('ui/common/DetailView');
+		DetailView = require('ui/common/DetailView'),	
+		Description = require('ui/common/Description');
 		
 	//var rssfeed = new RSS(feed);
 

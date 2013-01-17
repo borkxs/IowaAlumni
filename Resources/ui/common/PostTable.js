@@ -9,7 +9,8 @@ function PostTable() {
 	this.reloading = false;
 
 	var self = Ti.UI.createTableView({
-		separatorColor: '#d5d5d5'
+		separatorColor: 'transparent',
+		backgroundColor: '#e2e2e2'
 	});
 
 	var tableHeader = Ti.UI.createView({

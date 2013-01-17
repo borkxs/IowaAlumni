@@ -48,7 +48,7 @@ TextPost.prototype.featureRow = function() {
 
 	desclbl  = getDescriptionLabel(this.description);
 	container.add(desclbl);
-	desclbl.top = titlelbl.height;
+	desclbl.top = titlelbl.height + 15;
 
 	var posted = Ti.UI.createLabel({
 		text: 			'Posted 2 hours ago in Kudos to Iowa People',
@@ -63,12 +63,28 @@ TextPost.prototype.featureRow = function() {
         shadowOffset: 	{x:0, y:1},
 		font: 			{fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	});
-	posted.top = titlelbl.height + desclbl.height + 5;
+	posted.top = titlelbl.height + desclbl.height + 20;
 	container.add(posted);
 
+	var imageContainer = Ti.UI.createView({
+		width: 			60,
+		height: 		60,
+		right: 			15,
+		top: 			titlelbl.height+20,
+		borderRadius:	4,
+		borderColor: 	'#d5d5d5',
+		borderWidth: 	1
 
-	container.height = titlelbl.height + desclbl.height + posted.height + 15;
+	});
+	var postImage = getPostImage(this.image);
+	cachedImageView('imageDirectoryName', this.image, postImage);
+	imageContainer.add(postImage);
+	container.add(imageContainer);
+
+	container.height = titlelbl.height + desclbl.height + posted.height + 35;
 	row.height = container.height + 25;
+
+	
 
 	/*
 	var icon = Ti.UI.createImageView({
@@ -123,9 +139,9 @@ function getTitleLabel(title) {
 	var label = Ti.UI.createLabel({
 		text: title,
 		left: 15,
-		top: 0,
+		top: 15,
 		bottom:10,
-		height: theheight,
+		height: view.toImage().height,
 		textAlign:'left',
 		width: 270,
 		color:'#303030',
@@ -145,16 +161,42 @@ function getDescriptionLabel(description) {
 		left: 15,
 		bottom: 10,
 		top: 0,
-		height: 55,
+		height: 70,
 		textAlign:'left',
-		width: 260,
+		width: 200,
 		color:'#000000',
-		font:{fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
+		font:{fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	});
 	this.postheight += text.toImage().height;
 
 	return text;
 
+}
+
+function getPostImage(image) {
+	var tempimagebox = Ti.UI.createImageView({
+		image: image,
+		width: 'auto',
+		height: 'auto',
+		hires: true,
+		//top: -10, // this works for some reason
+	});
+    cachedImageView('imageDirectoryName', image, tempimagebox);
+	
+	var height = tempimagebox.toImage().height;
+	var width = tempimagebox.toImage().width;
+	var ratio = width / height;
+
+	var adjustedWidth = Math.floor(60 * ratio);
+
+	var imagebox = Ti.UI.createImageView({
+		image: this.image,
+		hires: true,
+		width: adjustedWidth,
+		top: 0
+	});
+
+	return imagebox;
 }
 
 /* 
