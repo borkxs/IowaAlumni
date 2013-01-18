@@ -33,57 +33,68 @@ else {
 
 		//// ---- Menu window, positioned on the left
 		var menuWindow = Ti.UI.createWindow({
-		    top:0,
-		    left:0,
-		    width:180
+		    top: 		0,
+		    left: 		0,
+		    width: 		0
 		});
-		menuWindow.open();
+		
+		var logorow = Ti.UI.createTableViewRow({
+			layout: 'vertical',
+			height: 125,
+			backgroundColor: 'transparent'
+		});
+		var logo = Ti.UI.createImageView({
+			image: 'logo.png',
+			width: 210,
+			height: 75,
+			top: 50,
+			left: 10,
+			hires: true
+		});
+		logorow.add(logo);
+
 		//// ---- Menu Table
 		// Menu Titles
 		var menuTitles = [
-		    (new MenuRow('Menu 1')),
-		    (new MenuRow('Menu 2')),
-		    (new MenuRow('Menu 3')),
-		    (new MenuRow('Menu 4')),
+			(logorow),
+		    (new MenuRow('Iowa Insider','insider','http://iowalum.com/blog/?feed=rss2',true)),
+		    (new MenuRow('Iowa Alumni Magazine','magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+		    (new MenuRow('Events','events',false))
 		];
+
 		// Tableview
 		var tableView = Ti.UI.createTableView({
 			separatorColor: '000000',
 			backgroundImage: 'menubg.jpg',
 		    footerTitle:'',
-		    top: 45
+		    top: 0
 		});
 		tableView.setData(menuTitles);
+		
 		menuWindow.add(tableView);
 
 		//// ---- Window with navigationGroup
 		var navWindow = Ti.UI.createWindow({
-		    width:320 // Set the width of the sliding window to avoid cut out from animation
+		    width:320, // Set the width of the sliding window to avoid cut out from animation
+			navBarHidden:true
 		});
+		menuWindow.open();
 		navWindow.open();
+		menuWindow.width = 270;
+
 		// Main window
 		var win = new Window('http://iowalum.com/blog/?feed=rss2','Iowa Insider');
-		/*var win = Ti.UI.createWindow({
-		    title:'Main Window',
-		    backgroundColor:'#28292c',
-		    barColor:'#28292c',
-		    moving:false, // Custom property for movement
-		    axis:0 // Custom property for X axis
-		});*/
 		win.moving = false;
 		win.axis = 0;
+		win.navBarHidden = true;
+
 		// NavigationGroup
 		var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		    window:win
 		});
 		navWindow.add(navGroup);
-		// Top left button
-		var menuButton = Ti.UI.createButton({
-		    title:'Menu',
-		    toggle:false // Custom property for menu toggle
-		});
-		win.setLeftNavButton(menuButton);
-		menuButton.addEventListener('click', function(e){
+
+		win.addEventListener('menuClick', function(e){
 		    // If the menu is opened
 		    if(e.source.toggle == true){
 		        navWindow.animate({
@@ -96,7 +107,7 @@ else {
 		    // If the menu isn't opened
 		    else{
 		        navWindow.animate({
-		            left:180,
+		            left:270,
 		            duration:400,
 		            curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
 		        });
@@ -104,12 +115,60 @@ else {
 		    }
 		});
 
-		win.addEventListener('touchstart', function(e){
+		tableView.addEventListener('click', function(e) {
+			
+			//Ti.API.info(JSON.stringify(e));
+			//// ---- Window with navigationGroup
+			var navWindow = Ti.UI.createWindow({
+			    width:320, // Set the width of the sliding window to avoid cut out from animation
+				navBarHidden:true
+			});
+			menuWindow.open();
+			navWindow.open();
+			menuWindow.width = 270;
+
+			// Main window
+			var win = new Window(e.row.feed,e.row.feedTitle);
+			win.moving = false;
+			win.axis = 0;
+			win.navBarHidden = true;
+
+			// NavigationGroup
+			var navGroup = Ti.UI.iPhone.createNavigationGroup({
+			    window:win
+			});
+			navWindow.add(navGroup);
+
+			win.addEventListener('menuClick', function(e){
+			    // If the menu is opened
+			    if(e.source.toggle == true){
+			        navWindow.animate({
+			            left:0,
+			            duration:400,
+			            curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+			        });
+			        e.source.toggle = false;
+			    }
+			    // If the menu isn't opened
+			    else{
+			        navWindow.animate({
+			            left:270,
+			            duration:400,
+			            curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+			        });
+			        e.source.toggle  = true;
+			    }
+			});
+
+		});
+
+		/*
+		win.addEventListener('fireTouchstart', function(e){
 		    // Get starting horizontal position
 		    e.source.axis = parseInt(e.x);
 		});
 
-		win.addEventListener('touchmove', function(e){
+		win.addEventListener('fireTouchmove', function(e){
 		    // Subtracting current position to starting horizontal position
 		    var coordinates = parseInt(e.globalPoint.x) - e.source.axis;
 		    // Detecting movement after a 20px shift
@@ -128,13 +187,13 @@ else {
 		    }
 		});
 
-		win.addEventListener('touchend', function(e){
+		win.addEventListener('fireTouchend', function(e){
 		    // No longer moving the window
 		    e.source.moving = false;
-		    if(navWindow.left >= 75 && navWindow.left < 180){
+		    if(navWindow.left >= 75 && navWindow.left < 270){
 		        // Repositioning the window to the right
 		        navWindow.animate({
-		            left:180,
+		            left:270,
 		            duration:300
 		        });
 		        menuButton.toggle = true;
@@ -147,6 +206,7 @@ else {
 		        menuButton.toggle = false;
 		    }
 		});
+	*/
 
 
 		/*

@@ -9,6 +9,7 @@ function Post(item) {
     this.title = item.title;
     this.description = (new Description(item.description)).getDescription();
     this.timestring = (new DateObject(item.pubDate)).dateString();
+    this.pubDate = item.pubDate;
     this.image = (new Description(item.description)).getImage();
     this.url = item.link;
     this.imageheight = getImageHeight(this.image);

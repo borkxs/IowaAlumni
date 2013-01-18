@@ -53,6 +53,11 @@ function MasterView(feed) {
 			beginReloading();
 		}
 	});
+
+	self.addEventListener('swipe', function(e){
+		self.fireEvent('menuClick');
+	});
+
 	function beginReloading() {
 		// just mock out the reload
 		refreshRSS();
@@ -77,6 +82,7 @@ function MasterView(feed) {
 			var rows = [];
 			var group = [];
 			var featureSet = false;
+			var groupCount = 0;
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
 				if(post.imageheight > 150 && featureSet == false) {
@@ -84,6 +90,9 @@ function MasterView(feed) {
 					featureSet = true;
 					row.addEventListener('click', function(e) {
 						self.fireEvent('itemSelected', { link: e.row.link });
+					});			
+					row.addEventListener('swipe', function(e){
+				 		self.fireEvent('swipeToggle');
 					});
 					rows.push(row);
 				}
@@ -92,10 +101,23 @@ function MasterView(feed) {
 					row.addEventListener('click', function(e) {
 						self.fireEvent('itemSelected', { link: e.row.link });
 					});
-					group.push(row);
+					if(groupCount >= 1) {
+						group.push(row);
+						rows.push(new PostGroup(group));
+						group = [];
+						groupCount = 0;
+						//if(!adSet) {
+						//	rows.push(new Ad('ad.jpg'));
+						//} 
+						//else 
+						featureSet = false;
+					}
+					else {
+						group.push(row);
+						groupCount++;
+					}
 				}
 			}
-			rows.push(new PostGroup(group));
 			table.setData(rows);
 		}
 	}

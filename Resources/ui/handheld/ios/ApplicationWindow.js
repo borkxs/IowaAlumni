@@ -11,7 +11,8 @@ function ApplicationWindow(feed,windowtitle) {
 	//create object instance
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
-		barImage: 'navbar.png'
+		//barImage: 'navbar.png'
+		navBarHidden: true
 	});
 
 	//construct UI
@@ -21,23 +22,38 @@ function ApplicationWindow(feed,windowtitle) {
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
 		title:windowtitle,
-		navBarHidden:true,
-		//barImage:'navbar.png',
+		navBarHidden:false,
+		barImage:'navbar.png',
 		//hires:true,
 		moving:false, // Custom property for movement
 		    axis:0 // Custom property for X axis
-	});/*
+	});
 	var menuButton = Ti.UI.createButton({
-		backgroundImage: 'menubutton.png',
-		backgroundSelectedImage: 'menubuttonselected.png',
+		backgroundImage: 'newmenubutton.png',
+		backgroundSelectedImage: 'newmenubuttonselected.png',
 		title: '',
 		height: 22,
 		width: 37,
+		//left: 15,
     	toggle:false // Custom property for menu toggle
 	});
-	masterContainerWindow.setLeftNavButton(menuButton);*/
+	masterContainerWindow.setLeftNavButton(menuButton);
 	masterContainerWindow.add(masterView);
 
+	//menuButton event
+	menuButton.addEventListener('click', function(e){
+		self.fireEvent('menuClick');
+	});
+
+	self.addEventListener('swipeToggle', function(e){
+		self.fireEvent('menuClick');
+	});
+	self.addEventListener('swipe', function(e){
+		self.fireEvent('menuClick');
+	});
+	self.addEventListener('swipeListen', function(e){
+		self.fireEvent('menuClick');
+	});
 
 	//create detail view container
 	var detailContainerWindow = Ti.UI.createWindow({barImage: 'navbar.png',navBarHidden:false});

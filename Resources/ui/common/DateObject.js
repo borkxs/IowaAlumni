@@ -50,10 +50,15 @@ DateObject.prototype.magazineDateString = function() {
 
 DateObject.prototype.prettyDate = function() {
 	var monthname = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-	var date = new Date(this.pubDate),
-	diff = (((new Date()).getTime() - date.getTime())),
+	var date = new Date(this.pubDate);
+	Ti.API.info(this.pubDate);
+	Ti.API.info(date + date.getTime());
+	var newdate = new Date();
+	Ti.API.info(newdate + newdate.getTime());
+	var diff = ( ( (new Date()).getTime() - date.getTime() ) ),
 	day_diff = Math.floor(diff / 86400);
-	Ti.API.info( ((new Date()).getTime() + ' ' + date.getTime()) );
+	Ti.API.info(diff + ' ' + day_diff)
+	//Ti.API.info( ((new Date()).getTime() + ' ' + date.getTime()) );
 	if ( isNaN(day_diff) || day_diff < 0 ){
 		return '';
 	}

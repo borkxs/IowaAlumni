@@ -53,7 +53,8 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 				title: getRssText(item, 'title'),
 				link: getRssText(item, 'link'),
 				description: getRssText(item, 'description'),
-				pubDate: parseDate(getRssText(item, 'pubDate')),
+				//pubDate: parseDate(getRssText(item, 'pubDate')),
+				pubDate: getRssText(item, 'pubDate'),
 				image: image
 			});
 		}

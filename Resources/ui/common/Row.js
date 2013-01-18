@@ -136,7 +136,7 @@ function getTitleLabel(title) {
 		color:'#303030',
         shadowOpacity:0.5,
         shadowOffset:{x:0, y:1},
-		font:{fontFamily:'Helvetica',fontSize:16,fontWeight:'bold'}
+		font:{fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
 	});
 	
 	return label;

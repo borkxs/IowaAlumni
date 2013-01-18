@@ -1,3 +1,4 @@
+var DateObject = require('ui/common/DateObject');
 /*
  * Post Object
  * Essential attributes
@@ -38,14 +39,14 @@ function FeatureRow(post) {
 	//cacheImage(this.image);
 	this.containerheight = getContainerHeight(post.image);
 	//Ti.API.info(this.containerheight);
-	container.height 	 = this.containerheight + 65;
-	row.height 			 = this.containerheight + 100;
+	container.height 	 = this.containerheight + 65 + 30;
+	row.height 			 = this.containerheight + 100 + 8;
 
 	var imagebox = Ti.UI.createImageView({
 		width: 300,
 		height: this.containerheight,
 		hires: true,
-		top: 0
+		top: 30
 		//top: -10, // this works for some reason
 		//url: this.image
 	});
@@ -54,24 +55,24 @@ function FeatureRow(post) {
 		width: 300,
 		height: 40,
 		hires: true,
-		top: 0,
+		top: 1,
 		image: 'gold.png'
 	});
 	var shadow = Ti.UI.createImageView({
 		width: 300,
 		height: 150,
 		hires: true,
-		top: this.containerheight-150,
+		top: this.containerheight-120,
 		image: 'shadow.png'
 	});
 	container.add(imagebox);
 	container.add(shadow);
 	container.add(overlay);
 	
-	titlelbl = getTitleLabel(post.title,this.containerheight);
+	titlelbl = getTitleLabel(post.title,this.containerheight+30);
 	container.add(titlelbl);
 
-	desclbl  = getDescriptionLabel(post.description,this.containerheight);
+	desclbl  = getDescriptionLabel(post.description,this.containerheight+30);
 	container.add(desclbl);
 
 	/*
@@ -83,6 +84,23 @@ function FeatureRow(post) {
 	});
 	container.add(icon); */
 
+	var posted = Ti.UI.createLabel({
+		text: 'Posted ' + (new DateObject(post.pubDate)).prettyDate() + ' in Kudos to Iowa People',
+		top: 8,
+		left: 15,
+		bottom: 10,
+		height: 15,
+		textAlign:'left',
+		width: 270,
+		color:'#5c4e1a',
+		shadowColor:'#f0d87f',
+        shadowOpacity:0.5,
+        shadowOffset:{x:0, y:1},
+		font:{fontFamily:'HelveticaNeue-CondensedBold',fontSize:12,fontWeight:'bold'}
+	});
+	container.add(posted);
+
+	/*
 	var date = Ti.UI.createLabel({
 		text: 			post.timestring,
 		top: 			7,
@@ -95,24 +113,9 @@ function FeatureRow(post) {
 		font: 			{fontFamily:'HelveticaNeue-CondensedBold',fontSize:13,fontWeight:'bold'}
 	});
 	container.add(date);
+	*/
 
 	row.add(container);
-
-	var posted = Ti.UI.createLabel({
-		text: 'Posted 2 hours ago in Kudos to Iowa People',
-		top: 7,
-		left: 25,
-		bottom: 10,
-		height: 15,
-		textAlign:'left',
-		width: 270,
-		color:'#616161',
-		shadowColor:'#ffffff',
-        shadowOpacity:0.5,
-        shadowOffset:{x:0, y:1},
-		font:{fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
-	});
-	row.add(posted);
 	
 	return row;
 
@@ -257,5 +260,24 @@ cachedImageView = function(imageDirectoryName, url, imageViewObject)
 		xhr.send();
 	};
 };
+
+function prettyDate(time){
+	var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+		diff = (((new Date()).getTime() - date.getTime()) / 1000),
+		day_diff = Math.floor(diff / 86400);
+			
+	if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+		return;
+			
+	return day_diff == 0 && (
+			diff < 60 && "just now" ||
+			diff < 120 && "1 minute ago" ||
+			diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+			diff < 7200 && "1 hour ago" ||
+			diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+		day_diff == 1 && "Yesterday" ||
+		day_diff < 7 && day_diff + " days ago" ||
+		day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+}
  
 module.exports = FeatureRow;
