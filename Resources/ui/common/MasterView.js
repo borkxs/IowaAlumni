@@ -1,6 +1,7 @@
 var Post = require('ui/common/Post'),
 	FeatureRow = require('ui/common/FeatureRow'),
 	Row = require('ui/common/Row'),
+	TextRow = require('ui/common/TextRow'),
 	PostGroup = require('ui/common/PostGroup'),
 	PostTable = require('ui/common/PostTable'),
 	RSS = require('services/rss');
@@ -85,7 +86,10 @@ function MasterView(feed) {
 			var groupCount = 0;
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
-				if(post.imageheight > 150 && featureSet == false) {
+				var row = new TextRow(post);
+				rows.push(row);
+				/*
+				if(post.imageheight > 150 && post.imageheight < 300 && featureSet == false) {
 					var row = new FeatureRow(post);
 					featureSet = true;
 					row.addEventListener('click', function(e) {
@@ -117,6 +121,7 @@ function MasterView(feed) {
 						groupCount++;
 					}
 				}
+				*/
 			}
 			table.setData(rows);
 		}

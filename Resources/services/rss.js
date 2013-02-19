@@ -57,6 +57,7 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 				pubDate: getRssText(item, 'pubDate'),
 				image: image
 			});
+			//Ti.API.info(data);
 		}
 		if (o.success) { o.success(data); }
 	};

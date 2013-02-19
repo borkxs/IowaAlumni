@@ -5,17 +5,19 @@ function Description(description) {
 Description.prototype.getImage = function() {
 	var imageregex  = /(img|src)=("|')[^"'>]+/;
 	var imageurl    = imageregex.exec(this.description);
-
-	if(imageurl.length>1) {
+	//Ti.API.info(String(imageurl));
+	if(imageurl!=null) {
+		if(imageurl.length>1) {
 		var imageurlstr = imageurl[0];
 		imageurlstr 	= imageurlstr.substring(5, imageurlstr.length);
-		Ti.API.info(imageurlstr);
-		var dimregex	= /-(\d{3})x(\d{3}).jpg/; 
+		//Ti.API.info(imageurlstr);
+		var dimregex	= /-(\d{3})x(\d{3}).jpg/;
 		imageurlstr 		= imageurlstr.replace(dimregex,".jpg");
-		Ti.API.info(imageurlstr);
-	}
-	
-	return imageurlstr;
+		//Ti.API.info(imageurlstr);
+		}
+		else imageurlstr = null;
+		return imageurlstr;
+	} else return null;
 	
 }
 

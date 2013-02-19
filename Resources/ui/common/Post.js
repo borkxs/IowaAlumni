@@ -6,13 +6,14 @@ var DateObject = require('ui/common/DateObject'),
  */
 
 function Post(item) {
-    this.title = item.title;
+    this.title = (new Description(item.title)).getDescription();
+    //this.title = item.title;
     this.description = (new Description(item.description)).getDescription();
     this.timestring = (new DateObject(item.pubDate)).dateString();
     this.pubDate = item.pubDate;
     this.image = (new Description(item.description)).getImage();
     this.url = item.link;
-    this.imageheight = getImageHeight(this.image);
+    if(image!=null) this.imageheight = getImageHeight(this.image);
 }
 function getImageHeight(img) {
 	var tempimagebox = Ti.UI.createImageView({

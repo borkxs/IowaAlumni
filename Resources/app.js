@@ -8,7 +8,7 @@ else {
 		var osname = Ti.Platform.osname,
 			height = Ti.Platform.displayCaps.platformHeight,
 			width = Ti.Platform.displayCaps.platformWidth;
-	
+		
 		//considering tablet to have one dimension over 900px - can define your own
 		var isTablet = osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899));
 		
@@ -28,6 +28,32 @@ else {
 				Window = require('ui/handheld/ios/ApplicationWindow');
 			}
 		}
+
+		/*
+		var RSS = require('services/rss');
+		var Description = require('ui/common/description');
+
+		rssfeed = new RSS('http://iowalum.com/calendar/feed_xml.cfm');
+
+		function refreshRssTable(data) {
+			if (Object.prototype.toString.apply(data) === '[object Array]') {
+				for (var i = 0; i < data.length; i++) {
+					var description = (new Description(data[i].description)).getDescription();
+					var title = (new Description(data[i].title)).getDescription();
+					Ti.API.info(i+': '+title+' '+description);
+				}
+			}
+		}
+		function refreshRSS() {
+			rssfeed.loadRssFeed({
+				success: function(data) {
+		    		refreshRssTable(data);
+		    	}
+			});
+		}
+		refreshRSS();
+		*/
+		
 
 		var MenuRow = require('ui/common/MenuRow');
 
@@ -59,7 +85,7 @@ else {
 			(logorow),
 		    (new MenuRow('Iowa Insider','insider','http://iowalum.com/blog/?feed=rss2',true)),
 		    (new MenuRow('Iowa Alumni Magazine','magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
-		    (new MenuRow('Events','events',false))
+		    (new MenuRow('Events','events','http://iowalum.com/calendar/feed_xml.cfm',false)),
 		];
 
 		// Tableview
@@ -162,7 +188,10 @@ else {
 
 		});
 
+		//*/
+
 		/*
+		=========================================================
 		win.addEventListener('fireTouchstart', function(e){
 		    // Get starting horizontal position
 		    e.source.axis = parseInt(e.x);

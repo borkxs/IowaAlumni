@@ -26,3 +26,8 @@ Creates navigation group and events for handling showing/hiding menu.
 Menu populates with MenuRows containing icon and feed name
 
 # 
+
+
+old height           60
+----------   =   ---------- 
+old width         new width
