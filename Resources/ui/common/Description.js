@@ -6,18 +6,20 @@ Description.prototype.getImage = function() {
 	var imageregex  = /(img|src)=("|')[^"'>]+/;
 	var imageurl    = imageregex.exec(this.description);
 	//Ti.API.info(String(imageurl));
+	var imageurlstr ='';
 	if(imageurl!=null) {
 		if(imageurl.length>1) {
-		var imageurlstr = imageurl[0];
+		imageurlstr 	= imageurl[0];
 		imageurlstr 	= imageurlstr.substring(5, imageurlstr.length);
-		//Ti.API.info(imageurlstr);
 		var dimregex	= /-(\d{3})x(\d{3}).jpg/;
-		imageurlstr 		= imageurlstr.replace(dimregex,".jpg");
-		//Ti.API.info(imageurlstr);
+		imageurlstr 	= imageurlstr.replace(dimregex,".jpg");
+		imageurlstr		=  imageurlstr.replace(/ /g,"%20");
+		Ti.API.info(imageurlstr);
 		}
 		else imageurlstr = null;
-		return imageurlstr;
-	} else return null;
+	}
+	else imageurlstr = null;
+	return imageurlstr;
 	
 }
 

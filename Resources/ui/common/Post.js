@@ -13,7 +13,7 @@ function Post(item) {
     this.pubDate = item.pubDate;
     this.image = (new Description(item.description)).getImage();
     this.url = item.link;
-    if(image!=null) this.imageheight = getImageHeight(this.image);
+    this.imageheight = (this.image!=null) ? getImageHeight(this.image) : null;
 }
 function getImageHeight(img) {
 	var tempimagebox = Ti.UI.createImageView({

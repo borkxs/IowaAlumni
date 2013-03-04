@@ -86,22 +86,24 @@ function MasterView(feed) {
 			var groupCount = 0;
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
-				var row = new TextRow(post);
-				rows.push(row);
+				// FeatureRow
 				/*
-				if(post.imageheight > 150 && post.imageheight < 300 && featureSet == false) {
+				PostGroup(FeaturePost())
+				PostGroup(Post(),Post(),Post())
+				*/
+				if(post.imageheight != null && post.imageheight > 150 && post.imageheight < 300 && featureSet == false) {
 					var row = new FeatureRow(post);
 					featureSet = true;
 					row.addEventListener('click', function(e) {
 						self.fireEvent('itemSelected', { link: e.row.link });
-					});			
+					});
 					row.addEventListener('swipe', function(e){
 				 		self.fireEvent('swipeToggle');
 					});
 					rows.push(row);
 				}
 				else {
-					var row = new Row(post);
+					var row = (post.imageheight!=null) ? new Row(post) : new TextRow(post);
 					row.addEventListener('click', function(e) {
 						self.fireEvent('itemSelected', { link: e.row.link });
 					});
@@ -121,7 +123,6 @@ function MasterView(feed) {
 						groupCount++;
 					}
 				}
-				*/
 			}
 			table.setData(rows);
 		}
