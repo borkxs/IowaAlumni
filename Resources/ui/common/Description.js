@@ -14,7 +14,7 @@ Description.prototype.getImage = function() {
 		var dimregex	= /-(\d{3})x(\d{3}).jpg/;
 		imageurlstr 	= imageurlstr.replace(dimregex,".jpg");
 		imageurlstr		=  imageurlstr.replace(/ /g,"%20");
-		Ti.API.info(imageurlstr);
+		//Ti.API.info(imageurlstr);
 		}
 		else imageurlstr = null;
 	}

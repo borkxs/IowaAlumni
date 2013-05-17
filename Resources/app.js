@@ -29,30 +29,6 @@ else {
 			}
 		}
 
-		/*
-		var RSS = require('services/rss');
-		var Description = require('ui/common/description');
-
-		rssfeed = new RSS('http://iowalum.com/calendar/feed_xml.cfm');
-
-		function refreshRssTable(data) {
-			if (Object.prototype.toString.apply(data) === '[object Array]') {
-				for (var i = 0; i < data.length; i++) {
-					var description = (new Description(data[i].description)).getDescription();
-					var title = (new Description(data[i].title)).getDescription();
-					Ti.API.info(i+': '+title+' '+description);
-				}
-			}
-		}
-		function refreshRSS() {
-			rssfeed.loadRssFeed({
-				success: function(data) {
-		    		refreshRssTable(data);
-		    	}
-			});
-		}
-		refreshRSS();
-		*/
 		
 
 		var MenuRow = require('ui/common/MenuRow');
@@ -79,6 +55,21 @@ else {
 		});
 		logorow.add(logo);
 
+		var taglinerow = Ti.UI.createTableViewRow({
+			layout: 'vertical',
+			height: 125,
+			backgroundColor: 'transparent'
+		});
+		var tagline = Ti.UI.createImageView({
+			image: 'tagline.png',
+			width: 200,
+			height: 40,
+			top: 50,
+			left: 10,
+			hires: true
+		});
+		taglinerow.add(tagline);
+
 		//// ---- Menu Table
 		// Menu Titles
 		var menuTitles = [
@@ -86,6 +77,9 @@ else {
 		    (new MenuRow('Iowa Insider','insider','http://iowalum.com/blog/?feed=rss2',true)),
 		    (new MenuRow('Iowa Alumni Magazine','magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
 		    (new MenuRow('Events','events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+		    (new MenuRow('Member Benefits','memberbenefits','',false)),
+		    (new MenuRow('Member Card','membercard','',false)),
+		    (taglinerow)
 		];
 
 		// Tableview
@@ -237,24 +231,6 @@ else {
 		});
 	*/
 
-
-		/*
-
-		var tgrp = Ti.UI.createTabGroup();
-		var win1 = new Window('http://iowalum.com/blog/?feed=rss2','Iowa Insider');
-		var win2 = new Window('http://iowalum.com/magazine/feed_xml.cfm?start=1&end=10','Alumni Magazine');
-		//var win3 = new Window('http://now.uiowa.edu/recent/feed','Iowa Now');
-		win1.navBarHidden = true;
-		win2.navBarHidden = true;
-		//win3.navBarHidden = true;
-		var tab1 = Ti.UI.createTab({window:win1,titleid:'Iowa Insider'});
-		var tab2 = Ti.UI.createTab({window:win2,titleid:'Alumni Magazine'});
-		//var tab3 = Ti.UI.createTab({window:win3,titleid:'Iowa Now'});
-		tgrp.addTab(tab1);
-		tgrp.addTab(tab2);
-		//tgrp.addTab(tab3);
-		tgrp.open();
-		*/
 
 	})();
 }

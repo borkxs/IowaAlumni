@@ -6,6 +6,7 @@ function DetailView() {
 
 	self.showArticle = function(url) {
 		webview.url = url;
+		webview.canGoBack = true;
 	};
 	
 	webview.addEventListener('load', function(e) {

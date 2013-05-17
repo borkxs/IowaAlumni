@@ -1,3 +1,4 @@
+var DateObject = require('ui/common/DateObject');
 /*
  * Post Object
  * Essential attributes
@@ -39,7 +40,7 @@ function TextRow(post) {
 	desclbl.top = titlelbl.height + 15;
 
 	var posted = Ti.UI.createLabel({
-		text: 			'Posted 2 hours ago in Kudos to Iowa People',
+		text: 			(new DateObject(post.pubDate)).prettyDate(),
 		left: 			15,
 		bottom: 		10,
 		height: 		15,
