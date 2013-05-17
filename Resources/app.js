@@ -74,7 +74,7 @@ else {
 		// Menu Titles
 		var menuTitles = [
 			(logorow),
-		    (new MenuRow('Iowa Insider','insider','http://iowalum.com/blog/?feed=rss2',true)),
+		    (new MenuRow('The Iowa Insider','insider','http://iowalum.com/blog/?feed=rss2',true)),
 		    (new MenuRow('Iowa Alumni Magazine','magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
 		    (new MenuRow('Events','events','http://iowalum.com/calendar/feed_xml.cfm',false)),
 		    (new MenuRow('Member Benefits','memberbenefits','',false)),
