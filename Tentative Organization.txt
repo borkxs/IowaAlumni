@@ -2,6 +2,10 @@ Tentative Organization
 ======================
 
 
+		RSS Feeds ->
+
+			|
+			V
 1. 		  app.js
 		 	|___________________
 			|					|
@@ -25,9 +29,7 @@ Creates navigation group and events for handling showing/hiding menu.
 # Menu.js and MenuRow.js
 Menu populates with MenuRows containing icon and feed name
 
-# 
+# ApplicationsWindow.js
+Collects RSS 
 
 
-old height           60
-----------   =   ---------- 
-old width         new width

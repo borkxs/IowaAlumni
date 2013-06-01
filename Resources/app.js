@@ -30,7 +30,7 @@ else {
 		}
 
 		
-
+		var MapWindow = require('ui/common/MapWindow');
 		var MenuRow = require('ui/common/MenuRow');
 
 		//// ---- Menu window, positioned on the left
@@ -147,11 +147,18 @@ else {
 			navWindow.open();
 			menuWindow.width = 270;
 
+			
+			Ti.API.info(e.row.feedTitle);
 			// Main window
-			var win = new Window(e.row.feed,e.row.feedTitle);
+			if(e.row.feedTitle=='Member Benefits') {
+				var win = new MapWindow();
+			}
+			else {
+				var win = new Window(e.row.feed,e.row.feedTitle);
+				win.navBarHidden = true;
+			}
 			win.moving = false;
 			win.axis = 0;
-			win.navBarHidden = true;
 
 			// NavigationGroup
 			var navGroup = Ti.UI.iPhone.createNavigationGroup({
