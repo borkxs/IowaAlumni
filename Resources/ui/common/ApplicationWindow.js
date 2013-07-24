@@ -1,27 +1,14 @@
-//Application Window Component Constructor
-function ApplicationWindow(feed,windowtitle) {
-	//declare module dependencies
-	var RSS = require('services/rss'),
-		MasterView = require('ui/common/MasterView'),
-		DetailView = require('ui/common/DetailView'),	
-		Description = require('ui/common/Description');
-		
-	var rssfeed = new RSS(feed);
-
-	//create object instance
+function ApplicationWindow(windowtitle) {
+	
 	var self = Ti.UI.createWindow({
-		backgroundColor:'#ffffff',
-		//barImage: 'navbar.png'
+	    //title:'Window 1',
+	    backgroundColor:'#e2e2e2',
 		navBarHidden: true
 	});
 
-	//construct UI
-	var masterView = new MasterView(feed),
-		detailView = new DetailView();
-
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title:windowtitle,
+		title: windowtitle,
 		navBarHidden:false,
 		barImage:'navbar.png',
 		//hires:true,
@@ -38,7 +25,6 @@ function ApplicationWindow(feed,windowtitle) {
     	toggle:false // Custom property for menu toggle
 	});
 	masterContainerWindow.setLeftNavButton(menuButton);
-	masterContainerWindow.add(masterView);
 
 	//menuButton event
 	menuButton.addEventListener('click', function(e){
@@ -54,23 +40,11 @@ function ApplicationWindow(feed,windowtitle) {
 	self.addEventListener('swipeListen', function(e){
 		self.fireEvent('menuClick');
 	});
-
-	//create detail view container
-	var detailContainerWindow = Ti.UI.createWindow({barImage: 'navbar.png',navBarHidden:false});
-	detailContainerWindow.add(detailView);
-
-	//create iOS specific NavGroup UI
+	
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		window:masterContainerWindow
 	});
 	self.add(navGroup);
-
-	//add behavior for master view
-	masterView.addEventListener('itemSelected', function(e) {
-		detailView.showArticle(e.link);
-		navGroup.open(detailContainerWindow);
-	});
-	
 	
 	return self;
 };

@@ -1,9 +1,12 @@
+var WebView = require('ui/common/WebView');
+
 function RSS(feed) {
 	this.feed = feed;
 }
 
 var osname = Ti.Platform.osname;
 var RSS_URL = osname === 'mobileweb' ? '/feed.xml' : 'http://iowalum.com/blog/?feed=rss2';
+
 var MONTH_MAP = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
 
 var getRssText = function(item, key) {
@@ -20,10 +23,17 @@ var parseDate = function(dateString) {
 
 RSS.prototype.loadRssFeed = function(o, tries) {
 	var xhr = Titanium.Network.createHTTPClient();	
+	
 	tries = tries || 0;
 	xhr.open('GET', this.feed);
+	
+	
 	xhr.onload = function(e) {
+		
+		
 		var xml = this.responseXML;
+		
+		
 		
 		if (xml === null || xml.documentElement === null) { 
 			if (tries < 3) {
@@ -32,6 +42,7 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 				return;
 			} else {
 				alert('Error reading RSS feed. Make sure you have a network connection and try refreshing.');
+				
 				if (o.error) { o.error(); }
 				return;	
 			}	
@@ -42,6 +53,7 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 
 		for (var i = 0; i < items.length; i++) {
 			var item = items.item(i);
+			
 			var image;
 			try {
 			var image = item.getElementsByTagNameNS('http://mashable.com/', 'thumbnail').item(0).getElementsByTagName('img').item(0).getAttribute('src');
@@ -49,24 +61,51 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 				image = '';
 			}
 			
-			data.push({
-				title: getRssText(item, 'title'),
-				link: getRssText(item, 'link'),
-				description: getRssText(item, 'description'),
-				//pubDate: parseDate(getRssText(item, 'pubDate')),
-				pubDate: getRssText(item, 'pubDate'),
-				image: image
-			});
-			//Ti.API.info(data);
+			try {
+					data.push({
+					snl: getRssText(item, 'snl'),
+					place: getRssText(item, 'place'),
+					title: getRssText(item, 'title'),
+					link: getRssText(item, 'link'),
+					description: getRssText(item, 'description'),
+					pubDate: getRssText(item, 'pubDate'),
+					image: image
+					});
+			}
+			catch (err){
+					data.push({
+					title: getRssText(item, 'title'),
+					link: getRssText(item, 'link'),
+					description: getRssText(item, 'description'),
+					pubDate: getRssText(item, 'pubDate'),
+					image: image
+					});
+			}
+					
+			
+			
+			
+			
 		}
 		if (o.success) { o.success(data); }
+		
+		
 	};
+	
+
 	xhr.onerror = function(e) {
 		if (o.error) { o.error(); }
+		
+		
 	};
+	
+	
 
 	if (o.start) { o.start(); }
-	xhr.send();	
+	xhr.send();
+	
+	
 };
+
 
 module.exports = RSS;

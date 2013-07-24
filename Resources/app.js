@@ -1,3 +1,5 @@
+
+
 if (Ti.version < 1.8 ) {
 	alert('Sorry - this application template requires Titanium Mobile SDK 1.8 or later');
 }
@@ -28,9 +30,11 @@ else {
 				Window = require('ui/handheld/ios/ApplicationWindow');
 			}
 		}
-
 		
+		var InfoWindow = require('ui/common/InfoWindow');
+		var ClubsWindow = require('ui/common/ClubsWindow');
 		var MapWindow = require('ui/common/MapWindow');
+		var MemberCardWindow = require('ui/common/MemberCardWindow');
 		var MenuRow = require('ui/common/MenuRow');
 
 		//// ---- Menu window, positioned on the left
@@ -40,11 +44,16 @@ else {
 		    width: 		0
 		});
 		
-		var logorow = Ti.UI.createTableViewRow({
-			layout: 'vertical',
+	
+		//UIAA logo 
+		var logorow = Ti.UI.createImageView({
 			height: 125,
-			backgroundColor: 'transparent'
+			width: 270,
+			top: 0,
+			backgroundImage: 'menubg.jpg'
+			
 		});
+		
 		var logo = Ti.UI.createImageView({
 			image: 'logo.png',
 			width: 210,
@@ -52,47 +61,61 @@ else {
 			top: 50,
 			left: 10,
 			hires: true
+			
 		});
-		logorow.add(logo);
-
-		var taglinerow = Ti.UI.createTableViewRow({
-			layout: 'vertical',
+		menuWindow.add(logorow);
+		menuWindow.add(logo);
+		
+		//"Once a Hawkeye" Image
+		var taglinerow = Ti.UI.createImageView({
 			height: 125,
-			backgroundColor: 'transparent'
+			width: 270,
+			top: 350,
+			backgroundImage: 'menubg.jpg'
+			
 		});
 		var tagline = Ti.UI.createImageView({
 			image: 'tagline.png',
 			width: 200,
 			height: 40,
-			top: 50,
-			left: 10,
-			hires: true
+			top: 380,
+			left: 10
 		});
-		taglinerow.add(tagline);
 
+		menuWindow.add(taglinerow);
+		menuWindow.add(tagline);
+		
 		//// ---- Menu Table
 		// Menu Titles
+		var iowaInsiderTitle = 'The Iowa Insider';
+		var  alumniMagazineTitle = 'Iowa Alumni Magazine';
+		var eventsTitle = 'Events';
+		var memberBenefitsTitle = 'Member Benefits';
+		var memberCardTitle = 'Member Card';
+		var clubsTitle = 'Clubs and Game Watches';
+		var contactUsTitle = 'Contact Us';
+		
 		var menuTitles = [
-			(logorow),
-		    (new MenuRow('The Iowa Insider','insider','http://iowalum.com/blog/?feed=rss2',true)),
-		    (new MenuRow('Iowa Alumni Magazine','magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
-		    (new MenuRow('Events','events','http://iowalum.com/calendar/feed_xml.cfm',false)),
-		    (new MenuRow('Member Benefits','memberbenefits','',false)),
-		    (new MenuRow('Member Card','membercard','',false)),
-		    (taglinerow)
+		    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',true)),
+		    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+		    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+		    (new MenuRow(memberBenefitsTitle,'memberbenefits','',false)),
+		    (new MenuRow(memberCardTitle,'membercard','',false)),
+		    (new MenuRow(clubsTitle,'clubs','',false)),
+		    (new MenuRow(contactUsTitle,'info','',false))
 		];
 
 		// Tableview
 		var tableView = Ti.UI.createTableView({
 			separatorColor: '000000',
 			backgroundImage: 'menubg.jpg',
-		    footerTitle:'',
-		    top: 0
+		    //footerTitle:'',
+		    height: 225,
+		    top: 125
 		});
-		tableView.setData(menuTitles);
-		
+		tableView.setData(menuTitles); // Set the menu in the Home page
 		menuWindow.add(tableView);
-
+		
 		//// ---- Window with navigationGroup
 		var navWindow = Ti.UI.createWindow({
 		    width:320, // Set the width of the sliding window to avoid cut out from animation
@@ -114,7 +137,9 @@ else {
 		});
 		navWindow.add(navGroup);
 
+		//menu button action
 		win.addEventListener('menuClick', function(e){
+			
 		    // If the menu is opened
 		    if(e.source.toggle == true){
 		        navWindow.animate({
@@ -133,11 +158,10 @@ else {
 		        });
 		        e.source.toggle  = true;
 		    }
-		});
+		    
+		    });
 
 		tableView.addEventListener('click', function(e) {
-			
-			//Ti.API.info(JSON.stringify(e));
 			//// ---- Window with navigationGroup
 			var navWindow = Ti.UI.createWindow({
 			    width:320, // Set the width of the sliding window to avoid cut out from animation
@@ -149,14 +173,114 @@ else {
 
 			
 			Ti.API.info(e.row.feedTitle);
-			// Main window
-			if(e.row.feedTitle=='Member Benefits') {
-				var win = new MapWindow();
-			}
-			else {
+			
+			// Navigate to the item selected
+			if(e.row.feedTitle==iowaInsiderTitle) {
 				var win = new Window(e.row.feed,e.row.feedTitle);
+				menuTitles = [
+				    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',true)),
+				    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+				    (new MenuRow(memberBenefitsTitle,'memberbenefits','',false)),
+				    (new MenuRow(memberCardTitle,'membercard','',false)),
+				    (new MenuRow(clubsTitle,'clubs','',false)),
+				    (new MenuRow(contactUsTitle,'info','',false))
+				];
+				tableView.setData(menuTitles); 
+				menuWindow.add(tableView);
 				win.navBarHidden = true;
 			}
+			else if(e.row.feedTitle==alumniMagazineTitle) {
+				var win = new Window(e.row.feed,e.row.feedTitle);
+				menuTitles = [
+				    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',false)),
+				    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',true)),
+				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+				    (new MenuRow(memberBenefitsTitle,'memberbenefits','',false)),
+				    (new MenuRow(memberCardTitle,'membercard','',false)),
+				    (new MenuRow(clubsTitle,'clubs','',false)),
+				    (new MenuRow(contactUsTitle,'info','',false))
+				];
+				tableView.setData(menuTitles); 
+				menuWindow.add(tableView);
+				win.navBarHidden = true;
+			}
+			
+			else if(e.row.feedTitle==eventsTitle) {
+				var win = new Window(e.row.feed,e.row.feedTitle);
+				menuTitles = [
+				    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',false)),
+				    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',true)),
+				    (new MenuRow(memberBenefitsTitle,'memberbenefits','',false)),
+				    (new MenuRow(memberCardTitle,'membercard','',false)),
+				    (new MenuRow(clubsTitle,'clubs','',false)),
+				    (new MenuRow(contactUsTitle,'info','',false))
+				];
+				tableView.setData(menuTitles); 
+				menuWindow.add(tableView);
+				win.navBarHidden = true;
+			}
+
+			else if(e.row.feedTitle==memberBenefitsTitle) {
+				var win = new MapWindow();
+				menuTitles = [
+				    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',false)),
+				    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+				    (new MenuRow(memberBenefitsTitle,'memberbenefits','',true)),
+				    (new MenuRow(memberCardTitle,'membercard','',false)),
+				    (new MenuRow(clubsTitle,'clubs','',false)),
+				    (new MenuRow(contactUsTitle,'info','',false))
+				];
+				tableView.setData(menuTitles); 
+				menuWindow.add(tableView);
+			}
+			
+			else if(e.row.feedTitle==clubsTitle) {
+				var win = new ClubsWindow(clubsTitle);
+				menuTitles = [
+				    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',false)),
+				    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+				    (new MenuRow(memberBenefitsTitle,'memberbenefits','',false)),
+				    (new MenuRow(memberCardTitle,'membercard','',false)),
+				    (new MenuRow(clubsTitle,'clubs','',true)),
+				    (new MenuRow(contactUsTitle,'info','',false))
+				];
+				tableView.setData(menuTitles); 
+				menuWindow.add(tableView);
+			}
+			
+			else if(e.row.feedTitle==contactUsTitle) {
+				var win = new InfoWindow(contactUsTitle);
+				menuTitles = [
+				    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',false)),
+				    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+				    (new MenuRow(memberBenefitsTitle,'memberbenefits','',false)),
+				    (new MenuRow(memberCardTitle,'membercard','',false)),
+				    (new MenuRow(clubsTitle,'clubs','',false)),
+				    (new MenuRow(contactUsTitle,'info','',true))
+				];
+				tableView.setData(menuTitles); 
+				menuWindow.add(tableView);
+			}
+			else {
+				var win = new MemberCardWindow(memberCardTitle);
+				menuTitles = [
+				    (new MenuRow( iowaInsiderTitle,'insider','http://iowalum.com/blog/?feed=rss2',false)),
+				    (new MenuRow(alumniMagazineTitle,'magazine','http://iowalum.com/magazine/feed_xml.cfm',false)),
+				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),
+				    (new MenuRow(memberBenefitsTitle,'memberbenefits','',false)),
+				    (new MenuRow(memberCardTitle,'membercard','',true)),
+				    (new MenuRow(clubsTitle,'clubs','',false)),
+				    (new MenuRow(contactUsTitle,'info','',false))
+				];
+				tableView.setData(menuTitles);
+				menuWindow.add(tableView);
+			}
+	
 			win.moving = false;
 			win.axis = 0;
 
@@ -167,6 +291,7 @@ else {
 			navWindow.add(navGroup);
 
 			win.addEventListener('menuClick', function(e){
+				
 			    // If the menu is opened
 			    if(e.source.toggle == true){
 			        navWindow.animate({
@@ -185,59 +310,13 @@ else {
 			        });
 			        e.source.toggle  = true;
 			    }
+			   
 			});
 
 		});
 
-		//*/
-
-		/*
-		=========================================================
-		win.addEventListener('fireTouchstart', function(e){
-		    // Get starting horizontal position
-		    e.source.axis = parseInt(e.x);
-		});
-
-		win.addEventListener('fireTouchmove', function(e){
-		    // Subtracting current position to starting horizontal position
-		    var coordinates = parseInt(e.globalPoint.x) - e.source.axis;
-		    // Detecting movement after a 20px shift
-		    if(coordinates > 20 || coordinates < -20){
-		        e.source.moving = true;
-		    }
-		    // Locks the window so it doesn't move further than allowed
-		    if(e.source.moving == true && coordinates <= 180 && coordinates >= 0){
-		        // This will smooth the animation and make it less jumpy
-		        navWindow.animate({
-		            left:coordinates,
-		            duration:20
-		        });
-		        // Defining coordinates as the final left position
-		        navWindow.left = coordinates;
-		    }
-		});
-
-		win.addEventListener('fireTouchend', function(e){
-		    // No longer moving the window
-		    e.source.moving = false;
-		    if(navWindow.left >= 75 && navWindow.left < 270){
-		        // Repositioning the window to the right
-		        navWindow.animate({
-		            left:270,
-		            duration:300
-		        });
-		        menuButton.toggle = true;
-		    }else{
-		        // Repositioning the window to the left
-		        navWindow.animate({
-		            left:0,
-		            duration:300
-		        });
-		        menuButton.toggle = false;
-		    }
-		});
-	*/
-
 
 	})();
 }
+
+

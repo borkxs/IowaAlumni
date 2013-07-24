@@ -8,3 +8,6 @@ University of Iowa Alumni Association App
 * Iowa Insider
 * UIAA Events
 * UIAA Member Benefits
+* UIAA Member Card
+* Clubs and GameWatch
+* Contact Us

@@ -1,4 +1,5 @@
 var DateObject = require('ui/common/DateObject');
+var CachedImageView = require('ui/common/CachedImageView');
 /*
  * Post Object
  * Essential attributes
@@ -32,13 +33,9 @@ function FeatureRow(post) {
 			bottom:			0,
 			padding:		0,
 			borderRadius:	5
-			//borderColor: 	'#d5d5d5',
-			//borderWidth: 	2
 	});
 
-	//cacheImage(this.image);
 	this.containerheight = getContainerHeight(post.image);
-	//Ti.API.info(this.containerheight);
 	container.height 	 = this.containerheight + 65 + 30;
 	row.height 			 = this.containerheight + 100 + 8;
 
@@ -47,10 +44,8 @@ function FeatureRow(post) {
 		height: this.containerheight,
 		hires: true,
 		top: 30
-		//top: -10, // this works for some reason
-		//url: this.image
 	});
-	cachedImageView('imageDirectoryName', post.image, imagebox);
+	new CachedImageView('imageDirectoryName', post.image, imagebox);
 	var overlay = Ti.UI.createImageView({
 		width: 300,
 		height: 40,
@@ -75,14 +70,6 @@ function FeatureRow(post) {
 	desclbl  = getDescriptionLabel(post.description,this.containerheight+30);
 	container.add(desclbl);
 
-	/*
-	var icon = Ti.UI.createImageView({
-		top: 3,
-		left: 280,
-		width: 20,
-		image:'clock1.png'
-	});
-	container.add(icon); */
 
 	var posted = Ti.UI.createLabel({
 		text: 'Posted ' + (new DateObject(post.pubDate)).prettyDate() + ' in Kudos to Iowa People',
@@ -100,21 +87,6 @@ function FeatureRow(post) {
 	});
 	container.add(posted);
 
-	/*
-	var date = Ti.UI.createLabel({
-		text: 			post.timestring,
-		top: 			7,
-		left: 			15,
-		textAlign: 		'left',
-		width: 			200,
-		color: 			'#222222',
-		shadowColor: 	'#f0da72',
-		shadowOffset:   {x:0,y:1},
-		font: 			{fontFamily:'HelveticaNeue-CondensedBold',fontSize:13,fontWeight:'bold'}
-	});
-	container.add(date);
-	*/
-
 	row.add(container);
 	
 	return row;
@@ -129,9 +101,8 @@ function getContainerHeight(img) {
 		width: 'auto',
 		height: 'auto',
 		hires: true,
-		//top: -10, // this works for some reason
 	});
-    cachedImageView('imageDirectoryName', img, tempimagebox);
+    new CachedImageView('imageDirectoryName', img, tempimagebox);
 	
 	var height = tempimagebox.toImage().height;
 	var width = tempimagebox.toImage().width;
@@ -157,8 +128,7 @@ function getTitleLabel(title,postheight) {
 	});
 	view.add(temp);
 	theheight = view.toImage().height;
-	//Ti.API.info('[' + view.toImage().width + ' x ' + view.toImage().height + '][' + view.toImage().size + '] ' + title);
-
+	
 	var titlelbl = Ti.UI.createLabel({
 		text: title,
 		left: 15,
@@ -209,75 +179,6 @@ function getDescriptionLabel(description,postheight) {
 
 }
 
-/* 
-	Developed by Kevin L. Hopkins (http://kevin.h-pk-ns.com)
-	You may borrow, steal, use this in any way you feel necessary but please
-	leave attribution to me as the source.  If you feel especially grateful,
-	give me a linkback from your blog, a shoutout @Devneck on Twitter, or 
-	my company profile @ http://wearefound.com.
 
-/* Expects parameters of the directory name you wish to save it under, the url of the remote image, 
-   and the Image View Object its being assigned to. */
-cachedImageView = function(imageDirectoryName, url, imageViewObject)
-{
-	// Grab the filename
-	var filename = url.split('/');
-	filename = filename[filename.length - 1];
-	// Try and get the file that has been previously cached
-	var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, imageDirectoryName, filename);
-	
-	if (file.exists()) {
-		// If it has been cached, assign the local asset path to the image view object.
-		imageViewObject.image = file.nativePath;
-		//To release memory
-		file = null;
-	} else {
-		// If it hasn't been cached, grab the directory it will be stored in.
-		var g = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, imageDirectoryName);
-		if (!g.exists()) {
-			// If the directory doesn't exist, make it
-			g.createDirectory();
-		};
-		
-		// Create the HTTP client to download the asset.
-		var xhr = Ti.Network.createHTTPClient();
-		
-		xhr.onload = function() {
-			if (xhr.status == 200) {
-				// On successful load, take that image file we tried to grab before and 
-				// save the remote image data to it.
-				file.write(xhr.responseData);
-				// Assign the local asset path to the image view object.
-				imageViewObject.image = file.nativePath;
-				//To release memory
-				file = null;
-			};
-		};
-		
-		// Issuing a GET request to the remote URL
-		xhr.open('GET', url);
-		// Finally, sending the request out.
-		xhr.send();
-	};
-};
-
-function prettyDate(time){
-	var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
-		diff = (((new Date()).getTime() - date.getTime()) / 1000),
-		day_diff = Math.floor(diff / 86400);
-			
-	if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
-		return;
-			
-	return day_diff == 0 && (
-			diff < 60 && "just now" ||
-			diff < 120 && "1 minute ago" ||
-			diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
-			diff < 7200 && "1 hour ago" ||
-			diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
-		day_diff == 1 && "Yesterday" ||
-		day_diff < 7 && day_diff + " days ago" ||
-		day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
-}
  
 module.exports = FeatureRow;

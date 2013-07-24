@@ -4,16 +4,22 @@ var Post = require('ui/common/Post'),
 	TextRow = require('ui/common/TextRow'),
 	PostGroup = require('ui/common/PostGroup'),
 	PostTable = require('ui/common/PostTable'),
+	Ad = require('ui/common/Ad'),
+	GetFeed = require('ui/common/GetFeed'),
+	FormatDate = require('ui/common/FormatDate'),
 	RSS = require('services/rss');
+	ParsingError = require('ui/common//ParsingError');
 
 /* 
  * Master View Component Constructor
  */
-function MasterView(feed) {
 
+function MasterView(feed) {
+	
 	var minheight = 200;
 
 	var rssfeed = new RSS(feed);
+	
 
 	var self = Ti.UI.createView({
 		backgroundColor:'#fff'
@@ -72,7 +78,7 @@ function MasterView(feed) {
 	}
 	function resetTable() { 
 		table.setContentInsets({top:0},{animated:true});
-		table.updateDateText("Last Updated: "+formatDate());
+		table.updateDateText("Last Updated: "+ formatDate());
 		table.hideActInd();
 		table.updateLabelText("Pull down to refresh...");
 	}
@@ -84,8 +90,32 @@ function MasterView(feed) {
 			var group = [];
 			var featureSet = false;
 			var groupCount = 0;
+			//Ti.API.log('error', data);
+			var adCounter = 0;
+			var adIndex = 0;
+			var ads = new GetFeed('http://iowalum.com/advertising/feed_xml.cfm');
+			//Ti.API.info( ads);
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
+				
+				if (adCounter != 0 && (adCounter % 3) == 0 && adIndex < 3){
+					var the_Ad = (ads[adIndex].ad).replace("#", "");
+					the_Ad = (the_Ad).replace("#", "");
+					var row = new Ad(the_Ad, adIndex);
+					
+					//Ti.API.info(the_Link);
+					row.addEventListener('click', function(e) {
+						
+						var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
+						the_Link = (the_Link).replace("#", "");
+						
+						self.fireEvent('itemSelected', { link: the_Link });
+					});
+					rows.push(row);
+					adIndex++;
+				}
+				adCounter++;
+				
 				// FeatureRow
 				/*
 				PostGroup(FeaturePost())
@@ -104,6 +134,7 @@ function MasterView(feed) {
 				}
 				else {
 					var row = (post.imageheight!=null) ? new Row(post) : new TextRow(post);
+					
 					row.addEventListener('click', function(e) {
 						self.fireEvent('itemSelected', { link: e.row.link });
 					});
@@ -112,10 +143,7 @@ function MasterView(feed) {
 						rows.push(new PostGroup(group));
 						group = [];
 						groupCount = 0;
-						//if(!adSet) {
-						//	rows.push(new Ad('ad.jpg'));
-						//} 
-						//else 
+						
 						featureSet = false;
 					}
 					else {
@@ -124,20 +152,48 @@ function MasterView(feed) {
 					}
 				}
 			}
+			
+			//Ti.API.info( new GetAd().theAd());
+			//var post = new Post(new GetAd().theAd());
+			
+			
 			table.setData(rows);
+			
+			
+			
 		}
+		
 	}
 	function refreshRSS() {
-		rssfeed.loadRssFeed({
+		var t = 0;
+		 rssfeed.loadRssFeed({
 			success: function(data) {
-	    		refreshRssTable(data);
-	    	}
+	    		t = refreshRssTable(data);
+	    		
+	    }
 		});
+		
+	/*	
+	 if (1 < 2){
+			self.add(table);
+			
+		}
+		
+		else{
+			var pageError = Ti.UI.createLabel({
+				text: "Sorry, This section of UIAA Moblie Application is currently. Try again in a few minutes. ",
+				textAlign: 'left',
+			    left: 10,
+			    top: 10,
+				font: {fontFamily:'Helvetica',fontSize:12,fontWeight:'normal'}
+			});
+			self.add(pageError);
+		}
+		*/
 	}
 
 	// load initial rss feed
 	refreshRSS();
-
 	self.add(table);
 
 	return self;

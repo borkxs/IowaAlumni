@@ -37,6 +37,7 @@ Description.prototype.getDescription = function() {
 	
 	// Remove returns and line
 	description		= description.replace(/(\r\n|\n|\r|\t)/gm," ");
+	description		= description.replace("&#8217;","'");
 	var regex       = /(<([^>]+)>)/ig;
 	description     = description.replace(regex, "");
 	var regex2      = /&[^;]+?;/;

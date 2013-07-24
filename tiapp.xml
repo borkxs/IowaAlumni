@@ -16,7 +16,7 @@
     <url>http://appcelerator.com</url>
     <description>not specified</description>
     <copyright>2011 by tlukasavage</copyright>
-    <icon>appicon.png</icon>
+    <icon>icon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>opaque</statusbar-style>

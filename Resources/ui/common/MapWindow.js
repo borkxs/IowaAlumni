@@ -1,73 +1,50 @@
 
+//var GetLocation = require('ui/common/GetLocation');
+var GetFeed = require('ui/common/GetFeed');
+var ApplicationWindow = require('ui/common/ApplicationWindow');
 
 function MapWindow(data) {
 	
-	var self = Ti.UI.createWindow({
-	    //title:'Window 1',
-	    backgroundColor:'#ffffff',
-		navBarHidden: true
-	});
-
-	//create master view container
-	var masterContainerWindow = Ti.UI.createWindow({
-		title:'Member Benefits',
-		navBarHidden:false,
-		barImage:'navbar.png',
-		//hires:true,
-		moving:false, // Custom property for movement
-		    axis:0 // Custom property for X axis
-	});
-	var menuButton = Ti.UI.createButton({
-		backgroundImage: 'newmenubutton.png',
-		backgroundSelectedImage: 'newmenubuttonselected.png',
-		title: '',
-		height: 22,
-		width: 37,
-		//left: 15,
-    	toggle:false // Custom property for menu toggle
-	});
-	masterContainerWindow.setLeftNavButton(menuButton);
-
-	//menuButton event
-	menuButton.addEventListener('click', function(e){
-		self.fireEvent('menuClick');
-	});
-
-	self.addEventListener('swipeToggle', function(e){
-		self.fireEvent('menuClick');
-	});
-	self.addEventListener('swipe', function(e){
-		self.fireEvent('menuClick');
-	});
-	self.addEventListener('swipeListen', function(e){
-		self.fireEvent('menuClick');
-	});
-
+	var self = new ApplicationWindow("Member Benefits");
+	
+	
 	var mapWin = Ti.UI.createWindow({
 	    //title:'Window 1',
+	    top: 43,
 	    backgroundColor:'#ffffff',
 		navBarHidden: true
 	});
 
-	var annotation = Titanium.Map.createAnnotation(
-	{
-	    latitude:41.659255,
-	    longitude:-91.534460,
-	    title:"Active Endeavors",
-	    subtitle:'10% off regular-priced footwear',
-	    pincolor: Titanium.Map.ANNOTATION_RED,
-	    animate:true,
-	});
 
+	
+	
+	var businessesInfo =  new GetFeed ('http://iowalum.com/membership/feed_xml.cfm');
+	
+	var companyInfo = [];
+	for (var i = 0; i <= businessesInfo.length - 1; i++) {
+		companyInfo.push(
+			Titanium.Map.createAnnotation(
+			{
+			    latitude:  businessesInfo[i].latitude,
+			    longitude: businessesInfo[i].longitude,
+			    title: businessesInfo[i].company,
+			    subtitle: businessesInfo[i].street,
+			    pincolor: Titanium.Map.ANNOTATION_RED,
+			    animate:true,
+			})
+		);
+	}
+ 
+	
 	var map = Ti.Map.createView({
 		mapType: Titanium.Map.STANDARD_TYPE,
-		region: {latitude: 41.659255, longitude: -91.534460,
+		region: {latitude: businessesInfo[0].latitude, longitude: businessesInfo[0].longitude,
 			latitudeDelta:0.01, longitudeDelta:0.01 },
 		animate: true,
 		regionFit: true,
 		userLocation: true,
 		height: 250,
-	    annotations:[annotation],
+	    annotations: companyInfo,
 		top: 0
 	});
 
@@ -76,42 +53,65 @@ function MapWindow(data) {
 		top: 250
 	});
 
-	var businesses = ['Active Endeavors','All Seasons Auto','Anytime Fitness Iowa City','Azul Tequila','Biolife Plasma Services',
-	                    'Bo-James','Boubin Tire & Automotive','Buffalo Wild Wings',"Chili's",'Complete Nutrition','Cookies by Design'];
-
-
-
+	
 	var data = [];
-	for (var i = 0; i <= businesses.length - 1; i++) {
+	for (var i = 0; i <= businessesInfo.length - 1; i++) {
 	    var row = Ti.UI.createTableViewRow({
+	    	company: businessesInfo[i].company,
+	    	latitude:  businessesInfo[i].latitude,
+			longitude: businessesInfo[i].longitude,
 	        height: 50
 	    });
-	    var label = Ti.UI.createLabel({
-	        text: businesses[i],
+	    var companyLabel = Ti.UI.createLabel({
+	        text: (businessesInfo[i].company),
 	        textAlign: 'left',
 	        left: 10,
 	        font: {fontFamily:'Helvetica',fontSize:12,fontWeight:'bold'}
 	    });
-	    row.add(label);
+	    var discountLabel = Ti.UI.createLabel({
+	        text: (businessesInfo[i].discount),
+	        textAlign: 'left',
+	        left: 10,
+	        top: 35,
+	        font: {fontFamily:'HelveticaNeue-Light',fontSize:10,fontWeight:'bold'}
+	    });
+	    row.add(companyLabel);
+	    row.add(discountLabel);
 	    data.push(row);
 	};
 
 	table.setData(data);
-
+	
 	mapWin.add(map);
 	mapWin.add(table);
-
 	
-	masterContainerWindow.add(mapWin);
+	
+	self.add(mapWin);
+	
 
-	//create iOS specific NavGroup UI
-	var navGroup = Ti.UI.iPhone.createNavigationGroup({
-		window:masterContainerWindow
+	table.addEventListener('click', function(e){
+		
+		map = Ti.Map.createView({
+			mapType: Titanium.Map.STANDARD_TYPE,
+			region: {latitude: e.row.latitude, longitude: e.row.longitude,
+				latitudeDelta:0.01, longitudeDelta:0.01 },
+			animate: true,
+			regionFit: true,
+			userLocation: true,
+			height: 250,
+		    annotations: companyInfo,
+			top: 0
+		});
+		
+		mapWin.add(map);
+		
+		map.selectAnnotation(companyInfo[e.index]);
 	});
-	self.add(navGroup);
-
+	//new GetLocation();
 	return self;
 
 }
+
+
 
 module.exports = MapWindow;
