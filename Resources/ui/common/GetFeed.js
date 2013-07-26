@@ -16,11 +16,12 @@ function GetFeed (feed){
 		if (feed == "http://iowalum.com/clubs/feed_xml.cfm"){
 			data.push({
 				state:  getRssText(item, 'state'),
-				city: getRssText(item, 'city'),
-				leader: getRssText(item, 'leader'),
-				phone: getRssText(item, 'phone'),
-				email: getRssText(item, 'email'),
-				web: getRssText(item, 'web')
+				club:  getRssText(item, 'club'),
+				place: getRssText(item, 'place'),
+				web: getRssText(item, 'web'),
+				latitude: getRssText(item, 'latitude'),
+				longitude: getRssText(item, 'longitude'),
+				street: getRssText(item, 'street')
 				});
 		}
 		

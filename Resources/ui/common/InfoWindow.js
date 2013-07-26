@@ -26,21 +26,6 @@ function InfoWindow(title) {
 		height:				160,
 		width: 				300,
 		left: 				10,
-		top:				350,
-		bottom:				0,
-		padding:			0,
-		borderRadius:		5,
-		borderColor: 		'#d5d5d5',
-		borderWidth: 		1
-		
-	});
-	
-	var linkView = Ti.UI.createView({
-		separatorColor: 	'd5d5d5',
-		backgroundColor: 	'ffffff',
-		height:				160,
-		width: 				300,
-		left: 				10,
 		top:				180,
 		bottom:				0,
 		padding:			0,
@@ -49,15 +34,26 @@ function InfoWindow(title) {
 		borderWidth: 		1
 		
 	});
-	
-	
+		
 	var scrollMainView = Ti.UI.createScrollView({
 	  top: 45,
 	  contentWidth: 320,
-	  contentHeight: 520,
-	  showVerticalScrollIndicator: true,
+	  contentHeight: 420,
+	  showVerticalScrollIndicator: false,
 	  showHorizontalScrollIndicator: false
 	});
+	
+	var ad = Ti.UI.createImageView({
+	  image:    'https://www.iowalum.com/images/redesign10/rewards_new.jpg',
+	  width: 300,
+	  height: 52,
+	  top: 350,
+	  left: 10
+	  
+	});
+	ad.addEventListener('click', function(e) {
+		new WebView ('http://www.iowalum.com/iowarewards/index.cfm');
+	}); 
 	
 	// The Contact View 
 	var contactLabel = Ti.UI.createLabel({
@@ -70,7 +66,7 @@ function InfoWindow(title) {
 	});
 	
 	var levittline = Ti.UI.createView({
-		width: 				70,
+		width: 				67,
 		top:				44			
 		
 	});
@@ -96,7 +92,7 @@ function InfoWindow(title) {
 	});
 	
 	var emailline = Ti.UI.createView({
-		width: 				104,
+		width: 				99,
 		top:				142			
 	});
 	
@@ -112,137 +108,6 @@ function InfoWindow(title) {
 	}); 
 	
 	
-	// Link View
-	
-	var linkLabel = Ti.UI.createLabel({
-		text: "Links",
-		top: 10
-	});
-	
-	var aboutLabel = Ti.UI.createLabel({
-		text: "About Us",
-		top: 30	
-	});
-	
-	var aboutline = Ti.UI.createView({
-		width: 				52,
-		top:				44			
-		
-	});
-	
-	aboutLabel.addEventListener('click', function(e) {
-		vistedLink (aboutLabel, aboutline, "purple" );
-		new WebView ('http://www.iowalum.com/about/');
-	}); 
-	
-	var contactUsLabel = Ti.UI.createLabel({
-		text: "Contact Us",
-		top: 45
-	});
-	
-	var contactUsline = Ti.UI.createView({
-		width: 				60,
-		top:				59			
-		
-	});
-	
-	contactUsLabel.addEventListener('click', function(e) {
-		vistedLink (contactUsLabel, contactUsline, "purple" );
-		new WebView ('http://www.iowalum.com/about/contact.cfm');
-	}); 
-	
-	var privacyLabel = Ti.UI.createLabel({
-		text: "Privacy Policy",
-		top: 60
-	});
-	
-	var privacyline = Ti.UI.createView({
-		width: 				75,
-		top:				74			
-	});
-	
-	privacyLabel.addEventListener('click', function(e) {
-		vistedLink (privacyLabel, privacyline, "purple" );
-		new WebView ('http://www.iowalum.com/about/privacy.cfm');
-	}); 
-	
-	var uIowaLabel = Ti.UI.createLabel({
-		text: "U Iowa",
-		top: 75
-	});
-	
-	var uIowaline = Ti.UI.createView({
-		width: 				40,
-		top:				89			
-	});
-	
-	uIowaLabel.addEventListener('click', function(e) {
-		vistedLink (uIowaLabel, uIowaline, "purple" );
-		new WebView ('http://www.uiowa.edu/');
-	}); 
-	
-	var uiFoundationLabel = Ti.UI.createLabel({
-		text: "UI Foundation",
-		top: 90
-	});
-	
-	var uiFoundationline = Ti.UI.createView({
-		width: 				75,
-		top:				104			
-	});
-	
-	uiFoundationLabel.addEventListener('click', function(e) {
-		vistedLink (uiFoundationLabel, uiFoundationline, "purple" );
-		new WebView ('http://www.uifoundation.org/');
-	}); 
-	
-	var uiCollegesLabel = Ti.UI.createLabel({
-		text: "UI Colleges",
-		top: 105
-	});
-	
-	var uiCollegesline = Ti.UI.createView({
-		width: 				62,
-		top:				119			
-		
-	});
-	
-	uiCollegesLabel.addEventListener('click', function(e) {
-		vistedLink (uiCollegesLabel, uiCollegesline, "purple" );
-		new WebView ('http://www.iowalum.com/colleges/');
-	}); 
-	
-	var partnersLabel = Ti.UI.createLabel({
-		text: "Partners",
-		top: 120
-	});
-	
-	var partnersline = Ti.UI.createView({
-		width: 				48,
-		top:				134			
-		
-	});
-	
-	partnersLabel.addEventListener('click', function(e) {
-		vistedLink (partnersLabel, partnersline, "purple" );
-		new WebView ('http://www.iowalum.com/partners/');
-	}); 
-	
-	var advertisingLabel = Ti.UI.createLabel({
-		text: "Advertising",
-		top: 135
-	});
-	
-	var advertisingline = Ti.UI.createView({
-		width: 				61,
-		top:				149			
-		
-	});
-	
-	advertisingLabel.addEventListener('click', function(e) {
-		vistedLink (advertisingLabel, advertisingline, "purple" );
-		new WebView ('http://www.iowalum.com/advertising/');
-	}); 
 	
 	// Social Network View
 	var socialMdeiaLabel = Ti.UI.createLabel({
@@ -268,7 +133,7 @@ function InfoWindow(title) {
 	});
 	
 	var facebookline = Ti.UI.createView({
-		width: 				55,
+		width: 				53,
 		top:				46			
 		
 	});
@@ -294,7 +159,7 @@ function InfoWindow(title) {
 	});
 	
 	var twitterline = Ti.UI.createView({
-		width: 				38,
+		width: 				36,
 		top:				61			
 		
 	});
@@ -320,7 +185,7 @@ function InfoWindow(title) {
 	});
 	
 	var foursquareline = Ti.UI.createView({
-		width: 				68,
+		width: 				66,
 		top:				76			
 		
 	});
@@ -346,7 +211,7 @@ function InfoWindow(title) {
 	});
 	
 	var linkedInline = Ti.UI.createView({
-		width: 				46,
+		width: 				45,
 		top:				91			
 		
 	});
@@ -372,7 +237,7 @@ function InfoWindow(title) {
 	});
 	
 	var blogline = Ti.UI.createView({
-		width: 				96,
+		width: 				93,
 		top:				106				
 	});
 	
@@ -437,18 +302,17 @@ function InfoWindow(title) {
 	//---------------------------------------------------------   Adjust Common Arttributes Here  -----------------------------------\\
 	
 	//Font
-	feedLabel.font = onIowaLabel.font = blogLabel.font = linkedInLabel.font = foursquareLabel.font = twitterLabel.font = facebookLabel.font = advertisingLabel.font = 
-	partnersLabel.font = uiCollegesLabel.font = uiFoundationLabel.font = uIowaLabel.font = privacyLabel.font = contactUsLabel.font =  aboutLabel.font = emailLabel.font 
-	= phoneLabel.font = addressLabel.font =  levittLabel.font = {fontFamily:'Helvetica',fontSize:12,fontWeight:'normal'};
+	feedLabel.font = onIowaLabel.font = blogLabel.font = linkedInLabel.font = foursquareLabel.font = twitterLabel.font = facebookLabel.font = 
+	   emailLabel.font 
+	= phoneLabel.font = addressLabel.font =  levittLabel.font = {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'};
 	
 	// Font (Header)
-	socialMdeiaLabel.font =  linkLabel.font = contactLabel.font = {fontFamily:'Helvetica',fontSize:16,fontWeight:'bold'} ;
+	socialMdeiaLabel.font =  contactLabel.font = {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'} ;
 	
 	//Text Align(For All Text)
 	feedLabel.textAlign = onIowaLabel.textAlign = blogLabel.textAlign = linkedInLabel.textAlign = foursquareLabel.textAlign = twitterLabel.textAlign = 
-	facebookLabel.textAlign = advertisingLabel.textAlign = partnersLabel.textAlign = uiCollegesLabel.textAlign = uiFoundationLabel.textAlign = uIowaLabel.textAlign = 
-	privacyLabel.textAlign = contactUsLabel.textAlign =  aboutLabel.textAlign = emailLabel.textAlign = phoneLabel.textAlign = addressLabel.textAlign =  levittLabel.textAlign = 
-	socialMdeiaLabel.textAlign =  linkLabel.textAlign = contactLabel.textAlign = 'left' ;
+	facebookLabel.textAlign = emailLabel.textAlign = phoneLabel.textAlign = addressLabel.textAlign =  levittLabel.textAlign = 
+	socialMdeiaLabel.textAlign =   contactLabel.textAlign = 'left' ;
 	
 	//Left (Social Media Links)
 	feedLabel.left = onIowaLabel.left = blogLabel.left = linkedInLabel.left = foursquareLabel.left = twitterLabel.left = facebookLabel.left =
@@ -463,31 +327,19 @@ function InfoWindow(title) {
 	 //Link Color
 	feedLabel.color = onIowaLabel.color = blogLabel.color = linkedInLabel.color = foursquareLabel.color = twitterLabel.color = facebookLabel.color = feedline.backgroundColor = 
 	onIowaline.backgroundColor = blogline.backgroundColor = linkedInline.backgroundColor = foursquareline.backgroundColor = twitterline.backgroundColor = facebookline.backgroundColor = 
-	advertisingline.backgroundColor = partnersline.backgroundColor = uiCollegesline.backgroundColor = uiFoundationline.backgroundColor = uIowaline.backgroundColor = 
-	privacyline.backgroundColor = contactUsline.backgroundColor =  aboutline.backgroundColor = emailline.backgroundColor =  levittline.backgroundColor =
-	advertisingLabel.color = partnersLabel.color = uiCollegesLabel.color = uiFoundationLabel.color = uIowaLabel.color = privacyLabel.color = contactUsLabel.color =  
-	aboutLabel.color = emailLabel.color =  levittLabel.color = "blue";
+	 emailline.backgroundColor =  levittline.backgroundColor =  emailLabel.color =  levittLabel.color = "blue";
 	
 	// Line Height
-	feedline.height = onIowaline.height = blogline.height = linkedInline.height = foursquareline.height = twitterline.height = facebookline.height = advertisingline.height = partnersline.height = 
-	uiCollegesline.height = uiFoundationline.height = uIowaline.height = privacyline.height = contactUsline.height =  aboutline.height = emailline.height =  levittline.height = 1 ;
+	feedline.height = onIowaline.height = blogline.height = linkedInline.height = foursquareline.height = twitterline.height = facebookline.height =  emailline.height =  levittline.height = 1 ;
 	
 	//Left 
-	feedimage.left = onIowaimage.left = blogimage.left = linkedInimage.left = foursquareimage.left = twitterimage.left = facebookimage.left = socialMdeiaLabel.left =  linkLabel.left = contactLabel.left =
-	advertisingline.left = partnersline.left = uiCollegesline.left = uiFoundationline.left = uIowaline.left = privacyline.left = contactUsline.left =  aboutline.left = emailline.left =  levittline.left =
-	 advertisingLabel.left = partnersLabel.left = uiCollegesLabel.left = uiFoundationLabel.left = uIowaLabel.left = privacyLabel.left = contactUsLabel.left =  aboutLabel.left = emailLabel.left = phoneLabel.left = 
-	  addressLabel.left =  levittLabel.left = 10;
+	feedimage.left = onIowaimage.left = blogimage.left = linkedInimage.left = foursquareimage.left = twitterimage.left = facebookimage.left = socialMdeiaLabel.left =  contactLabel.left =
+	  emailline.left =  levittline.left =  emailLabel.left = phoneLabel.left = addressLabel.left =  levittLabel.left = 10;
 	
 	
 	//------------------------------------------   Contact View's Objects  ---------------------------------------------------------\\
 	contactView.add(contactLabel);	contactView.add(levittLabel);	contactView.add(levittline);	contactView.add(addressLabel);
 	contactView.add(phoneLabel);	contactView.add(emailLabel);	contactView.add(emailline);
-	
-	//------------------------------------------   Link View's Objects  ---------------------------------------------------------\\
-	linkView.add(linkLabel);	linkView.add(aboutLabel);	linkView.add(aboutline);	linkView.add(contactUsLabel);	linkView.add(contactUsline);
-	linkView.add(privacyLabel);	linkView.add(privacyline);	linkView.add(uIowaLabel);	linkView.add(uIowaline);	linkView.add(uiFoundationLabel);
-	linkView.add(uiFoundationline);	linkView.add(uiCollegesLabel);	linkView.add(uiCollegesline);	linkView.add(partnersLabel);
-	linkView.add(partnersline);	linkView.add(advertisingLabel);	linkView.add(advertisingline);
 	
 	
 	//------------------------------------------   Social Media View's Objects  ---------------------------------------------------------\\
@@ -499,7 +351,7 @@ function InfoWindow(title) {
 	socialMediaView.add(feedLabel);	socialMediaView.add(feedline);
 	
 	//------------------------------------------   Views    ---------------------------------------------------------------------------\\	
-	scrollMainView.add(socialMediaView);	scrollMainView.add(linkView);	scrollMainView.add(contactView);
+	scrollMainView.add(socialMediaView);	scrollMainView.add(contactView);	scrollMainView.add(ad);
 	
 	self.add(scrollMainView);
 	return self;

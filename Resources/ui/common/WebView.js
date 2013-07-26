@@ -8,8 +8,8 @@ function WebView (link){
 	
     	
 		var closeButton = Titanium.UI.createButton({
-			title:'Info',
-			font: {fontFamily:'Serif',fontSize:14,fontWeight:'bold'},
+			title:'Back',
+			font: {fontFamily:'Helvetica Neue',fontSize:14,fontWeight:'bold'},
 			backgroundImage: 'backbutton.png',
 			width: 63,
 			height: 30

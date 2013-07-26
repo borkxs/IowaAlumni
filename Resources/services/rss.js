@@ -27,13 +27,13 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 	tries = tries || 0;
 	xhr.open('GET', this.feed);
 	
-	
 	xhr.onload = function(e) {
 		
 		
 		var xml = this.responseXML;
 		
-		
+	
+	
 		
 		if (xml === null || xml.documentElement === null) { 
 			if (tries < 3) {
@@ -69,6 +69,7 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 					link: getRssText(item, 'link'),
 					description: getRssText(item, 'description'),
 					pubDate: getRssText(item, 'pubDate'),
+					hlink: getRssText(item, 'hlink'),
 					image: image
 					});
 			}

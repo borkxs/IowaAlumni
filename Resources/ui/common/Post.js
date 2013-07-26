@@ -13,7 +13,7 @@ function Post(item) {//<----
     this.description = (new Description(item.description)).getDescription();
     //this.timestring = (new DateObject(item.pubDate)).dateString();
     this.pubDate = item.pubDate;
-    //this.ad = item.ad;
+    this.hlink = item.hlink;
     this.image = (new Description(item.description)).getImage();
     this.url = item.link;
     this.imageheight = (this.image!=null) ? getImageHeight(this.image) : null;

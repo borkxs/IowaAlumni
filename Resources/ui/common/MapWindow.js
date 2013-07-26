@@ -65,15 +65,16 @@ function MapWindow(data) {
 	    var companyLabel = Ti.UI.createLabel({
 	        text: (businessesInfo[i].company),
 	        textAlign: 'left',
+	        height: 20,
 	        left: 10,
-	        font: {fontFamily:'Helvetica',fontSize:12,fontWeight:'bold'}
+	        font: {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
 	    });
 	    var discountLabel = Ti.UI.createLabel({
 	        text: (businessesInfo[i].discount),
 	        textAlign: 'left',
 	        left: 10,
 	        top: 35,
-	        font: {fontFamily:'HelveticaNeue-Light',fontSize:10,fontWeight:'bold'}
+	        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	    });
 	    row.add(companyLabel);
 	    row.add(discountLabel);

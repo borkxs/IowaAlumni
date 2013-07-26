@@ -1,4 +1,5 @@
 var GetFeed = require('ui/common/GetFeed');
+var GameWatchWindow = require('ui/common/GameWatchWindow');
 
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 
@@ -43,14 +44,25 @@ function ClubsWindow(title){
 	table.setData(data);
 	self.add(table);
 	table.addEventListener('click', function(e){
-		//Ti.API.info(e) ;
-		//(StateWindow()).open();
+		var stateClubs = getStateList(clubs, e.row.text);
+		//Ti.API.info(stateClubs);
+		(new GameWatchWindow(stateClubs)).open();
 	});
 	
 	
 
 	return self;
 	
+}
+
+function getStateList (clubsList, state){
+	var stateList = [];
+	for (var i = 0; i <= clubsList.length - 1; i++){
+		if (clubsList[i].state == state ){
+			stateList.push(clubsList[i]);
+		}
+	} 
+	return stateList;
 }
 
 

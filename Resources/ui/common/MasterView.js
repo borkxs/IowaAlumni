@@ -2,6 +2,8 @@ var Post = require('ui/common/Post'),
 	FeatureRow = require('ui/common/FeatureRow'),
 	Row = require('ui/common/Row'),
 	TextRow = require('ui/common/TextRow'),
+	SingleRow = require('ui/common/SingleRow'),
+	HeaderRow = require('ui/common/HeaderRow'),
 	PostGroup = require('ui/common/PostGroup'),
 	PostTable = require('ui/common/PostTable'),
 	Ad = require('ui/common/Ad'),
@@ -61,10 +63,21 @@ function MasterView(feed) {
 		}
 	});
 
+	
+	self.addEventListener('swipeToggle', function(e){
+		self.fireEvent('menuClick');
+	});
 	self.addEventListener('swipe', function(e){
 		self.fireEvent('menuClick');
 	});
-
+	self.addEventListener('swipeListen', function(e){
+		self.fireEvent('menuClick');
+	});
+	
+	//alert("This section of app is currently down");
+	
+	
+	
 	function beginReloading() {
 		// just mock out the reload
 		refreshRSS();
@@ -91,14 +104,16 @@ function MasterView(feed) {
 			var featureSet = false;
 			var groupCount = 0;
 			//Ti.API.log('error', data);
-			var adCounter = 0;
+			var Counter = 0;
 			var adIndex = 0;
+			var adEIndex = 0;
 			var ads = new GetFeed('http://iowalum.com/advertising/feed_xml.cfm');
 			//Ti.API.info( ads);
+			var tempDate = "";
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
 				
-				if (adCounter != 0 && (adCounter % 3) == 0 && adIndex < 3){
+				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed != 'http://iowalum.com/calendar/feed_xml.cfm'){
 					var the_Ad = (ads[adIndex].ad).replace("#", "");
 					the_Ad = (the_Ad).replace("#", "");
 					var row = new Ad(the_Ad, adIndex);
@@ -114,13 +129,9 @@ function MasterView(feed) {
 					rows.push(row);
 					adIndex++;
 				}
-				adCounter++;
 				
-				// FeatureRow
-				/*
-				PostGroup(FeaturePost())
-				PostGroup(Post(),Post(),Post())
-				*/
+				
+				
 				if(post.imageheight != null && post.imageheight > 150 && post.imageheight < 300 && featureSet == false) {
 					var row = new FeatureRow(post);
 					featureSet = true;
@@ -130,6 +141,38 @@ function MasterView(feed) {
 					row.addEventListener('swipe', function(e){
 				 		self.fireEvent('swipeToggle');
 					});
+					rows.push(row);
+				}
+				else if (feed == 'http://iowalum.com/calendar/feed_xml.cfm'){
+					if ((Counter == 0) ||(tempDate != post.pubDate && Counter != 0)){
+						var header = new HeaderRow(post);
+						header.addEventListener('click', function(e) {
+							self.fireEvent('itemSelected', { link: e.row.link });
+						});
+						if (Counter != 0 && (Counter % 3) == 0 && adEIndex < 3 ){
+							var the_Ad = (ads[adEIndex].ad).replace("#", "");
+							the_Ad = (the_Ad).replace("#", "");
+							var row = new Ad(the_Ad, adEIndex);
+							
+				
+							row.addEventListener('click', function(e) {
+								
+								var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
+								the_Link = (the_Link).replace("#", "");
+								
+								self.fireEvent('itemSelected', { link: the_Link });
+							});
+							rows.push(row);
+							adEIndex++;
+						}
+						rows.push(header);
+					}
+					var row = new SingleRow(post);
+					
+					row.addEventListener('click', function(e) {
+						self.fireEvent('itemSelected', { link: e.row.link });
+					});
+					
 					rows.push(row);
 				}
 				else {
@@ -151,9 +194,11 @@ function MasterView(feed) {
 						groupCount++;
 					}
 				}
+				Counter++;
+				tempDate = post.pubDate;
 			}
 			
-			//Ti.API.info( new GetAd().theAd());
+			
 			//var post = new Post(new GetAd().theAd());
 			
 			
@@ -165,11 +210,11 @@ function MasterView(feed) {
 		
 	}
 	function refreshRSS() {
-		var t = 0;
+		
 		 rssfeed.loadRssFeed({
 			success: function(data) {
-	    		t = refreshRssTable(data);
-	    		
+	    		refreshRssTable(data);
+	    				
 	    }
 		});
 		

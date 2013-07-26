@@ -5,74 +5,83 @@ var EditText = require('ui/common/EditText');
  * Essential attributes
  */
 
-function TextRow(post) {
+function SingleRow(post) {
 
-    this.postheight		= 0;
+   var table = Ti.UI.createTableView({
+		separatorColor: 	'd5d5d5',
+		backgroundColor: 	'ffffff',
+		height:				'auto',
+		width: 				300,
+		left: 				10,
+		top:				10,
+		bottom:				0,
+		padding:			0,
+		borderRadius:		5,
+		borderColor: 		'#d5d5d5',
+		borderWidth: 		1,
+		scrollable: 		false
+	});
 
-    var row = Ti.UI.createTableViewRow({
-		hasChild: 			true,
+	 var rowText = Ti.UI.createTableViewRow({
+	    	text: "hello",
+	        height: 150
+	    });
+	table.height = rowText.height;
+	var data = [];
+	 data.push(rowText);
+	table.setData(data);
+
+	var row = Ti.UI.createTableViewRow({
+		hasChild: true,
+		height: table.height+15,
+		padding: 0,
+		top: 0,
+		bottom: 0,
 		link: 				post.url,
-		height: 			'auto',
-		padding: 			0,
-		top: 				0,
-		bottom: 			0,
-		layout: 			'vertical',
-		backgroundColor: 	'e2e2e2'
+		layout: 'vertical',
+		backgroundColor: 'e2e2e2'
 	});
 	row.rightImage = null;
 	row.backgroundSelectedImage = null;
 	row.backgroundFocusImage = null;
 
-	var container =  Titanium.UI.createView({
-		backgroundColor: 	'ffffff',
-		height:				'auto',
-		width: 				300,
-		left: 				0,
-		top:				0,
-		bottom:				0,
-		padding:			0
-	});
-
-	var overlay = Ti.UI.createImageView({
-		width: 300,
-		height: 40,
-		hires: true,
-		top: 0,
-		image: 'gold.png'
-	});
-	
+	row.add(table);
 	//container.add(overlay);
-	datebl  = getpubDateLabel(post.pubDate);
-	container.add(datebl);
-
+	
+	//datebl  = getpubDateLabel(post.pubDate);
+	//rowText.add(datebl);
+	
 	titlelbl = getTitleLabel(post.title);
-	container.add(titlelbl);
+	rowText.add(titlelbl);
 
 	timebl  = timeLabel();
-	container.add(timebl);
+	rowText.add(timebl);
 
 	inputtimebl  = getTime(post.snl);
-	container.add(inputtimebl);
+	rowText.add(inputtimebl);
 
 	inputplacebl  = getPlace(post.place);
-	container.add(inputplacebl);
+	rowText.add(inputplacebl);
 
 	placebl  = placeLabel();
-	container.add(placebl);
+	rowText.add(placebl);
 
 
-	timebl.top = datebl.height + titlelbl.height + 15 ;
-	inputtimebl.top = datebl.height + titlelbl.height + 15 ;
-	placebl.top =  timebl.height + datebl.height + titlelbl.height + 15 ;
-	inputplacebl.top =  placebl.top;
-
-
-
-	container.height = titlelbl.height + inputtimebl.height + inputplacebl.height + datebl.height + 35;
-	row.height = container.height + 30;
-
+	timebl.top =   titlelbl.height + 15 ;
+	inputtimebl.top  = timebl.top;
+	placebl.top =  inputplacebl.top = timebl.height  + titlelbl.height + 15 ;
 	
-	row.add(container);
+	
+	
+
+	rowText.height = titlelbl.height + inputtimebl.height + inputplacebl.height + datebl.height + 15;
+	table.height = rowText.height;
+	row.height = table.height + 15;
+	
+	//table.height = row.height;
+	
+	//table.add(container);
+	
 
 	return row;
 }
@@ -99,7 +108,6 @@ function getContainerHeight(img) {
 }
 
 function getTitleLabel(title) {
-
 	// Temp label to get height
 	// At this font-size/font-face the height per line is 32
 
@@ -121,7 +129,7 @@ function getTitleLabel(title) {
 	var label = Ti.UI.createLabel({
 		text: title,
 		left: 15,
-		top: 35,
+		top: 10,
 		bottom:10,
 		height: view.toImage().height,
 		textAlign:'left',
@@ -133,7 +141,6 @@ function getTitleLabel(title) {
 	});
 
 	return label;
-
 }
 
 
@@ -228,4 +235,5 @@ function placeLabel (){
 
 }
 
-module.exports = TextRow;
+
+module.exports = SingleRow;
