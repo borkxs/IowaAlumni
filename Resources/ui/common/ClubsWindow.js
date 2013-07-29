@@ -11,7 +11,7 @@ function ClubsWindow(title){
 	
 	
 	var table = Ti.UI.createTableView({
-		height: 420,
+		height: 'auto',
 		top: 43
 	});
 	var clubs = new GetFeed("http://iowalum.com/clubs/feed_xml.cfm");
@@ -24,13 +24,16 @@ function ClubsWindow(title){
 		    	text: clubs[i].state,
 		        height: 50
 		    });
-		    var label = Ti.UI.createLabel({
-		        text: clubs[i].state,
-		        textAlign: 'left',
-		        left: 10,
-		        font: {fontFamily:'Helvetica',fontSize:12,fontWeight:'bold'}
-		    });
 		  
+
+		var label = Ti.UI.createLabel({
+			 text: clubs[i].state,
+			 textAlign: 'center',
+			 //left: 10,
+			 font: {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
+			        
+		});
+		   
 		    row.add(label);
 		    data.push(row);
 		   

@@ -49,7 +49,7 @@ function MapWindow(data) {
 	});
 
 	var table = Ti.UI.createTableView({
-		height: 300,
+		height: 'auto',
 		top: 250
 	});
 

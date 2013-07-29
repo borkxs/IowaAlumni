@@ -11,6 +11,7 @@ var Post = require('ui/common/Post'),
 	FormatDate = require('ui/common/FormatDate'),
 	RSS = require('services/rss');
 	ParsingError = require('ui/common//ParsingError');
+	WebView = require('ui/common/WebView');
 
 /* 
  * Master View Component Constructor
@@ -29,13 +30,8 @@ function MasterView(feed) {
 
 	var table = new PostTable();
 
-	/*
-	 * PostTable Event Listeners
-	 
-	table.addEventListener('click', function(e) {
-		self.fireEvent('itemSelected', { link: e.row.link });
-	});
-	*/
+	// PostTable Event Listeners
+	
 	table.addEventListener('scroll',function(e)
 	{
 		var offset = e.contentOffset.y;
@@ -64,17 +60,6 @@ function MasterView(feed) {
 	});
 
 	
-	self.addEventListener('swipeToggle', function(e){
-		self.fireEvent('menuClick');
-	});
-	self.addEventListener('swipe', function(e){
-		self.fireEvent('menuClick');
-	});
-	self.addEventListener('swipeListen', function(e){
-		self.fireEvent('menuClick');
-	});
-	
-	//alert("This section of app is currently down");
 	
 	
 	
@@ -123,8 +108,8 @@ function MasterView(feed) {
 						
 						var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
 						the_Link = (the_Link).replace("#", "");
-						
-						self.fireEvent('itemSelected', { link: the_Link });
+						new WebView (the_Link );
+						//self.fireEvent('itemSelected', { link: the_Link });
 					});
 					rows.push(row);
 					adIndex++;
@@ -136,7 +121,8 @@ function MasterView(feed) {
 					var row = new FeatureRow(post);
 					featureSet = true;
 					row.addEventListener('click', function(e) {
-						self.fireEvent('itemSelected', { link: e.row.link });
+						//self.fireEvent('itemSelected', { link: e.row.link });
+						new WebView (e.row.link);
 					});
 					row.addEventListener('swipe', function(e){
 				 		self.fireEvent('swipeToggle');
@@ -146,9 +132,7 @@ function MasterView(feed) {
 				else if (feed == 'http://iowalum.com/calendar/feed_xml.cfm'){
 					if ((Counter == 0) ||(tempDate != post.pubDate && Counter != 0)){
 						var header = new HeaderRow(post);
-						header.addEventListener('click', function(e) {
-							self.fireEvent('itemSelected', { link: e.row.link });
-						});
+						
 						if (Counter != 0 && (Counter % 3) == 0 && adEIndex < 3 ){
 							var the_Ad = (ads[adEIndex].ad).replace("#", "");
 							the_Ad = (the_Ad).replace("#", "");
@@ -159,8 +143,8 @@ function MasterView(feed) {
 								
 								var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
 								the_Link = (the_Link).replace("#", "");
-								
-								self.fireEvent('itemSelected', { link: the_Link });
+								new WebView (the_Link);
+								//self.fireEvent('itemSelected', { link: the_Link });
 							});
 							rows.push(row);
 							adEIndex++;
@@ -169,17 +153,14 @@ function MasterView(feed) {
 					}
 					var row = new SingleRow(post);
 					
-					row.addEventListener('click', function(e) {
-						self.fireEvent('itemSelected', { link: e.row.link });
-					});
-					
 					rows.push(row);
 				}
 				else {
 					var row = (post.imageheight!=null) ? new Row(post) : new TextRow(post);
 					
 					row.addEventListener('click', function(e) {
-						self.fireEvent('itemSelected', { link: e.row.link });
+						//self.fireEvent('itemSelected', { link: e.row.link });
+						new WebView (e.row.link);
 					});
 					if(groupCount >= 1) {
 						group.push(row);
@@ -199,8 +180,6 @@ function MasterView(feed) {
 			}
 			
 			
-			//var post = new Post(new GetAd().theAd());
-			
 			
 			table.setData(rows);
 			
@@ -218,23 +197,6 @@ function MasterView(feed) {
 	    }
 		});
 		
-	/*	
-	 if (1 < 2){
-			self.add(table);
-			
-		}
-		
-		else{
-			var pageError = Ti.UI.createLabel({
-				text: "Sorry, This section of UIAA Moblie Application is currently. Try again in a few minutes. ",
-				textAlign: 'left',
-			    left: 10,
-			    top: 10,
-				font: {fontFamily:'Helvetica',fontSize:12,fontWeight:'normal'}
-			});
-			self.add(pageError);
-		}
-		*/
 	}
 
 	// load initial rss feed

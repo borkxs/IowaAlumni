@@ -1,5 +1,6 @@
 var DateObject = require('ui/common/DateObject');
 var EditText = require('ui/common/EditText');
+var WebView = require('ui/common/WebView');
 /*
  * Post Object
  * Essential attributes
@@ -26,6 +27,10 @@ function HeaderRow(post) {
 	        selectedBackgroundImage: 'blue.png'
 	        
 	    });
+	 rowText.addEventListener('click', function(e) {
+			new WebView (post.url);
+	 });
+	 
 	table.height = rowText.height;
 	var data = [];
 	 data.push(rowText);
@@ -39,6 +44,7 @@ function HeaderRow(post) {
 		bottom: 0,
 		link: 	post.hlink,
 		layout: 'vertical',
+		selectionStyle: 'none',
 		backgroundColor: 'e2e2e2'
 	});
 	row.rightImage = null;

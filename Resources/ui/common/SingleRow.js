@@ -1,5 +1,6 @@
 var DateObject = require('ui/common/DateObject');
 var EditText = require('ui/common/EditText');
+var WebView = require('ui/common/WebView');
 /*
  * Post Object
  * Essential attributes
@@ -24,8 +25,13 @@ function SingleRow(post) {
 
 	 var rowText = Ti.UI.createTableViewRow({
 	    	text: "hello",
+	    	
 	        height: 150
 	    });
+	    
+	 rowText.addEventListener('click', function(e) {
+			new WebView (post.url);
+	 });
 	table.height = rowText.height;
 	var data = [];
 	 data.push(rowText);
@@ -39,6 +45,7 @@ function SingleRow(post) {
 		bottom: 0,
 		link: 				post.url,
 		layout: 'vertical',
+		selectionStyle: 'none',
 		backgroundColor: 'e2e2e2'
 	});
 	row.rightImage = null;
