@@ -56,16 +56,30 @@ function MapWindow(data) {
 	
 	var data = [];
 	for (var i = 0; i <= businessesInfo.length - 1; i++) {
-	    var row = Ti.UI.createTableViewRow({
-	    	company: businessesInfo[i].company,
-	    	latitude:  businessesInfo[i].latitude,
-			longitude: businessesInfo[i].longitude,
-	        height: 50
-	    });
+		if (i % 2 == 0){
+		    var row = Ti.UI.createTableViewRow({
+		    	company: businessesInfo[i].company,
+		    	latitude:  businessesInfo[i].latitude,
+				longitude: businessesInfo[i].longitude,
+		        height: 'auto',
+		        bottom: 10,
+		    });
+		}
+		else{
+			var row = Ti.UI.createTableViewRow({
+		    	company: businessesInfo[i].company,
+		    	latitude:  businessesInfo[i].latitude,
+				longitude: businessesInfo[i].longitude,
+		        height: 'auto',
+		        backgroundColor:'#cccccc',
+		        bottom: 10,
+		    });
+		}
 	    var companyLabel = Ti.UI.createLabel({
 	        text: (businessesInfo[i].company),
 	        textAlign: 'left',
 	        height: 20,
+	        top: 10,
 	        left: 10,
 	        font: {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
 	    });
@@ -73,7 +87,7 @@ function MapWindow(data) {
 	        text: (businessesInfo[i].discount),
 	        textAlign: 'left',
 	        left: 10,
-	        top: 35,
+	        top: 31,
 	        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	    });
 	    row.add(companyLabel);

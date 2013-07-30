@@ -1,6 +1,6 @@
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 
-function GameWatchWindow(clubData) {
+function GameWatchWindow(clubData, clubInfoData) {
 	
 	
 	var self = Ti.UI.createWindow({
@@ -91,13 +91,27 @@ function GameWatchWindow(clubData) {
 
 	
 	var data = [];
+	var rowCounter = 0;
 	for (var i = 0; i <= gameWatchInfo.length - 1; i++) {
-	    var row = Ti.UI.createTableViewRow({
-	    	club: clubData[i].club,
-	    	latitude:  clubData[i].latitude,
-			longitude: clubData[i].longitude,
-	        height: 100
-	    });
+		if (rowCounter % 2 == 0){
+		    var row = Ti.UI.createTableViewRow({
+		    	club: clubData[i].club,
+		    	latitude:  clubData[i].latitude,
+				longitude: clubData[i].longitude,
+		        height: 'auto',
+		        bottom: 10
+		    });
+		}
+		else{
+			var row = Ti.UI.createTableViewRow({
+		    	club: clubData[i].club,
+		    	latitude:  clubData[i].latitude,
+				longitude: clubData[i].longitude,
+		        height: 'auto',
+		        backgroundColor:'#cccccc',
+		        bottom: 10
+		    });
+		}
 	    var clubLabel = Ti.UI.createLabel({
 	        text: (clubData[i].club),
 	        textAlign: 'left',
@@ -111,6 +125,7 @@ function GameWatchWindow(clubData) {
 	        textAlign: 'left',
 	        left: 10,
 	        top: 31,
+	        height: 14,
 	        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	    });
 	    var streetLabel = Ti.UI.createLabel({
@@ -118,15 +133,27 @@ function GameWatchWindow(clubData) {
 	        textAlign: 'left',
 	        left: 10,
 	        top: 46,
+	        height: 14,
 	        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	    });
+	    if (clubData[i].phone != 'NA'){
+	    	var phoneLabel = Ti.UI.createLabel({
+	        	text: (clubData[i].phone),
+		        textAlign: 'left',
+		        left: 10,
+		        top: 61,
+		        height: 14,
+		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
+		    });
+		    row.add(phoneLabel);
+	    }
 	    row.add(clubLabel);
 	    row.add(placeLabel);
 	    row.add(streetLabel);
 	    data.push(row);
-	    
+	    rowCounter++;
 	};
-
+	data = addRows(i, data, false);
 	table.setData(data);
 	
 	mapWin.add(map);
@@ -163,31 +190,31 @@ var tabGroup = Titanium.UI.createTabGroup();
 
 
 
-var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
+var navTab2 = Titanium.UI.iPhone.createNavigationGroup({
     window: self
 });
 
-var baseWinTab1 = Titanium.UI.createWindow({
+var baseWinTab2 = Titanium.UI.createWindow({
     navBarHidden: true
 });
 
-baseWinTab1.add(navTab1);
+baseWinTab2.add(navTab2);
 
 
 //Club Window
-var mainWinTab2 = Titanium.UI.createWindow({
+var mainWinTab1 = Titanium.UI.createWindow({
     navBarHidden: true,
     backgroundColor:'#e2e2e2'
 });
 
-var navTab2 = Titanium.UI.iPhone.createNavigationGroup({
-    window: mainWinTab2
+var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
+    window: mainWinTab1
 });
 
 	
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title: (clubData[0].state).concat(" Clubs"),
+		title: (clubInfoData[0].state).concat("'s Iowa Clubs"),
 		navBarHidden:false,
 		barImage:'navbar.png',
 		//hires:true,
@@ -216,7 +243,7 @@ var navTab2 = Titanium.UI.iPhone.createNavigationGroup({
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		window:masterContainerWindow
 	});
-	mainWinTab2.add(navGroup);
+	mainWinTab1.add(navGroup);
 	
 	var table = Ti.UI.createTableView({
 		height: 'auto',
@@ -225,142 +252,178 @@ var navTab2 = Titanium.UI.iPhone.createNavigationGroup({
 
 	
 	var data = [];
-	for (var i = 0; i <= clubData.length - 1; i++) {
-	    var row = Ti.UI.createTableViewRow({
-	    	club: clubData[i].club,
-	    	latitude:  clubData[i].latitude,
-			longitude: clubData[i].longitude,
-	        height: 50
-	    });
-	    var clubLabel = Ti.UI.createLabel({
-	        text: (clubData[i].club),
+	var rowCounter = 0;
+	for (var i = 0; i <= clubInfoData.length - 1; i++) {
+		if (rowCounter % 2 == 0){
+		    var row = Ti.UI.createTableViewRow({
+		    	city: clubInfoData[i].city,
+		        height: 'auto',
+		        selectionStyle: 'none',
+		        bottom: 10
+		    });
+		}
+		else{
+			 var row = Ti.UI.createTableViewRow({
+		    	city: clubInfoData[i].city,
+		        height: 'auto',
+		        selectionStyle: 'none',
+		        backgroundColor:'#cccccc',
+		        bottom: 10
+		    });
+		}
+	    var cityLabel = Ti.UI.createLabel({
+	        text: (clubInfoData[i].city),
 	        textAlign: 'left',
 	        height: 20,
 	        top: 10,
 	        left: 10,
 	        font: {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
 	    });
-	   
-	    row.add(clubLabel);
+	    row.add(cityLabel);
 	    
+	   var leaderLabel = Ti.UI.createLabel({
+	        text: (clubInfoData[i].leader),
+	        textAlign: 'left',
+	        left: 10,
+	        top: 31,
+	        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
+	    }); 
+	    row.add(leaderLabel);
+	    
+	    var currentTop = 46;
+	    
+	    if (clubInfoData[i].phone != 'NA'){
+		    var phoneLabel = Ti.UI.createLabel({
+		        text: (clubInfoData[i].phone),
+		        textAlign: 'left',
+		        left: 10,
+		        top: currentTop,
+		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
+		    });
+		    row.add(phoneLabel);
+		    currentTop = currentTop + 15
+	    }
+	    if (clubInfoData[i].email != 'NA'){
+		    var emailLabel = Ti.UI.createLabel({
+		        text: (clubInfoData[i].email),
+		        textAlign: 'left',
+		        left: 10,
+		        top: currentTop,
+		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
+		    });
+		    row.add(emailLabel);
+	    	currentTop = currentTop + 15
+	    }
+	    
+	    if (clubInfoData[i].web != 'NA'){
+		    var webLabel = Ti.UI.createLabel({
+		        text: (clubInfoData[i].web),
+		        textAlign: 'left',
+		        left: 10,
+		        top: currentTop,
+		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
+		    });
+		    row.add(webLabel);
+	    }
+	   rowCounter++;
 	    data.push(row);
 	    
 	};
-
+	data = addRows(i, data, true);
 	table.setData(data);
 	
-	mainWinTab2.add(table);
+	mainWinTab1.add(table);
  
-var baseWinTab2 = Titanium.UI.createWindow({
-    navBarHidden: true
-});
-baseWinTab2.add(navTab2);
-
-var tab1 = Titanium.UI.createTab({  
-    icon: 'info.png',
-    title: 'Clubs',
-    window: baseWinTab1
-});
-tabGroup.addTab(tab1);  
- 
-var tab2 = Titanium.UI.createTab({  
-    icon: 'info.png',
-    title: 'Game Watch',
-    window: baseWinTab2
-});
-tabGroup.addTab(tab2);  
-tabGroup.setActiveTab(0); 
-tabGroup.open();
-
-return self;
-/*
-
- 
-// First tab, main window
- 
-var mainWinTab1 = Titanium.UI.createWindow({
-    title: 'Window 1'
-});
-var data = [{title: 'item one'}, {title: 'item two'}, {title: 'item three'}];
-var table = Titanium.UI.createTableView({
-    data: data
-}); 
-mainWinTab1.add(table);
- 
-// First tab, navigator
- 
-var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
-    window: mainWinTab1
-});
 var baseWinTab1 = Titanium.UI.createWindow({
     navBarHidden: true
 });
 baseWinTab1.add(navTab1);
- 
-// First tab, subwindow
- 
-table.addEventListener('click', function(e){
-    tabGroup.animate({bottom: -50, duration: 500});
- 
-    var subWinTab1 = Titanium.UI.createWindow({
-        title: e.row.title
-    });
-    navTab1.open(subWinTab1);
- 
-    subWinTab1.addEventListener('close', function(e){
-        tabGroup.animate({bottom: 0, duration: 500});
-    });
-});
- 
-// Second tab, main window
- 
-var mainWinTab2 = Titanium.UI.createWindow({
-    title: 'Window 2'
-});
-var data = [{title: 'item a'}, {title: 'item b'}, {title: 'item c'}];
-var table = Titanium.UI.createTableView({
-    data: data
-}); 
-mainWinTab2.add(table);
- 
-// Second tab, navigator
- 
-var navTab2 = Titanium.UI.iPhone.createNavigationGroup({
-    window: mainWinTab2
-});
- 
-var baseWinTab2 = Titanium.UI.createWindow({
-    navBarHidden: true
-});
-baseWinTab2.add(navTab2);
- 
-// Second tab, subwindow
- 
-table.addEventListener('click', function(e){
-    var subWinTab2 = Titanium.UI.createWindow({
-        title: e.row.title
-    });
-    navTab2.open(subWinTab2);
-});
- 
-// Tab group
- 
+
+
 var tab1 = Titanium.UI.createTab({  
-    icon: 'KS_nav_ui.png',
-    title: 'Full nav',
+    icon: "people.png",
+    title: 'Clubs',
     window: baseWinTab1
 });
-tabGroup.addTab(tab1);  
- 
+tabGroup.addTab(tab1); 
+
+
 var tab2 = Titanium.UI.createTab({  
-    icon: 'KS_nav_views.png',
-    title: 'Embedded nav',
+    icon: 'tv.png',
+    title: 'Game Watch',
     window: baseWinTab2
 });
-tabGroup.addTab(tab2);  
- 
+tabGroup.addTab(tab2); 
+
+tabGroup.setActiveTab(0); 
 tabGroup.open();
-*/
+
+return mainWinTab1;
+
+}
+
+function addRows(i, data, flag){
+	if (i == 1 && flag == true){
+		var row = Ti.UI.createTableViewRow({
+		    height: 100,
+		    selectionStyle: 'none',
+		    backgroundColor:'#cccccc',
+		    bottom: 10
+		});
+		data.push(row);
+		
+		var row = Ti.UI.createTableViewRow({
+		    height: 100,
+		    selectionStyle: 'none',
+		    bottom: 10
+		});
+		data.push(row);
+		var row = Ti.UI.createTableViewRow({
+		    height: 100,
+		    selectionStyle: 'none',
+		    backgroundColor:'#cccccc',
+		    bottom: 10
+		});
+		data.push(row);
+	}
+	else if (i == 1 && flag == false){
+		var row = Ti.UI.createTableViewRow({
+		    height: 100,
+		    selectionStyle: 'none',
+		    backgroundColor:'#cccccc',
+		    bottom: 10
+		});
+		data.push(row);
+		
+	}
+	else if (i == 2 && flag == true){
+		var row = Ti.UI.createTableViewRow({
+		    height: 100,
+		    selectionStyle: 'none',
+		    bottom: 10
+		});
+		data.push(row);
+		
+		var row = Ti.UI.createTableViewRow({
+		    height: 100,
+		    selectionStyle: 'none',
+		    backgroundColor:'#cccccc',
+		    bottom: 10
+		});
+		data.push(row);
+		
+	}
+	else if (i == 3 && flag == true){
+		var row = Ti.UI.createTableViewRow({
+		    height: 100,
+		    selectionStyle: 'none',
+		     backgroundColor:'#cccccc',
+		    bottom: 10
+		});
+		data.push(row);
+		
+	}
+	return data;
 }
 
 

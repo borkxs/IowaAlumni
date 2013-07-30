@@ -18,13 +18,23 @@ function GetFeed (feed){
 				state:  getRssText(item, 'state'),
 				club:  getRssText(item, 'club'),
 				place: getRssText(item, 'place'),
-				web: getRssText(item, 'web'),
+				phone: getRssText(item, 'phone'),
 				latitude: getRssText(item, 'latitude'),
 				longitude: getRssText(item, 'longitude'),
 				street: getRssText(item, 'street')
 				});
 		}
 		
+		else if (feed == "http://iowalum.com/clubs/feed_p2_xml.cfm"){
+			data.push({
+				state:  getRssText(item, 'state'),
+				leader:  getRssText(item, 'leader'),
+				city: getRssText(item, 'city'),
+				web: getRssText(item, 'web'),
+				email: getRssText(item, 'email'),
+				phone: getRssText(item, 'phone')
+				});
+		}
 		else if (feed == "http://iowalum.com/advertising/feed_xml.cfm"){
 			data.push({
 				ad: getRssText(item, 'ad'),

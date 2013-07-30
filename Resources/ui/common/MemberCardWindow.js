@@ -8,7 +8,8 @@ function  MemberCardWindow(title){
 	
 	var passwordWin = Ti.UI.createWindow({
 	    top: 43,
-	    backgroundColor:'#202020',
+	    //backgroundColor:'#202020',
+	    backgroundColor:'#cccccc',
 		navBarHidden: true
 	});
 	
@@ -17,10 +18,10 @@ function  MemberCardWindow(title){
 		text: "UIAA Member Login:",
 		height:'auto',
 		width: 250,
-		color:'#efc006',
+		//color:'#efc006',
 		top: 100,
   		left: 80,
-		font:{fontFamily:'Helvetica',fontSize:16,fontWeight:'bold'}
+		font: {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
 	});
 	
 	var passwordTextField = Ti.UI.createTextField({
@@ -36,10 +37,10 @@ function  MemberCardWindow(title){
 		title:'Login',
 		width:50,
 		height:25,
-		color:'#efc006',
+		//color:'#efc006',
 		top: 142,
   		left: 130,
-		font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14},
+		font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 		
 	});
 	var wrongPasswordLabel = Ti.UI.createLabel({
@@ -49,7 +50,7 @@ function  MemberCardWindow(title){
 		color:'#FF0000',
 		top: 169,
   		left: 10,
-		font:{fontFamily:'Helvetica',fontSize:11,fontWeight:'bold'}
+		font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	});
 	
 	var image = Ti.UI.createImageView({

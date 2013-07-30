@@ -90,6 +90,7 @@ function MasterView(feed) {
 			var groupCount = 0;
 			//Ti.API.log('error', data);
 			var Counter = 0;
+			var headerCounter = 0;
 			var adIndex = 0;
 			var adEIndex = 0;
 			var ads = new GetFeed('http://iowalum.com/advertising/feed_xml.cfm');
@@ -133,7 +134,7 @@ function MasterView(feed) {
 					if ((Counter == 0) ||(tempDate != post.pubDate && Counter != 0)){
 						var header = new HeaderRow(post);
 						
-						if (Counter != 0 && (Counter % 3) == 0 && adEIndex < 3 ){
+						if (headerCounter != 0 && (headerCounter % 3) == 0 && adEIndex < 3 ){
 							var the_Ad = (ads[adEIndex].ad).replace("#", "");
 							the_Ad = (the_Ad).replace("#", "");
 							var row = new Ad(the_Ad, adEIndex);
@@ -148,8 +149,12 @@ function MasterView(feed) {
 							});
 							rows.push(row);
 							adEIndex++;
+							if (adEIndex == 2){
+								adEIndex = 0;
+							} 
 						}
 						rows.push(header);
+						headerCounter++;
 					}
 					var row = new SingleRow(post);
 					
