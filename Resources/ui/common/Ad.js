@@ -1,7 +1,7 @@
 var DateObject = require('ui/common/DateObject');
 var CachedImageView = require('ui/common/CachedImageView');
 /*
- * Post Object
+ * Ad Object
  * Essential attributes
  */
 
@@ -18,7 +18,8 @@ function Ad(post, index) {
 		bottom: 0,
 		layout: 'vertical',
 		backgroundColor: 'e2e2e2',
-		borderRadius: 0.5
+		borderRadius: 0.5,
+		selectionStyle: 'none'
 	});
 	row.rightImage = null;
 	row.backgroundSelectedImage = null;
@@ -33,26 +34,22 @@ function Ad(post, index) {
 			bottom:			0,
 			padding:		0,
 			borderRadius:	5
-			//borderColor: 	'#d5d5d5',
-			//borderWidth: 	2
 	});
 
-	//cacheImage(this.image);
+
 	this.containerheight = getContainerHeight(post);
-	//Ti.API.info(this.containerheight);
 	container.height 	 = this.containerheight;
 	row.height 			 = 62;
 
 	var imagebox = Ti.UI.createImageView({
 		width: 300,
-		height: 60,
+		height: 70,
 		hires: true,
 		top: 10
 		
 	});
-	//cachedImageView('imageDirectoryName', post, imagebox);
+	
 	new CachedImageView('imageDirectoryName', post, imagebox);
-	///new ImageCaching('imageDirectoryName', img);
 	container.add(imagebox);
 	
 
@@ -68,11 +65,9 @@ function getContainerHeight(img) {
 	var tempimagebox = Ti.UI.createImageView({
 		image: img,
 		width: 300,
-		height: 60,
-		hires: true,
-		//top: -10, // this works for some reason
+		height: 70,
+		hires: true
 	});
-    //cachedImageView('imageDirectoryName', img, tempimagebox);
     
 	
 	var height = tempimagebox.toImage().height;

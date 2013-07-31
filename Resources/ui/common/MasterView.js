@@ -8,9 +8,7 @@ var Post = require('ui/common/Post'),
 	PostTable = require('ui/common/PostTable'),
 	Ad = require('ui/common/Ad'),
 	GetFeed = require('ui/common/GetFeed'),
-	FormatDate = require('ui/common/FormatDate'),
 	RSS = require('services/rss');
-	ParsingError = require('ui/common//ParsingError');
 	WebView = require('ui/common/WebView');
 
 /* 
@@ -110,7 +108,6 @@ function MasterView(feed) {
 						var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
 						the_Link = (the_Link).replace("#", "");
 						new WebView (the_Link );
-						//self.fireEvent('itemSelected', { link: the_Link });
 					});
 					rows.push(row);
 					adIndex++;
@@ -135,16 +132,17 @@ function MasterView(feed) {
 						var header = new HeaderRow(post);
 						
 						if (headerCounter != 0 && (headerCounter % 3) == 0 && adEIndex < 3 ){
+							
 							var the_Ad = (ads[adEIndex].ad).replace("#", "");
 							the_Ad = (the_Ad).replace("#", "");
 							var row = new Ad(the_Ad, adEIndex);
 							
 				
 							row.addEventListener('click', function(e) {
-								
+
 								var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
 								the_Link = (the_Link).replace("#", "");
-								new WebView (the_Link);
+								new WebView (ads[e.row.linkIndex].link);
 								//self.fireEvent('itemSelected', { link: the_Link });
 							});
 							rows.push(row);
@@ -206,7 +204,24 @@ function MasterView(feed) {
 
 	// load initial rss feed
 	refreshRSS();
+	table.bottom = 70;
 	self.add(table);
+	
+	
+	var currentAd = new GetFeed("http://iowalum.com/mobile-app/feed_xml.cfm");
+	
+	var ad = Ti.UI.createImageView({
+	  image:    currentAd[0].staticAd,
+	  width: 320,
+	  height: 70,
+	  top: 350,
+	  left: 0
+	  
+	});
+	ad.addEventListener('click', function(e) {
+		new WebView (currentAd[0].staticAdUrl);
+	}); 
+	self.add(ad);
 
 	return self;
 }

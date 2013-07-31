@@ -1,4 +1,5 @@
 var ApplicationWindow = require('ui/common/ApplicationWindow');
+var WebView = require('ui/common/WebView');
 
 function GameWatchWindow(clubData, clubInfoData) {
 	
@@ -9,9 +10,11 @@ function GameWatchWindow(clubData, clubInfoData) {
 		navBarHidden: true
 	});
 
+
+	windowTitle = setStateTitle (clubData[0].state);
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title: clubData[0].state,
+		title: windowTitle,
 		navBarHidden:false,
 		barImage:'navbar.png',
 		//hires:true,
@@ -145,6 +148,11 @@ function GameWatchWindow(clubData, clubInfoData) {
 		        height: 14,
 		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 		    });
+			/*
+		    phoneLabel.addEventListener('click', function(e) {
+				Ti.Platform.openURL('tel:5551234');
+			}); 
+			*/
 		    row.add(phoneLabel);
 	    }
 	    row.add(clubLabel);
@@ -214,7 +222,7 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 	
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title: (clubInfoData[0].state).concat("'s Iowa Clubs"),
+		title: windowTitle,
 		navBarHidden:false,
 		barImage:'navbar.png',
 		//hires:true,
@@ -307,12 +315,26 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 		    var emailLabel = Ti.UI.createLabel({
 		        text: (clubInfoData[i].email),
 		        textAlign: 'left',
+		        color: 'blue',
 		        left: 10,
 		        top: currentTop,
 		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 		    });
+		    
+		   
+	    	emailLabel.addEventListener('click', function(e) {
+	    		//data[e.index].emailLabel.color = 'purple'
+	    		//Ti.API.info(e.row);
+				var emailDialog = Ti.UI.createEmailDialog()
+				emailDialog.toRecipients = [clubInfoData[e.index].email];
+				var f = Ti.Filesystem.getFile('cricket.wav');
+				emailDialog.addAttachment(f);
+				emailDialog.open();
+	}); 
+	
 		    row.add(emailLabel);
 	    	currentTop = currentTop + 15
+	    	
 	    }
 	    
 	    if (clubInfoData[i].web != 'NA'){
@@ -321,9 +343,15 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 		        textAlign: 'left',
 		        left: 10,
 		        top: currentTop,
+		        color: "blue",
 		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 		    });
-		    row.add(webLabel);
+		   
+		    
+		    webLabel.addEventListener('click', function(e) {
+				new WebView (clubInfoData[e.index].web);
+			}); 
+			row.add(webLabel);
 	    }
 	   rowCounter++;
 	    data.push(row);
@@ -342,7 +370,7 @@ baseWinTab1.add(navTab1);
 
 var tab1 = Titanium.UI.createTab({  
     icon: "people.png",
-    title: 'Clubs',
+    title: 'Iowa Clubs',
     window: baseWinTab1
 });
 tabGroup.addTab(tab1); 
@@ -350,7 +378,7 @@ tabGroup.addTab(tab1);
 
 var tab2 = Titanium.UI.createTab({  
     icon: 'tv.png',
-    title: 'Game Watch',
+    title: 'Game Watch Locations',
     window: baseWinTab2
 });
 tabGroup.addTab(tab2); 
@@ -426,6 +454,35 @@ function addRows(i, data, flag){
 	return data;
 }
 
-
+function setStateTitle (string){
+	if (string.toUpperCase() == 'DISTRICT OF COLUMBIA'){
+		return 'Washington, DC'
+	}
+	else if (string.toUpperCase() == 'MASSACHUSETTS'){
+		return 'MA'
+	}
+	else if (string.toUpperCase() == 'NEW MEXICO'){
+		return 'NM'
+	}
+	else if (string.toUpperCase() == 'NEW YORK'){
+		return 'New York'
+	}
+	else if (string.toUpperCase() == 'NORTH CAROLINA'){
+		return 'NC'
+	}
+	else if (string.toUpperCase() == 'SOUTH CAROLINA'){
+		return 'SC'
+	}
+	else if (string.toUpperCase() == 'PENNSYLVANIA'){
+		return 'PA'
+	}
+	else if (string.toUpperCase() == 'WASHINGTON'){
+		return 'WA'
+	}
+	else{
+		return string.charAt(0).toUpperCase() + (string.slice(1)).toLowerCase();
+	}
+    
+}
 
 module.exports = GameWatchWindow;

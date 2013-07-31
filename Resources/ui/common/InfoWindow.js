@@ -1,6 +1,7 @@
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var WebView = require('ui/common/WebView');
 var DetailView = require('ui/common/DetailView');
+var GetFeed = require('ui/common/GetFeed');
 
 function InfoWindow(title) {
 	var self = new ApplicationWindow(title);
@@ -43,8 +44,10 @@ function InfoWindow(title) {
 	  showHorizontalScrollIndicator: false
 	});
 	
+	var currentAd =  new GetFeed ('http://iowalum.com/mobile-app/feed_xml.cfm');
+	
 	var ad = Ti.UI.createImageView({
-	  image:    'https://www.iowalum.com/images/redesign10/rewards_new.jpg',
+	  image:    currentAd[0].contactUsAd,
 	  width: 300,
 	  height: 52,
 	  top: 350,
@@ -52,7 +55,7 @@ function InfoWindow(title) {
 	  
 	});
 	ad.addEventListener('click', function(e) {
-		new WebView ('http://www.iowalum.com/iowarewards/index.cfm');
+		new WebView (currentAd[0].contactUsUrl);
 	}); 
 	
 	// The Contact View 
@@ -254,15 +257,7 @@ function InfoWindow(title) {
 	onIowaimage.addEventListener('click', function(e) {
 		vistedLink (onIowaLabel, onIowaline, "purple" );
 		new WebView ('http://instagram.com/uiowaalumni');
-		/*
-		var url = "comgooglemaps://";
-		if (Titanium.Platform.canOpenURL(url)) {
-		    Titanium.Platform.openURL(url);
-		}
-		else {
-		    alert('Cannot open app');
-		}
-		*/
+	
 	}); 
 	
 	var onIowaLabel = Ti.UI.createLabel({

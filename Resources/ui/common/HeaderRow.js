@@ -2,7 +2,7 @@ var DateObject = require('ui/common/DateObject');
 var EditText = require('ui/common/EditText');
 var WebView = require('ui/common/WebView');
 /*
- * Post Object
+ * Event Date Header Object
  * Essential attributes
  */
 
@@ -75,9 +75,6 @@ function getpubDateLabel(pubDate) {
 		width: 200,
 		height: 20,
 		color:'#5c4e1a',
-		//shadowColor:'#f0d87f',
-        //shadowOpacity:0.5,
-        //shadowOffset:{x:0, y:1},
 		font:{fontFamily:'Helvetica-Bold',fontSize:20,fontWeight:'normal'}
 	});
 

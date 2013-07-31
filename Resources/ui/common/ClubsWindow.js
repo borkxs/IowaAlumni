@@ -8,12 +8,30 @@ function ClubsWindow(title){
 	
 	var self = new ApplicationWindow(title);
 	
-	
+	var introLabel = Ti.UI.createLabel({
+			 text: 'Want to connect with fellow UI grads, need a place to watch the next game with fellow Hawkeye fans? IOWA clubs have you covered—find a location near you!',
+			 textAlign: 'left',
+			 left: 10,
+			 width: 300,
+			 top: 53,
+			font: {fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
+			        
+		});
+	self.add(introLabel);		
 	
 	var table = Ti.UI.createTableView({
 		height: 'auto',
-		top: 43
+		bottom: 70,
+		top: 185
 	});
+	
+	var people = Ti.UI.createImageView({
+	  image:    'https://www.iowalum.com/mobile/clubs.png',
+	  top:   130
+	});
+	
+	self.add(people);
+	
 	var clubs = new GetFeed("http://iowalum.com/clubs/feed_xml.cfm");
 	var clubsInfo = new GetFeed("http://iowalum.com/clubs/feed_p2_xml.cfm");
 	var data = [];
@@ -60,7 +78,20 @@ function ClubsWindow(title){
 		(new GameWatchWindow(stateClubs[0], stateClubs[1])).open();
 	});
 	
+	var currentAd = new GetFeed("http://iowalum.com/mobile-app/feed_xml.cfm");
 	
+	var ad = Ti.UI.createImageView({
+	  image:    currentAd[0].staticAd,
+	  width: 320,
+	  height: 70,
+	  top: 395,
+	  left: 0
+	  
+	});
+	ad.addEventListener('click', function(e) {
+		new WebView (currentAd[0].staticAdUrl);
+	}); 
+	self.add(ad);
 
 	return self;
 	
@@ -78,8 +109,6 @@ function getStateList (clubsList, clubsInfoList, state){
 	data.push(stateList);
 	for (var i = 0; i <= clubsInfoList.length - 1; i++){
 		if ((clubsInfoList[i].state).toUpperCase() == state ){
-			//clubsInfoList[i].state = setStateTitle(state);
-			//Ti.API.info(clubsInfoList[i].state)
 			stateInfoList.push(clubsInfoList[i]);
 		}
 	} 
@@ -88,35 +117,5 @@ function getStateList (clubsList, clubsInfoList, state){
 	return data;
 }
 
-function setStateTitle (string){
-	if (string.toUpperCase() == 'DISTRICT OF COLUMBIA'){
-		return 'DC'
-	}
-	else if (string.toUpperCase() == 'MASSACHUSETTS'){
-		return 'MA'
-	}
-	else if (string.toUpperCase() == 'NEW MEXICO'){
-		return 'NM'
-	}
-	else if (string.toUpperCase() == 'NEW YORK'){
-		return 'New York'
-	}
-	else if (string.toUpperCase() == 'NORTH CAROLINA'){
-		return 'NC'
-	}
-	else if (string.toUpperCase() == 'SOUTH CAROLINA'){
-		return 'SC'
-	}
-	else if (string.toUpperCase() == 'PENNSYLVANIA'){
-		return 'PA'
-	}
-	else if (string.toUpperCase() == 'WASHINGTON'){
-		return 'WA'
-	}
-	else{
-		return string.charAt(0).toUpperCase() + (string.slice(1)).toLowerCase();
-	}
-    
-}
 
 module.exports = ClubsWindow;

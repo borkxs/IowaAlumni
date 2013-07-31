@@ -2,7 +2,7 @@ var DateObject = require('ui/common/DateObject');
 var EditText = require('ui/common/EditText');
 var WebView = require('ui/common/WebView');
 /*
- * Post Object
+ * Single Post Object
  * Essential attributes
  */
 
@@ -24,8 +24,6 @@ function SingleRow(post) {
 	});
 
 	 var rowText = Ti.UI.createTableViewRow({
-	    	text: "hello",
-	    	
 	        height: 150
 	    });
 	    
@@ -53,10 +51,7 @@ function SingleRow(post) {
 	row.backgroundFocusImage = null;
 
 	row.add(table);
-	//container.add(overlay);
 	
-	//datebl  = getpubDateLabel(post.pubDate);
-	//rowText.add(datebl);
 	
 	titlelbl = getTitleLabel(post.title);
 	rowText.add(titlelbl);
@@ -85,9 +80,7 @@ function SingleRow(post) {
 	table.height = rowText.height;
 	row.height = table.height + 15;
 	
-	//table.height = row.height;
 	
-	//table.add(container);
 	
 
 	return row;
@@ -97,22 +90,6 @@ function SingleRow(post) {
  * Helper Functions
  */
 
-function getContainerHeight(img) {
-	var tempimagebox = Ti.UI.createImageView({
-		image: img,
-		width: 'auto',
-		height: 'auto',
-		hires: true,
-		//top: -10, // this works for some reason
-	});
-    cachedImageView('imageDirectoryName', img, tempimagebox);
-
-	var height = tempimagebox.toImage().height;
-	var width = tempimagebox.toImage().width;
-	var ratio = height / width;
-
-	return Math.floor( 300 * ratio );
-}
 
 function getTitleLabel(title) {
 	// Temp label to get height

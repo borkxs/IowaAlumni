@@ -43,14 +43,35 @@ function MapWindow(data) {
 		animate: true,
 		regionFit: true,
 		userLocation: true,
-		height: 250,
+		height: 200,
 	    annotations: companyInfo,
 		top: 0
 	});
+	
+	
+	var textView = Ti.UI.createView({
+		//separatorColor: 	'd5d5d5',
+		backgroundColor: 	'#e2e2e2',
+		height:				70,
+		//width: 				300,
+		//left: 				10,
+		top:				200,
+		
+	});
+	var introLabel = Ti.UI.createLabel({
+			 text: 'UI Alumni members have an array of benefits available to them. Use your member benefit car at any of these locations.',
+			 textAlign: 'left',
+			 left: 10,
+			 width: 300,
+			 top: 10,
+			font: {fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
+			        
+		});
+	textView.add(introLabel);	
 
 	var table = Ti.UI.createTableView({
 		height: 'auto',
-		top: 250
+		top: 270
 	});
 
 	
@@ -98,6 +119,7 @@ function MapWindow(data) {
 	table.setData(data);
 	
 	mapWin.add(map);
+	mapWin.add(textView);
 	mapWin.add(table);
 	
 	

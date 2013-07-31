@@ -87,11 +87,11 @@ else {
 		
 		//// ---- Menu Table
 		// Menu Titles
-		var iowaInsiderTitle = 'The Iowa Insider';
+		var iowaInsiderTitle = 'Iowa Insider Blog';
 		var  alumniMagazineTitle = 'Iowa Alumni Magazine';
 		var eventsTitle = 'Events';
 		var memberBenefitsTitle = 'Member Benefits';
-		var memberCardTitle = 'Member Card';
+		var memberCardTitle = 'Member Benefits Card';
 		var clubsTitle = 'Clubs and Game Watches';
 		var contactUsTitle = 'Contact Us';
 		
