@@ -1,4 +1,3 @@
-
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var GetFeed = require('ui/common/GetFeed');
 
@@ -8,7 +7,6 @@ function  MemberCardWindow(title){
 	
 	var passwordWin = Ti.UI.createWindow({
 	    top: 43,
-	    //backgroundColor:'#202020',
 	    backgroundColor:'#cccccc',
 		navBarHidden: true
 	});
@@ -37,7 +35,6 @@ function  MemberCardWindow(title){
 		text: "Let us know via email (alumni-member@uiowa.edu) and we will send it to you promptly during regular business hours. Type 'members-only password' in the subject line of your message and include your first and last name, city, and state.",
 		height:'auto',
 		width: 300,
-		//color:'#efc006',
 		top: 135,
   		left: 10,
 		font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
@@ -56,7 +53,6 @@ function  MemberCardWindow(title){
 		title:'Login',
 		width:50,
 		height:25,
-		//color:'#efc006',
 		top: 82,
   		left: 130,
 		font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
@@ -104,13 +100,10 @@ function  MemberCardWindow(title){
 			passwordWin.backgroundColor = '202020';
 			wrongPasswordLabel.setVisible(false);
 			passwordWin.add(image);
-			self.title = "Member's Card";
 			
 		}
 		else {
 			wrongPasswordLabel.setVisible(true);
-			//passwordInfoLabel.color = 'red';
-			//passwordInfoLabel.text = 'Let us know via email (alumni-member@uiowa.edu) and we will send it to you promptly during regular business hours. Type "members-only password" in the subject line of your message and include your first and last name, city, and state. Or call the UIAA at 800/469-2586.'
 		}
 	});
 

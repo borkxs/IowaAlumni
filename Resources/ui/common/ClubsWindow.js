@@ -55,7 +55,6 @@ function ClubsWindow(title){
 		var label = Ti.UI.createLabel({
 			 text: clubs[i].state,
 			 textAlign: 'center',
-			 //left: 10,
 			 font: {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
 			        
 		});
@@ -74,7 +73,6 @@ function ClubsWindow(title){
 	self.add(table);
 	table.addEventListener('click', function(e){
 		var stateClubs = getStateList(clubs, clubsInfo, e.row.text);
-		//Ti.API.info(stateClubs);
 		(new GameWatchWindow(stateClubs[0], stateClubs[1])).open();
 	});
 	

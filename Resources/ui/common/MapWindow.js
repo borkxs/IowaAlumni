@@ -1,5 +1,3 @@
-
-//var GetLocation = require('ui/common/GetLocation');
 var GetFeed = require('ui/common/GetFeed');
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 
@@ -9,7 +7,6 @@ function MapWindow(data) {
 	
 	
 	var mapWin = Ti.UI.createWindow({
-	    //title:'Window 1',
 	    top: 43,
 	    backgroundColor:'#ffffff',
 		navBarHidden: true
@@ -50,11 +47,8 @@ function MapWindow(data) {
 	
 	
 	var textView = Ti.UI.createView({
-		//separatorColor: 	'd5d5d5',
 		backgroundColor: 	'#e2e2e2',
 		height:				70,
-		//width: 				300,
-		//left: 				10,
 		top:				200,
 		
 	});
@@ -144,7 +138,7 @@ function MapWindow(data) {
 		
 		map.selectAnnotation(companyInfo[e.index]);
 	});
-	//new GetLocation();
+
 	return self;
 
 }

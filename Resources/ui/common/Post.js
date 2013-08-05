@@ -1,5 +1,4 @@
-var DateObject = require('ui/common/DateObject'),
-	Description = require('ui/common/Description');
+var	Description = require('ui/common/Description');
 var CachedImageView = require('ui/common/CachedImageView');
 /*
  * Post Object
@@ -11,13 +10,11 @@ function Post(item) {//<----
     this.snl = item.snl;
     this.place = item.place;
     this.description = (new Description(item.description)).getDescription();
-    //this.timestring = (new DateObject(item.pubDate)).dateString();
     this.pubDate = item.pubDate;
     this.hlink = item.hlink;
     this.image = (new Description(item.description)).getImage();
     this.url = item.link;
     this.imageheight = (this.image!=null) ? getImageHeight(this.image) : null;
-    //this.date = item.date;
     
 }
 function getImageHeight(img) {

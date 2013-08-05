@@ -1,6 +1,5 @@
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var WebView = require('ui/common/WebView');
-var DetailView = require('ui/common/DetailView');
 var GetFeed = require('ui/common/GetFeed');
 
 function InfoWindow(title) {
@@ -59,14 +58,18 @@ function InfoWindow(title) {
 	}); 
 	
 	// The Contact View 
+	var textCurrentTop = 0;
+	
 	var contactLabel = Ti.UI.createLabel({
 		text: "Contact Us",
 		top: 10
 	});
+	
 	var levittLabel = Ti.UI.createLabel({
 		text: "Levitt Center",
 		top: 30
 	});
+	textCurrentTop = levittLabel.top;
 	
 	var levittline = Ti.UI.createView({
 		width: 				67,
@@ -79,15 +82,18 @@ function InfoWindow(title) {
 		new WebView ('http://www.iowalum.com/about/levitt.cfm');
 	}); 
 	
+	
 	var addressLabel = Ti.UI.createLabel({
 		text: ("P.O. Box 1970").concat('\n').concat("Iowa City, IA 52244-1970"),
-		top: 45
+		top: textCurrentTop + 15
 	});
+	
 	
 	var phoneLabel = Ti.UI.createLabel({
 		text: ("Phone: 319/335-3294").concat('\n').concat("Toll Free: 800/469-2586").concat('\n').concat("FAX: 319/335-1079"),
 		top: 85
 	});
+	
 	
 	var emailLabel = Ti.UI.createLabel({
 		text: "alumni@uiowa.edu",
@@ -113,6 +119,10 @@ function InfoWindow(title) {
 	
 	
 	// Social Network View
+	var textCurrentTop = 0;
+	var imageCurrentTop = 32;
+	var lineCurrentTop = 46;
+	
 	var socialMdeiaLabel = Ti.UI.createLabel({
 		text: "Social Networks",
 		left: 10,
@@ -121,7 +131,7 @@ function InfoWindow(title) {
 	
 	var facebookimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/images/icons/facebook.png',
-	  top:    32
+	  top:    imageCurrentTop
 	});
 	
 	facebookimage.addEventListener('click', function(e) {
@@ -134,10 +144,11 @@ function InfoWindow(title) {
 		color: "blue",
 		top: 32
 	});
+	var textCurrentTop = facebookLabel.top;
 	
 	var facebookline = Ti.UI.createView({
 		width: 				53,
-		top:				46			
+		top:				lineCurrentTop		
 		
 	});
 	
@@ -148,8 +159,9 @@ function InfoWindow(title) {
 	
 	var twitterimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/images/icons/twitter.png',
-	  top:    47
+	  top:    imageCurrentTop + 15
 	});
+	imageCurrentTop = imageCurrentTop + 15;
 	
 	twitterimage.addEventListener('click', function(e) {
 		vistedLink (twitterLabel, twitterline, "purple" );
@@ -158,14 +170,17 @@ function InfoWindow(title) {
 	
 	var twitterLabel = Ti.UI.createLabel({
 		text: "Twitter",
-		top: 47
+		top: textCurrentTop + 15
 	});
+	textCurrentTop = textCurrentTop + 15;
+	
 	
 	var twitterline = Ti.UI.createView({
 		width: 				36,
-		top:				61			
+		top:				lineCurrentTop + 15			
 		
 	});
+	lineCurrentTop = lineCurrentTop + 15;
 	
 	twitterLabel.addEventListener('click', function(e) {
 		vistedLink (twitterLabel, twitterline, "purple" );
@@ -174,24 +189,27 @@ function InfoWindow(title) {
 	
 	var foursquareimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/images/icons/fourquare.png',
-	  top:    62
+	  top:   imageCurrentTop + 15
 	});
 	
 	foursquareimage.addEventListener('click', function(e) {
 		vistedLink (foursquareLabel, foursquareline, "purple" );
 		new WebView ('https://foursquare.com/uiowaalumni');
 	}); 
+	imageCurrentTop = imageCurrentTop + 15;
 	
 	var foursquareLabel = Ti.UI.createLabel({
 		text: "Four Square",
-		top: 62
+		top: textCurrentTop + 15
 	});
+	textCurrentTop = textCurrentTop + 15;
 	
 	var foursquareline = Ti.UI.createView({
 		width: 				66,
-		top:				76			
+		top:				lineCurrentTop + 15			
 		
 	});
+	lineCurrentTop = lineCurrentTop + 15;
 	
 	foursquareLabel.addEventListener('click', function(e) {
 		vistedLink (foursquareLabel, foursquareline, "purple" );
@@ -200,8 +218,9 @@ function InfoWindow(title) {
 
 	var linkedInimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/images/icons/linkedin.png',
-	  top:    77
+	  top:    imageCurrentTop + 15
 	});
+	imageCurrentTop = imageCurrentTop + 15;
 	
 	linkedInimage.addEventListener('click', function(e) {
 		vistedLink (linkedInLabel, linkedInline, "purple" );
@@ -210,69 +229,76 @@ function InfoWindow(title) {
 	
 	var linkedInLabel = Ti.UI.createLabel({
 		text: "LinkedIn",
-		top: 77
+		top: textCurrentTop + 15
 	});
+	textCurrentTop = textCurrentTop + 15;
 	
 	var linkedInline = Ti.UI.createView({
 		width: 				45,
-		top:				91			
+		top:				lineCurrentTop + 15			
 		
 	});
+	lineCurrentTop = lineCurrentTop + 15;
 	
 	linkedInLabel.addEventListener('click', function(e) {
 		vistedLink (linkedInLabel, linkedInline, "purple" );
 		new WebView ('http://www.linkedin.com/groups?gid=1814071&trk=hb_side_g');
 	}); 
 	
-	var blogimage = Ti.UI.createImageView({
+	var pinterestimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/socialNet/images/pinterest.png',
-	  top:    92
+	  top:  imageCurrentTop + 15
 	});
+	imageCurrentTop = imageCurrentTop + 15;
 	
-	blogimage.addEventListener('click', function(e) {
-		vistedLink (blogLabel, blogline, "purple" );
+	pinterestimage.addEventListener('click', function(e) {
+		vistedLink (pinterestLabel, pinterestline, "purple" );
 		new WebView ('https://www.pinterest.com/uiowaalumni');
 	}); 
 	
-	var blogLabel = Ti.UI.createLabel({
+	var pinterestLabel = Ti.UI.createLabel({
 		text: "Pinterest",
-		top: 92
+		top: textCurrentTop + 15
 	});
+	textCurrentTop = textCurrentTop + 15;
 	
-	var blogline = Ti.UI.createView({
+	var pinterestline = Ti.UI.createView({
 		width: 				48,
-		top:				106				
+		top:				lineCurrentTop + 15				
 	});
+	lineCurrentTop = lineCurrentTop + 15;	
 	
-	blogLabel.addEventListener('click', function(e) {
-		vistedLink (blogLabel, blogline, "purple" );
+	pinterestLabel.addEventListener('click', function(e) {
+		vistedLink (pinterestLabel, pinterestline, "purple" );
 		new WebView ('https://www.pinterest.com/uiowaalumni');
 	}); 
 	
-	var onIowaimage = Ti.UI.createImageView({
+	var instagramimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/socialNet/images/instagram.png',
-	  top:    107
+	  top:    imageCurrentTop + 15
 	});
+	 imageCurrentTop = imageCurrentTop + 15;
 	
-	onIowaimage.addEventListener('click', function(e) {
-		vistedLink (onIowaLabel, onIowaline, "purple" );
+	instagramimage.addEventListener('click', function(e) {
+		vistedLink (instagramLabel, instagramline, "purple" );
 		new WebView ('http://instagram.com/uiowaalumni');
 	
 	}); 
 	
-	var onIowaLabel = Ti.UI.createLabel({
+	var instagramLabel = Ti.UI.createLabel({
 		text: "Instagram",
-		top: 107
+		top: textCurrentTop + 15
 	});
 	
-	var onIowaline = Ti.UI.createView({
+	
+	var instagramline = Ti.UI.createView({
 		width: 				52,
-		top:				121			
+		top:				lineCurrentTop + 15			
 		
 	});
 	
-	onIowaLabel.addEventListener('click', function(e) {
-		vistedLink (onIowaLabel, onIowaline, "purple" );
+	instagramLabel.addEventListener('click', function(e) {
+		vistedLink (instagramLabel, instagramline, "purple" );
 		new WebView ('http://instagram.com/uiowaalumni');
 	}); 
 	
@@ -281,7 +307,7 @@ function InfoWindow(title) {
 	//---------------------------------------------------------   Adjust Common Arttributes Here  -----------------------------------\\
 	
 	//Font
-	 onIowaLabel.font = blogLabel.font = linkedInLabel.font = foursquareLabel.font = twitterLabel.font = facebookLabel.font = 
+	 instagramLabel.font = pinterestLabel.font = linkedInLabel.font = foursquareLabel.font = twitterLabel.font = facebookLabel.font = 
 	   emailLabel.font 
 	= phoneLabel.font = addressLabel.font =  levittLabel.font = {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'};
 	
@@ -289,30 +315,30 @@ function InfoWindow(title) {
 	socialMdeiaLabel.font =  contactLabel.font = {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'} ;
 	
 	//Text Align(For All Text)
-	onIowaLabel.textAlign = blogLabel.textAlign = linkedInLabel.textAlign = foursquareLabel.textAlign = twitterLabel.textAlign = 
+	instagramLabel.textAlign = pinterestLabel.textAlign = linkedInLabel.textAlign = foursquareLabel.textAlign = twitterLabel.textAlign = 
 	facebookLabel.textAlign = emailLabel.textAlign = phoneLabel.textAlign = addressLabel.textAlign =  levittLabel.textAlign = 
 	socialMdeiaLabel.textAlign =   contactLabel.textAlign = 'left' ;
 	
 	//Left (Social Media Links)
-	 onIowaLabel.left = blogLabel.left = linkedInLabel.left = foursquareLabel.left = twitterLabel.left = facebookLabel.left =
-	 onIowaline.left = blogline.left = linkedInline.left = foursquareline.left = twitterline.left = facebookline.left = 25;
+	 instagramLabel.left = pinterestLabel.left = linkedInLabel.left = foursquareLabel.left = twitterLabel.left = facebookLabel.left =
+	 instagramline.left = pinterestline.left = linkedInline.left = foursquareline.left = twitterline.left = facebookline.left = 25;
 	
 	//Width (Images)
-	onIowaimage.width = blogimage.width = linkedInimage.width = foursquareimage.width = twitterimage.width = facebookimage.width = 12;
+	instagramimage.width = pinterestimage.width = linkedInimage.width = foursquareimage.width = twitterimage.width = facebookimage.width = 12;
 	
 	//Height (Images)
-	onIowaimage.height = blogimage.height = linkedInimage.height = foursquareimage.height = twitterimage.height = facebookimage.height = 12;
+	instagramimage.height = pinterestimage.height = linkedInimage.height = foursquareimage.height = twitterimage.height = facebookimage.height = 12;
 	 
 	 //Link Color
-	 onIowaLabel.color = blogLabel.color = linkedInLabel.color = foursquareLabel.color = twitterLabel.color = facebookLabel.color 
-	onIowaline.backgroundColor = blogline.backgroundColor = linkedInline.backgroundColor = foursquareline.backgroundColor = twitterline.backgroundColor = facebookline.backgroundColor = 
+	 instagramLabel.color = pinterestLabel.color = linkedInLabel.color = foursquareLabel.color = twitterLabel.color = facebookLabel.color 
+	instagramline.backgroundColor = pinterestline.backgroundColor = linkedInline.backgroundColor = foursquareline.backgroundColor = twitterline.backgroundColor = facebookline.backgroundColor = 
 	 emailline.backgroundColor =  levittline.backgroundColor =  emailLabel.color =  levittLabel.color = "blue";
 	
 	// Line Height
-	 onIowaline.height = blogline.height = linkedInline.height = foursquareline.height = twitterline.height = facebookline.height =  emailline.height =  levittline.height = 1 ;
+	 instagramline.height = pinterestline.height = linkedInline.height = foursquareline.height = twitterline.height = facebookline.height =  emailline.height =  levittline.height = 1 ;
 	
 	//Left 
-	 onIowaimage.left = blogimage.left = linkedInimage.left = foursquareimage.left = twitterimage.left = facebookimage.left = socialMdeiaLabel.left =  contactLabel.left =
+	 instagramimage.left = pinterestimage.left = linkedInimage.left = foursquareimage.left = twitterimage.left = facebookimage.left = socialMdeiaLabel.left =  contactLabel.left =
 	  emailline.left =  levittline.left =  emailLabel.left = phoneLabel.left = addressLabel.left =  levittLabel.left = 10;
 	
 	
@@ -325,8 +351,8 @@ function InfoWindow(title) {
 	socialMediaView.add(socialMdeiaLabel);	socialMediaView.add(facebookimage);	socialMediaView.add(facebookLabel);	socialMediaView.add(facebookline);
 	socialMediaView.add(twitterimage);	socialMediaView.add(twitterLabel);	socialMediaView.add(twitterline);	socialMediaView.add(foursquareimage);
 	socialMediaView.add(foursquareLabel);	socialMediaView.add(foursquareline);	socialMediaView.add(linkedInimage);	socialMediaView.add(linkedInLabel);
-	socialMediaView.add(linkedInline);	socialMediaView.add(blogimage);	socialMediaView.add(blogLabel);	socialMediaView.add(blogline);
-	socialMediaView.add(onIowaimage);	socialMediaView.add(onIowaLabel);	socialMediaView.add(onIowaline);	
+	socialMediaView.add(linkedInline);	socialMediaView.add(pinterestimage);	socialMediaView.add(pinterestLabel);	socialMediaView.add(pinterestline);
+	socialMediaView.add(instagramimage);	socialMediaView.add(instagramLabel);	socialMediaView.add(instagramline);	
 		
 	
 	//------------------------------------------   Views    ---------------------------------------------------------------------------\\	

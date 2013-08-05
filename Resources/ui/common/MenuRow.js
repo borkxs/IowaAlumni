@@ -2,7 +2,6 @@ function MenuRow(t,i,f,s) {
 	this.s = s;
 	var self = Ti.UI.createTableViewRow({
 		height: 45,
-		//layout: 'vertical',
 		backgroundImage: 'menu.jpg',
 		backgroundFocusedImage: 'pressed.jpg',
 		backgroundSelectedImage: 'pressed.jpg',

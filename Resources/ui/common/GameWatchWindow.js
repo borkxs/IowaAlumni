@@ -3,9 +3,8 @@ var WebView = require('ui/common/WebView');
 
 function GameWatchWindow(clubData, clubInfoData) {
 	
-	
+//-----------	Game Watch Window -----------//
 	var self = Ti.UI.createWindow({
-	    //title:'Window 1',
 	    backgroundColor:'#e2e2e2',
 		navBarHidden: true
 	});
@@ -27,7 +26,6 @@ function GameWatchWindow(clubData, clubInfoData) {
 		height: 30,
 		width: 63,
 		backgroundImage: 'backbutton.png',
-		//left: 15,
 		font: {fontFamily:'Helvetica Neue',fontSize:14,fontWeight:'bold'},
     	toggle:false // Custom property for menu toggle
 	});
@@ -47,7 +45,6 @@ function GameWatchWindow(clubData, clubInfoData) {
 	
 	
 	var mapWin = Ti.UI.createWindow({
-	    //title:'Window 1',
 	    top: 43,
 	    backgroundColor:'#ffffff',
 		navBarHidden: true
@@ -148,11 +145,7 @@ function GameWatchWindow(clubData, clubInfoData) {
 		        height: 14,
 		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 		    });
-			/*
-		    phoneLabel.addEventListener('click', function(e) {
-				Ti.Platform.openURL('tel:5551234');
-			}); 
-			*/
+			
 		    row.add(phoneLabel);
 	    }
 	    row.add(clubLabel);
@@ -189,11 +182,11 @@ function GameWatchWindow(clubData, clubInfoData) {
 		
 		map.selectAnnotation(gameWatchInfo[e.index]);
 	});
-	//new GetLocation();
 	
 	
 	
-
+	
+//Creating tabs on the Game Watch Window 
 var tabGroup = Titanium.UI.createTabGroup();
 
 
@@ -209,7 +202,7 @@ var baseWinTab2 = Titanium.UI.createWindow({
 baseWinTab2.add(navTab2);
 
 
-//Club Window
+//--------------Club Window ----------------------//
 var mainWinTab1 = Titanium.UI.createWindow({
     navBarHidden: true,
     backgroundColor:'#e2e2e2'

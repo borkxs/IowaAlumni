@@ -1,18 +1,14 @@
-var DateObject = require('ui/common/DateObject');
-var CachedImageView = require('ui/common/CachedImageView');
 /*
  * Ad Object
  * Essential attributes
  */
 
 function Ad(post, index) {
-	
-	this.containerheight = 0;
 
     var row = Ti.UI.createTableViewRow({
 		hasChild:true,
 		linkIndex: index,
-		height: 55,
+		height: 70,
 		padding: 0,
 		top: 0,
 		bottom: 0,
@@ -37,11 +33,8 @@ function Ad(post, index) {
 	});
 
 
-	this.containerheight = getContainerHeight(post);
-	container.height 	 = this.containerheight;
-	row.height 			 = 62;
-
 	var imagebox = Ti.UI.createImageView({
+		image: post,
 		width: 300,
 		height: 70,
 		hires: true,
@@ -49,7 +42,7 @@ function Ad(post, index) {
 		
 	});
 	
-	new CachedImageView('imageDirectoryName', post, imagebox);
+	
 	container.add(imagebox);
 	
 
@@ -59,22 +52,5 @@ function Ad(post, index) {
 
 }
 
-
-
-function getContainerHeight(img) {
-	var tempimagebox = Ti.UI.createImageView({
-		image: img,
-		width: 300,
-		height: 70,
-		hires: true
-	});
-    
-	
-	var height = tempimagebox.toImage().height;
-	var width = tempimagebox.toImage().width;
-	var ratio = height / width;
-
-	return Math.floor( 300 * ratio );
-}
 
 module.exports = Ad;

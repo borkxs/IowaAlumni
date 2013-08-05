@@ -119,7 +119,7 @@ function MasterView(feed) {
 					var row = new FeatureRow(post);
 					featureSet = true;
 					row.addEventListener('click', function(e) {
-						//self.fireEvent('itemSelected', { link: e.row.link });
+						
 						new WebView (e.row.link);
 					});
 					row.addEventListener('swipe', function(e){
@@ -143,11 +143,11 @@ function MasterView(feed) {
 								var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
 								the_Link = (the_Link).replace("#", "");
 								new WebView (ads[e.row.linkIndex].link);
-								//self.fireEvent('itemSelected', { link: the_Link });
+								
 							});
 							rows.push(row);
 							adEIndex++;
-							if (adEIndex == 2){
+							if (adEIndex == 3){
 								adEIndex = 0;
 							} 
 						}
@@ -162,7 +162,7 @@ function MasterView(feed) {
 					var row = (post.imageheight!=null) ? new Row(post) : new TextRow(post);
 					
 					row.addEventListener('click', function(e) {
-						//self.fireEvent('itemSelected', { link: e.row.link });
+						
 						new WebView (e.row.link);
 					});
 					if(groupCount >= 1) {

@@ -1,3 +1,4 @@
+
 function Description(description) {
 	this.description = description;
 }
@@ -49,6 +50,7 @@ Description.prototype.getDescription = function() {
 		description = description.substring(description.length - 1, 1);
 		cur = description.substr(0,1);
 	}
+	
 	return description;
 }
 
