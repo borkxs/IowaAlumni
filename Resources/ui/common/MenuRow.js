@@ -20,6 +20,7 @@ function MenuRow(t,i,f,s) {
 			shadowColor:'#000000',
 	        shadowOpacity:0.5,
 	        shadowOffset:{x:0, y:1},
+	        
 			font:{fontFamily:'HelveticaNeue-CondensedBold',fontSize:17,fontWeight:'bold'}
 		});
 		var imageView = Ti.UI.createImageView({
