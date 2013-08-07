@@ -4,6 +4,7 @@ var Post = require('ui/common/Post'),
 	TextRow = require('ui/common/TextRow'),
 	SingleRow = require('ui/common/SingleRow'),
 	HeaderRow = require('ui/common/HeaderRow'),
+	IIBIntroRow = require('ui/common/IIBIntroRow'),
 	PostGroup = require('ui/common/PostGroup'),
 	PostTable = require('ui/common/PostTable'),
 	Ad = require('ui/common/Ad'),
@@ -97,6 +98,13 @@ function MasterView(feed) {
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
 				
+				if (i == 0 && feed == 'http://iowalum.com/blog/?feed=rss2'){
+						
+						var row = new IIBIntroRow();
+						rows.push(row);
+					}
+				
+				
 				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed != 'http://iowalum.com/calendar/feed_xml.cfm'){
 					var the_Ad = (ads[adIndex].ad).replace("#", "");
 					the_Ad = (the_Ad).replace("#", "");
@@ -116,6 +124,7 @@ function MasterView(feed) {
 				
 				
 				if(post.imageheight != null && post.imageheight > 150 && post.imageheight < 300 && featureSet == false) {
+					
 					var row = new FeatureRow(post);
 					featureSet = true;
 					row.addEventListener('click', function(e) {
