@@ -130,8 +130,9 @@ function InfoWindow(title) {
 	});
 	
 	var facebookimage = Ti.UI.createImageView({
-	  image:    'https://www.iowalum.com/images/icons/facebook.png',
-	  top:    imageCurrentTop
+	  image:    'facebook.png',
+	  top:    37,
+	  left: 55
 	});
 	
 	facebookimage.addEventListener('click', function(e) {
@@ -158,8 +159,9 @@ function InfoWindow(title) {
 	}); 
 	
 	var twitterimage = Ti.UI.createImageView({
-	  image:    'https://www.iowalum.com/images/icons/twitter.png',
-	  top:    imageCurrentTop + 15
+	  image:    'twitter.png',
+	  top:    37,
+	  left: 115
 	});
 	imageCurrentTop = imageCurrentTop + 15;
 	
@@ -188,8 +190,9 @@ function InfoWindow(title) {
 	}); 
 	
 	var foursquareimage = Ti.UI.createImageView({
-	  image:    'https://www.iowalum.com/images/icons/fourquare.png',
-	  top:   imageCurrentTop + 15
+	  image:    'fourquare.png',
+	  top:   97,
+	  left: 175
 	});
 	
 	foursquareimage.addEventListener('click', function(e) {
@@ -217,8 +220,9 @@ function InfoWindow(title) {
 	}); 
 
 	var linkedInimage = Ti.UI.createImageView({
-	  image:    'https://www.iowalum.com/images/icons/linkedin.png',
-	  top:    imageCurrentTop + 15
+	  image:    'linkedin.png',
+	  top:    97,
+	  left: 55
 	});
 	imageCurrentTop = imageCurrentTop + 15;
 	
@@ -247,7 +251,8 @@ function InfoWindow(title) {
 	
 	var pinterestimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/socialNet/images/pinterest.png',
-	  top:  imageCurrentTop + 15
+	   top:    97,
+	  left: 115
 	});
 	imageCurrentTop = imageCurrentTop + 15;
 	
@@ -275,7 +280,8 @@ function InfoWindow(title) {
 	
 	var instagramimage = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/socialNet/images/instagram.png',
-	  top:    imageCurrentTop + 15
+	  top:    37,
+	  left: 175
 	});
 	 imageCurrentTop = imageCurrentTop + 15;
 	
@@ -324,10 +330,10 @@ function InfoWindow(title) {
 	 instagramline.left = pinterestline.left = linkedInline.left = foursquareline.left = twitterline.left = facebookline.left = 25;
 	
 	//Width (Images)
-	instagramimage.width = pinterestimage.width = linkedInimage.width = foursquareimage.width = twitterimage.width = facebookimage.width = 12;
+	instagramimage.width = pinterestimage.width = linkedInimage.width = foursquareimage.width = twitterimage.width = facebookimage.width = 48;
 	
 	//Height (Images)
-	instagramimage.height = pinterestimage.height = linkedInimage.height = foursquareimage.height = twitterimage.height = facebookimage.height = 12;
+	instagramimage.height = pinterestimage.height = linkedInimage.height = foursquareimage.height = twitterimage.height = facebookimage.height = 48;
 	 
 	 //Link Color
 	 instagramLabel.color = pinterestLabel.color = linkedInLabel.color = foursquareLabel.color = twitterLabel.color = facebookLabel.color 
@@ -338,7 +344,7 @@ function InfoWindow(title) {
 	 instagramline.height = pinterestline.height = linkedInline.height = foursquareline.height = twitterline.height = facebookline.height =  emailline.height =  levittline.height = 1 ;
 	
 	//Left 
-	 instagramimage.left = pinterestimage.left = linkedInimage.left = foursquareimage.left = twitterimage.left = facebookimage.left = socialMdeiaLabel.left =  contactLabel.left =
+	/* instagramimage.left = pinterestimage.left = linkedInimage.left = foursquareimage.left = twitterimage.left = facebookimage.left = */socialMdeiaLabel.left =  contactLabel.left =
 	  emailline.left =  levittline.left =  emailLabel.left = phoneLabel.left = addressLabel.left =  levittLabel.left = 10;
 	
 	
@@ -348,13 +354,15 @@ function InfoWindow(title) {
 	
 	
 	//------------------------------------------   Social Media View's Objects  ---------------------------------------------------------\\
-	socialMediaView.add(socialMdeiaLabel);	socialMediaView.add(facebookimage);	socialMediaView.add(facebookLabel);	socialMediaView.add(facebookline);
-	socialMediaView.add(twitterimage);	socialMediaView.add(twitterLabel);	socialMediaView.add(twitterline);	socialMediaView.add(foursquareimage);
-	socialMediaView.add(foursquareLabel);	socialMediaView.add(foursquareline);	socialMediaView.add(linkedInimage);	socialMediaView.add(linkedInLabel);
-	socialMediaView.add(linkedInline);	socialMediaView.add(pinterestimage);	socialMediaView.add(pinterestLabel);	socialMediaView.add(pinterestline);
-	socialMediaView.add(instagramimage);	socialMediaView.add(instagramLabel);	socialMediaView.add(instagramline);	
-		
-	
+	/*
+			socialMediaView.add(facebookLabel);	socialMediaView.add(facebookline);
+		socialMediaView.add(twitterLabel);	socialMediaView.add(twitterline);	
+	socialMediaView.add(foursquareLabel);	socialMediaView.add(foursquareline);		socialMediaView.add(linkedInLabel);
+	socialMediaView.add(linkedInline);		socialMediaView.add(pinterestLabel);	socialMediaView.add(pinterestline);
+		socialMediaView.add(instagramLabel);	socialMediaView.add(instagramline);	
+		*/
+		socialMediaView.add(socialMdeiaLabel);socialMediaView.add(facebookimage); socialMediaView.add(twitterimage);socialMediaView.add(foursquareimage);socialMediaView.add(linkedInimage);
+	socialMediaView.add(pinterestimage);socialMediaView.add(instagramimage); 
 	//------------------------------------------   Views    ---------------------------------------------------------------------------\\	
 	scrollMainView.add(socialMediaView);	scrollMainView.add(contactView);	scrollMainView.add(ad);
 	
