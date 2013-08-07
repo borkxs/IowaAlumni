@@ -144,7 +144,7 @@ function MapWindow(data) {
 			animate: true,
 			regionFit: true,
 			userLocation: true,
-			height: 250,
+			height: 200,
 		    annotations: companyInfo,
 			top: 0
 		});

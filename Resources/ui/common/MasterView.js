@@ -5,6 +5,7 @@ var Post = require('ui/common/Post'),
 	SingleRow = require('ui/common/SingleRow'),
 	HeaderRow = require('ui/common/HeaderRow'),
 	IIBIntroRow = require('ui/common/IIBIntroRow'),
+	IAMIntroRow = require('ui/common/IAMIntroRow'),
 	PostGroup = require('ui/common/PostGroup'),
 	PostTable = require('ui/common/PostTable'),
 	Ad = require('ui/common/Ad'),
@@ -104,6 +105,11 @@ function MasterView(feed) {
 						rows.push(row);
 					}
 				
+				if (i == 0 && feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
+						
+						var row = new IAMIntroRow();
+						rows.push(row);
+					}
 				
 				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed != 'http://iowalum.com/calendar/feed_xml.cfm'){
 					var the_Ad = (ads[adIndex].ad).replace("#", "");

@@ -4,7 +4,7 @@ var WebView = require('ui/common/WebView');
  * Essential attributes
  */
 
-function IIBIntroRow(post) {
+function IAMIntroRow(post) {
 var table = Ti.UI.createTableView({
 		separatorColor: 	'd5d5d5',
 		backgroundColor: 	'ffffff',
@@ -22,8 +22,19 @@ var table = Ti.UI.createTableView({
 
 	 var rowText = Ti.UI.createTableViewRow({
 	 	selectionStyle: 'none',
-	        height: 50
+	        height: 80
+	       
 	    });
+	    
+	    
+	 var image = Ti.UI.createImageView({
+	  image:    'http://www.iowalum.com/magazine/new/images/magfan.jpg',
+	  top:   10,
+	  left: 200,
+	  width: 80,
+	  height: 55
+	});
+	
 	    
 	 
 	table.height = rowText.height;
@@ -38,6 +49,7 @@ var table = Ti.UI.createTableView({
 		top: 0,
 		bottom: 0,
 		layout: 'vertical',
+		selectionStyle: 'none',
 		backgroundColor: 'e2e2e2'
 	});
 	row.rightImage = null;
@@ -50,6 +62,7 @@ var table = Ti.UI.createTableView({
 
 	introLabel  = getText();
 	rowText.add(introLabel);
+	rowText.add(image);
 
 	
 	
@@ -67,11 +80,11 @@ var table = Ti.UI.createTableView({
 function getText (){
 
 	var text = Ti.UI.createLabel({
-		text: 'The official blog of the University of Iowa Alumni Association.',
+		text: 'Our award winning bimonthly magazine published by the University of Iowa Alumni Association. ',
 		left: 10,
 		top: 10,
 		textAlign:'left',
-		width: 290,
+		width: 200,
 		//height: 20,
 		color:'#000000',
 		font: {fontFamily:'HelveticaNeue-Bold',fontSize:12,fontWeight:'bold'}
@@ -83,4 +96,4 @@ function getText (){
 }
 
 
-module.exports = IIBIntroRow;
+module.exports = IAMIntroRow;
