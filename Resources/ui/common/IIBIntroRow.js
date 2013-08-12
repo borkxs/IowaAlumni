@@ -18,6 +18,7 @@ var table = Ti.UI.createTableView({
 		borderColor: 		'#d5d5d5',
 		borderWidth: 		1,
 		scrollable: 		false
+		
 	});
 
 	 var rowText = Ti.UI.createTableViewRow({

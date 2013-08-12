@@ -111,10 +111,26 @@ function MasterView(feed) {
 						rows.push(row);
 					}
 				
-				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed != 'http://iowalum.com/calendar/feed_xml.cfm'){
-					var the_Ad = (ads[adIndex].ad).replace("#", "");
+				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == 'http://iowalum.com/blog/?feed=rss2'){
+					var the_Ad = (ads[adIndex + 3].ad).replace("#", "");
 					the_Ad = (the_Ad).replace("#", "");
-					var row = new Ad(the_Ad, adIndex);
+					var row = new Ad(the_Ad, adIndex + 3);
+					
+					//Ti.API.info(the_Link);
+					row.addEventListener('click', function(e) {
+						
+						var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
+						the_Link = (the_Link).replace("#", "");
+						new WebView (the_Link );
+					});
+					rows.push(row);
+					adIndex++;
+				}
+				
+				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
+					var the_Ad = (ads[adIndex + 6].ad).replace("#", "");
+					the_Ad = (the_Ad).replace("#", "");
+					var row = new Ad(the_Ad, adIndex + 6);
 					
 					//Ti.API.info(the_Link);
 					row.addEventListener('click', function(e) {

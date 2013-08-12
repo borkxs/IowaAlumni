@@ -16,6 +16,23 @@ function GetFeed (feed){
 				});
 	}
 	
+	else if (feed == "http://iowalum.com/mobile-app/root_feed.cfm"){
+				data.push({
+					title:  getRssText(item, 'title'),
+					link:  getRssText(item, 'link'),
+					image: getRssText(item, 'image'),
+					description: getRssText(item, 'description'),
+					pubDate: getRssText(item, 'pubDate')
+					
+					});
+			}
+	else if (feed == "http://iowalum.com/mobile-app/root_date_feed.cfm"){
+				data.push({
+					date:  getRssText(item, 'date')
+					
+					});
+			}
+	
 	else{
 		for (var i = 0; i < items.length; i++) {
 			var item = items.item(i);
@@ -33,6 +50,19 @@ function GetFeed (feed){
 					});
 			}
 			
+			else if (feed == "http://iowalum.com/mobile-app/root_events_feed.cfm"){
+				data.push({
+					snl: getRssText(item, 'snl'),
+					place: getRssText(item, 'place'),
+					title: getRssText(item, 'title'),
+					link: getRssText(item, 'link'),
+					description: getRssText(item, 'description'),
+					pubDate: getRssText(item, 'pubDate')
+				
+					
+					});
+			}
+			
 			else if (feed == "http://iowalum.com/clubs/feed_p2_xml.cfm"){
 				data.push({
 					state:  getRssText(item, 'state'),
@@ -43,6 +73,7 @@ function GetFeed (feed){
 					phone: getRssText(item, 'phone')
 					});
 			}
+			
 			else if (feed == "http://iowalum.com/advertising/feed_xml.cfm"){
 				data.push({
 					ad: getRssText(item, 'ad'),
@@ -51,6 +82,12 @@ function GetFeed (feed){
 				
 			}
 			
+			else if (feed == "http://iowalum.com/mobile-app/root_homeImages_feed.cfm"){
+				data.push({
+					url: getRssText(item, 'url')
+				});
+				
+			}
 			else if (feed == "http://iowalum.com/membership/password_feed_xml.cfm"){
 				data.push(
 					getRssText (item, 'pass')

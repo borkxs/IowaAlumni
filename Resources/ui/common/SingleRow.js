@@ -26,7 +26,7 @@ function SingleRow(post) {
 	 var rowText = Ti.UI.createTableViewRow({
 	        height: 150
 	    });
-	    
+
 	 rowText.addEventListener('click', function(e) {
 			new WebView (post.url);
 	 });
@@ -51,8 +51,8 @@ function SingleRow(post) {
 	row.backgroundFocusImage = null;
 
 	row.add(table);
-	
-	
+
+
 	titlelbl = getTitleLabel(post.title);
 	rowText.add(titlelbl);
 
@@ -72,16 +72,16 @@ function SingleRow(post) {
 	timebl.top =   titlelbl.height + 15 ;
 	inputtimebl.top  = timebl.top;
 	placebl.top =  inputplacebl.top = timebl.height  + titlelbl.height + 15 ;
-	
-	
-	
 
-	rowText.height = titlelbl.height + inputtimebl.height + inputplacebl.height + datebl.height + 15;
+
+
+
+	rowText.height = titlelbl.height + inputtimebl.height + inputplacebl.height +  25;
 	table.height = rowText.height;
 	row.height = table.height + 15;
-	
-	
-	
+
+
+
 
 	return row;
 }
@@ -107,7 +107,7 @@ function getTitleLabel(title) {
 		height:'auto'
 	});
 	view.add(temp);
-	
+
 
 
 	var label = Ti.UI.createLabel({
