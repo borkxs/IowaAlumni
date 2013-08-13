@@ -93,7 +93,7 @@ function RootWindow(data) {
 	//-----------------------------------------------------------------------------------------	
 		var events = new GetFeed ('http://iowalum.com/mobile-app/root_events_feed.cfm');
 		
-		if(events.length != null){
+		if(events.length > 0){
 			var eventHeaderLabel = Ti.UI.createLabel({
 				text: "Today Events",
 				width: 300,
