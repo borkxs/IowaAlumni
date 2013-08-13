@@ -1,6 +1,6 @@
 var GetFeed = require('ui/common/GetFeed');
 var GameWatchWindow = require('ui/common/GameWatchWindow');
-
+var WebView = require('ui/common/WebView');
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 
 
@@ -79,7 +79,7 @@ function ClubsWindow(title){
 	var currentAd = new GetFeed("http://iowalum.com/mobile-app/feed_xml.cfm");
 	
 	var ad = Ti.UI.createImageView({
-	  image:    currentAd[0].staticAd,
+	  image:    currentAd[11].ad,
 	  width: 320,
 	  height: 70,
 	  top: 395,
@@ -87,7 +87,7 @@ function ClubsWindow(title){
 	  
 	});
 	ad.addEventListener('click', function(e) {
-		new WebView (currentAd[0].staticAdUrl);
+		new WebView (currentAd[11].adUrl);
 	}); 
 	self.add(ad);
 

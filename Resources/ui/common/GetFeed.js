@@ -6,17 +6,9 @@ function GetFeed (feed){
 	var items = xmlDoc.getElementsByTagName("item");
 	
 	var item = items.item(i);
-	if (feed == "http://iowalum.com/mobile-app/feed_xml.cfm"){
-			data.push({
-				staticAd:   getRssText(item, 'staticAd'),
-				staticAdUrl:  getRssText(item, 'staticAdUrl'),
-				contactUsAd:   getRssText(item, 'contactUsAd'),
-				contactUsUrl:  getRssText(item, 'contactUsUrl')
-				
-				});
-	}
 	
-	else if (feed == "http://iowalum.com/mobile-app/root_feed.cfm"){
+	
+	if (feed == "http://iowalum.com/mobile-app/root_feed.cfm"){
 				data.push({
 					title:  getRssText(item, 'title'),
 					url:  getRssText(item, 'link'),
@@ -49,6 +41,12 @@ function GetFeed (feed){
 					street: getRssText(item, 'street')
 					});
 			}
+			else if (feed == "http://iowalum.com/mobile-app/feed_xml.cfm"){
+				data.push({
+					ad:   getRssText(item, 'ad'),
+					adUrl:  getRssText(item, 'adUrl')
+					});
+		}
 			
 			else if (feed == "http://iowalum.com/mobile-app/root_events_feed.cfm"){
 				data.push({

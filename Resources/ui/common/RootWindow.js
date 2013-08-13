@@ -169,7 +169,7 @@ function RootWindow(data) {
 	var currentAd = new GetFeed("http://iowalum.com/mobile-app/feed_xml.cfm");
 	
 	var ad = Ti.UI.createImageView({
-	  image:    currentAd[0].staticAd,
+	  image:    currentAd[9].ad,
 	  width: 320,
 	  height: 70,
 	  top: 392,
@@ -177,7 +177,7 @@ function RootWindow(data) {
 	  
 	});
 	ad.addEventListener('click', function(e) {
-		new WebView (currentAd[0].staticAdUrl);
+		new WebView (currentAd[9].adUrl);
 	}); 
 	self.add(ad);
 

@@ -238,11 +238,20 @@ function MasterView(feed) {
 	table.bottom = 70;
 	self.add(table);
 	
-	
+	var index = 0;
+	if ( feed == 'http://iowalum.com/blog/?feed=rss2'){
+		index = 13
+	}
+	else if ( feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
+		index = 12
+	}
+	else {
+		index = 10
+	}
 	var currentAd = new GetFeed("http://iowalum.com/mobile-app/feed_xml.cfm");
 	
 	var ad = Ti.UI.createImageView({
-	  image:    currentAd[0].staticAd,
+	  image:    currentAd[index].ad,
 	  width: 320,
 	  height: 70,
 	  top: 350,
@@ -250,7 +259,7 @@ function MasterView(feed) {
 	  
 	});
 	ad.addEventListener('click', function(e) {
-		new WebView (currentAd[0].staticAdUrl);
+		new WebView (currentAd[index].adUrl);
 	}); 
 	self.add(ad);
 

@@ -46,7 +46,7 @@ function InfoWindow(title) {
 	var currentAd =  new GetFeed ('http://iowalum.com/mobile-app/feed_xml.cfm');
 	
 	var ad = Ti.UI.createImageView({
-	  image:    currentAd[0].contactUsAd,
+	  image:    currentAd[14].ad,
 	  width: 300,
 	  height: 52,
 	  top: 350,
@@ -54,7 +54,7 @@ function InfoWindow(title) {
 	  
 	});
 	ad.addEventListener('click', function(e) {
-		new WebView (currentAd[0].contactUsUrl);
+		new WebView (currentAd[14].adUrl);
 	}); 
 	
 	// The Contact View 
