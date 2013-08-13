@@ -19,7 +19,7 @@ function GetFeed (feed){
 	else if (feed == "http://iowalum.com/mobile-app/root_feed.cfm"){
 				data.push({
 					title:  getRssText(item, 'title'),
-					link:  getRssText(item, 'link'),
+					url:  getRssText(item, 'link'),
 					image: getRssText(item, 'image'),
 					description: getRssText(item, 'description'),
 					pubDate: getRssText(item, 'pubDate')
@@ -55,7 +55,7 @@ function GetFeed (feed){
 					snl: getRssText(item, 'snl'),
 					place: getRssText(item, 'place'),
 					title: getRssText(item, 'title'),
-					link: getRssText(item, 'link'),
+					url: getRssText(item, 'link'),
 					description: getRssText(item, 'description'),
 					pubDate: getRssText(item, 'pubDate')
 				

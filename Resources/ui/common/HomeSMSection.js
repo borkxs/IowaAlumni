@@ -36,7 +36,7 @@ function HomeSMSection(){
 		}); 
 		
 		var instagramimage = Ti.UI.createImageView({
-		  image:    'https://www.iowalum.com/socialNet/images/instagram.png',
+		  image:    'instagram.png',
 		  top:    0,
 		  left: 107.2
 		});
@@ -66,7 +66,7 @@ function HomeSMSection(){
 		}); 
 		
 		var pinterestimage = Ti.UI.createImageView({
-		  image:    'https://www.iowalum.com/socialNet/images/pinterest.png',
+		  image:    'pinterest.png',
 		   top:    0,
 		  left: 268
 		});

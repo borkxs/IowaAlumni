@@ -8,6 +8,7 @@ var HomeImageSlider = require('ui/common/HomeImageSlider');
 var HomeMagazineSection = require('ui/common/HomeMagazineSection');
 var HomeInsiderSection = require('ui/common/HomeInsiderSection');
 var HomeSMSection = require('ui/common/HomeSMSection');
+var Row = require('ui/common/Row');
 
 var WebView = require('ui/common/WebView');
 function RootWindow(data) {
@@ -86,12 +87,13 @@ function RootWindow(data) {
 		});
 		
 		var row = Ti.UI.createTableViewRow();
+		
 		row.add(introLabel);
 		rows.push(row);
 	//-----------------------------------------------------------------------------------------	
 		var events = new GetFeed ('http://iowalum.com/mobile-app/root_events_feed.cfm');
 		
-		if(events.lenght != null){
+		if(events.length != null){
 			var eventHeaderLabel = Ti.UI.createLabel({
 				text: "Today Events",
 				width: 300,
@@ -102,11 +104,13 @@ function RootWindow(data) {
 			
 			var row = Ti.UI.createTableViewRow();
 			row.add(eventHeaderLabel);
+			
 			rows.push(row);
 			
 			var events = new GetFeed ('http://iowalum.com/mobile-app/root_events_feed.cfm');
 			for (var i = 0; i < events.length; i++) {
 				var row = new SingleRow (events[0]);
+				
 				rows.push(row);
 			}
 		}
@@ -121,9 +125,12 @@ function RootWindow(data) {
 		
 		var row = Ti.UI.createTableViewRow();
 		row.add(magazineHeaderLabel);
+		
 		rows.push(row);
 	
+		
 		var row = new HomeMagazineSection();
+		
 		rows.push(row);
 	//----------------------------------------------------------------------------	
 		var iowaInsiderLabel = Ti.UI.createLabel({
@@ -135,6 +142,7 @@ function RootWindow(data) {
 		});
 		
 		var row = Ti.UI.createTableViewRow();
+		
 		row.add(iowaInsiderLabel);
 		rows.push(row);
 	
@@ -143,6 +151,7 @@ function RootWindow(data) {
 	
 		
 		var row = new HomeSMSection();
+		
 		rows.push(row);
 		
 		tableView.setData(rows);

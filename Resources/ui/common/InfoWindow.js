@@ -170,7 +170,7 @@ function InfoWindow(title) {
 	
 	
 	var pinterestimage = Ti.UI.createImageView({
-	  image:    'https://www.iowalum.com/socialNet/images/pinterest.png',
+	  image:    'pinterest.png',
 	   top:    97,
 	  left: 115
 	});
@@ -181,7 +181,7 @@ function InfoWindow(title) {
 	
 	
 	var instagramimage = Ti.UI.createImageView({
-	  image:    'https://www.iowalum.com/socialNet/images/instagram.png',
+	  image:    'instagram.png',
 	  top:    37,
 	  left: 175
 	});
