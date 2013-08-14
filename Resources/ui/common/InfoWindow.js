@@ -2,6 +2,7 @@ var ApplicationWindow = require('ui/common/ApplicationWindow');
 var WebView = require('ui/common/WebView');
 var GetFeed = require('ui/common/GetFeed');
 
+
 function InfoWindow(title) {
 	var self = new ApplicationWindow(title);
 
@@ -56,6 +57,8 @@ function InfoWindow(title) {
 	ad.addEventListener('click', function(e) {
 		new WebView (currentAd[14].adUrl);
 	}); 
+	
+	
 	
 	// The Contact View 
 	var textCurrentTop = 0;

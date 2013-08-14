@@ -9,6 +9,8 @@ var HomeMagazineSection = require('ui/common/HomeMagazineSection');
 var HomeInsiderSection = require('ui/common/HomeInsiderSection');
 var HomeSMSection = require('ui/common/HomeSMSection');
 var Row = require('ui/common/Row');
+var FormatDate = require('ui/common/FormatDate');
+var StaticAd = require('ui/common/StaticAd');
 
 var WebView = require('ui/common/WebView');
 function RootWindow(data) {
@@ -66,7 +68,7 @@ function RootWindow(data) {
 	}
 	function resetTable() { 
 		tableView.setContentInsets({top:0},{animated:true});
-		tableView.updateDateText("Last Updated: "+ formatDate());
+		tableView.updateDateText("Last Updated: "+ (new FormatDate()).getDate());
 		tableView.hideActInd();
 		tableView.updateLabelText("Pull down to refresh...");
 	}
@@ -165,20 +167,9 @@ function RootWindow(data) {
 
 	// load initial rss feed
 	refreshRSS();
+
+	var ad = new StaticAd(9,392);
 	
-	var currentAd = new GetFeed("http://iowalum.com/mobile-app/feed_xml.cfm");
-	
-	var ad = Ti.UI.createImageView({
-	  image:    currentAd[9].ad,
-	  width: 320,
-	  height: 70,
-	  top: 392,
-	  left: 0
-	  
-	});
-	ad.addEventListener('click', function(e) {
-		new WebView (currentAd[9].adUrl);
-	}); 
 	self.add(ad);
 
 

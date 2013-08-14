@@ -1,4 +1,5 @@
 var GetFeed = require('ui/common/GetFeed');
+var FormatDate = require('ui/common/FormatDate');
 
 function HomeImageSlider(){
 	var container =  Titanium.UI.createView({
@@ -49,9 +50,10 @@ function HomeImageSlider(){
 			image: 'shadow.png'
 		});
 		
+		var date = new Date();
 		var currentDate = new GetFeed ("http://iowalum.com/mobile-app/root_date_feed.cfm")[0].date;
 		var date = Ti.UI.createLabel({
-			text: currentDate,
+			text: (new FormatDate()).getMonthString(date.getMonth()) +' '+date.getDate()+', '+date.getFullYear(),
 			top: 8,
 			left: 10,
 			bottom: 10,

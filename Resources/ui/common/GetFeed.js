@@ -1,8 +1,8 @@
- var data = [];
 function GetFeed (feed){
-	data = [];
+	var data = [];
 	xmlDoc=loadXMLDoc(feed);
 
+	
 	var items = xmlDoc.getElementsByTagName("item");
 	
 	var item = items.item(i);
@@ -113,7 +113,7 @@ var RSS_URL = osname === 'mobileweb' ? '/feed.xml' : 'http://iowalum.com/blog/?f
 
 var getRssText = function(item, key) {
 	return osname === 'mobileweb' ?
-			item.getElementsByTagName(key).item(0).textContent : //childNodes[0].nodeValue :
+			item.getElementsByTagName(key).item(0).textContent : 
 			item.getElementsByTagName(key).item(0).text;
 }
 

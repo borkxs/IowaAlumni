@@ -1,3 +1,4 @@
+var FormatDate = require('ui/common/FormatDate');
 /*
  *	Post Table constructor
  *		Creates table for each Row object
@@ -33,7 +34,7 @@ function PostTable() {
 	});
 
 	var lastUpdatedLabel = Ti.UI.createLabel({
-		text:"Last Updated: "+formatDate(),
+		text:"Last Updated: "+ (new FormatDate()).getDate(),
 		left:55,
 		width:200,
 		bottom:15,
@@ -80,17 +81,3 @@ module.exports = PostTable;
 
 
 
-function formatDate()
-{
-	var date = new Date();
-	var datestr = date.getMonth()+'/'+date.getDate()+'/'+date.getFullYear();
-	if (date.getHours()>=12)
-	{
-		datestr+=' '+(date.getHours()==12 ? date.getHours() : date.getHours()-12)+':'+date.getMinutes()+' PM';
-	}
-	else
-	{
-		datestr+=' '+date.getHours()+':'+date.getMinutes()+' AM';
-	}
-	return datestr;
-}

@@ -10,8 +10,10 @@ var Post = require('ui/common/Post'),
 	PostTable = require('ui/common/PostTable'),
 	Ad = require('ui/common/Ad'),
 	GetFeed = require('ui/common/GetFeed'),
+	FormatDate = require('ui/common/FormatDate'),
 	RSS = require('services/rss');
-	WebView = require('ui/common/WebView');
+	WebView = require('ui/common/WebView'),
+	StaticAd = require('ui/common/StaticAd');
 
 /* 
  * Master View Component Constructor
@@ -76,7 +78,7 @@ function MasterView(feed) {
 	}
 	function resetTable() { 
 		table.setContentInsets({top:0},{animated:true});
-		table.updateDateText("Last Updated: "+ formatDate());
+		table.updateDateText("Last Updated: "+ (new FormatDate()).getDate());
 		table.hideActInd();
 		table.updateLabelText("Pull down to refresh...");
 	}
@@ -238,29 +240,17 @@ function MasterView(feed) {
 	table.bottom = 70;
 	self.add(table);
 	
-	var index = 0;
+	
 	if ( feed == 'http://iowalum.com/blog/?feed=rss2'){
-		index = 13
+		var ad = new StaticAd(13,350);
 	}
 	else if ( feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
-		index = 12
+		var ad = new StaticAd(12,350);
 	}
 	else {
-		index = 10
+		var ad = new StaticAd(10,350);
 	}
-	var currentAd = new GetFeed("http://iowalum.com/mobile-app/feed_xml.cfm");
 	
-	var ad = Ti.UI.createImageView({
-	  image:    currentAd[index].ad,
-	  width: 320,
-	  height: 70,
-	  top: 350,
-	  left: 0
-	  
-	});
-	ad.addEventListener('click', function(e) {
-		new WebView (currentAd[index].adUrl);
-	}); 
 	self.add(ad);
 
 	return self;
@@ -268,17 +258,3 @@ function MasterView(feed) {
 
 module.exports = MasterView;
 
-function formatDate()
-{
-	var date = new Date();
-	var datestr = date.getMonth()+'/'+date.getDate()+'/'+date.getFullYear();
-	if (date.getHours()>=12)
-	{
-		datestr+=' '+(date.getHours()==12 ? date.getHours() : date.getHours()-12)+':'+date.getMinutes()+' PM';
-	}
-	else
-	{
-		datestr+=' '+date.getHours()+':'+date.getMinutes()+' AM';
-	}
-	return datestr;
-}
