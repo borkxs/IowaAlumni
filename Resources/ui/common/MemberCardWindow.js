@@ -78,10 +78,10 @@ function  MemberCardWindow(title){
 	});
 	
 	var people = Ti.UI.createImageView({
-	  image:    'herky.png',
+	  image:    'thawk.png',
 	  top:   250,
-	  width: 105,
-	  height: 151
+	  width: 200,
+	  height: 127
 	});
 	
 	passwordWin.add(people);

@@ -97,7 +97,7 @@ function RootWindow(data) {
 		
 		if(events.length > 0){
 			var eventHeaderLabel = Ti.UI.createLabel({
-				text: "Today Events",
+				text: "Today's Events",
 				width: 300,
 				top: 10,
 				left: 10,

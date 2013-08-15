@@ -28,7 +28,7 @@ function HeaderRow(post) {
 	        
 	    });
 	 rowText.addEventListener('click', function(e) {
-			new WebView (post.url);
+			new WebView (post.hlink);
 	 });
 	 
 	table.height = rowText.height;

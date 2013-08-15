@@ -171,13 +171,7 @@ function MasterView(feed) {
 							var row = new Ad(the_Ad, adEIndex);
 							
 				
-							row.addEventListener('click', function(e) {
-
-								var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
-								the_Link = (the_Link).replace("#", "");
-								new WebView (ads[e.row.linkIndex].link);
-								
-							});
+					
 							rows.push(row);
 							adEIndex++;
 							if (adEIndex == 3){

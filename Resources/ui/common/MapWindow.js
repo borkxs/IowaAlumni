@@ -53,7 +53,7 @@ function MapWindow(data) {
 		
 	});
 	var introLabel = Ti.UI.createLabel({
-			 text: ('UI Alumni members have an array of ').concat('\navailable to them. Use your member benefit card at any of these locations.'),
+			 text: ('UI Alumni Association members have').concat('\nan array of available to them. Use your member benefit card at any of these locations.'),
 			 textAlign: 'left',
 			 left: 10,
 			 width: 300,
@@ -66,7 +66,7 @@ function MapWindow(data) {
 	var linkLabel = Ti.UI.createLabel({
 			 text: 'benefits',
 			 textAlign: 'left',
-			 left: 231.5,
+			 left: 236.5,
 			 top: 10,
 			 color: 'blue',
 			font: {fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}

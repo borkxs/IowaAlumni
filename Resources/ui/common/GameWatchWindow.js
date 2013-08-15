@@ -4,6 +4,7 @@ var WebView = require('ui/common/WebView');
 function GameWatchWindow(clubData, clubInfoData) {
 	
 //-----------	Game Watch Window -----------//
+
 	var self = Ti.UI.createWindow({
 	    backgroundColor:'#e2e2e2',
 		navBarHidden: true
@@ -42,6 +43,9 @@ function GameWatchWindow(clubData, clubInfoData) {
 		window:masterContainerWindow
 	});
 	self.add(navGroup);
+	
+	
+	
 	
 	
 	var mapWin = Ti.UI.createWindow({
@@ -215,7 +219,7 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 	
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title: windowTitle,
+		title: clubData[0].state,
 		navBarHidden:false,
 		barImage:'navbar.png',
 		//hires:true,
@@ -382,6 +386,8 @@ tabGroup.open();
 return mainWinTab1;
 
 }
+
+//Helper Functions
 
 function addRows(i, data, flag){
 	if (i == 1 && flag == true){
