@@ -1,13 +1,13 @@
+var WebView = require('ui/common/WebView');
 /*
  * Ad Object
  * Essential attributes
  */
 
-function Ad(post, index) {
+function Ad(post) {
 
     var row = Ti.UI.createTableViewRow({
 		hasChild:true,
-		linkIndex: index,
 		height: 70,
 		padding: 0,
 		top: 0,
@@ -34,7 +34,7 @@ function Ad(post, index) {
 
 
 	var imagebox = Ti.UI.createImageView({
-		image: post,
+		image: post.ad,
 		width: 300,
 		height: 70,
 		hires: true,
@@ -47,6 +47,10 @@ function Ad(post, index) {
 	
 
 	row.add(container);
+	
+	row.addEventListener('click', function(e) {
+		new WebView (post.link );
+	});
 	
 	return row;
 

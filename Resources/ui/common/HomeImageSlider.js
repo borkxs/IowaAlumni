@@ -46,7 +46,7 @@ function HomeImageSlider(){
 			width: 300,
 			height: 100,
 			hires: true,
-			top:80,
+			top:60,
 			image: 'shadow.png'
 		});
 		
@@ -72,8 +72,8 @@ function HomeImageSlider(){
 			backgroundColor: '#0c0c0c',
 			backgroundImage: 'dark.jpg',
 			width: 300,
-			height: 65,
-			top: 160
+			height: 85,
+			top: 140
 		});
 		var titlelbl = Ti.UI.createLabel({
 			text: 'Welcome',
@@ -96,9 +96,9 @@ function HomeImageSlider(){
 	
 		
 		var text = Ti.UI.createLabel({
-			text: "The Official Iowa Alumni Application",
+			text: "The Official App of The University of Iowa Alumni Association",
 			left: 15,
-			top: 15,
+			top: 22,
 			bottom: 10,
 			height: 55,
 			textAlign:'left',

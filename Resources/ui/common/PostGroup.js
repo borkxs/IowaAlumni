@@ -34,6 +34,7 @@ function PostGroup(rows) {
 		top: 0,
 		bottom: 0,
 		layout: 'vertical',
+		selectionStyle: 'none',
 		backgroundColor: 'e2e2e2'
 	});
 	row.rightImage = null;

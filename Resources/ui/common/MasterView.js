@@ -90,57 +90,34 @@ function MasterView(feed) {
 			var group = [];
 			var featureSet = false;
 			var groupCount = 0;
-			//Ti.API.log('error', data);
 			var Counter = 0;
 			var headerCounter = 0;
 			var adIndex = 0;
-			var adEIndex = 0;
 			var ads = new GetFeed('http://iowalum.com/advertising/feed_xml.cfm');
-			//Ti.API.info( ads);
 			var tempDate = "";
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
 				
+				//Add Feed's Intro Text
 				if (i == 0 && feed == 'http://iowalum.com/blog/?feed=rss2'){
-						
 						var row = new IIBIntroRow();
 						rows.push(row);
 					}
 				
 				if (i == 0 && feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
-						
 						var row = new IAMIntroRow();
 						rows.push(row);
 					}
 				
+				//Add Feed's Ad
 				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == 'http://iowalum.com/blog/?feed=rss2'){
-					var the_Ad = (ads[adIndex + 3].ad).replace("#", "");
-					the_Ad = (the_Ad).replace("#", "");
-					var row = new Ad(the_Ad, adIndex + 3);
-					
-					//Ti.API.info(the_Link);
-					row.addEventListener('click', function(e) {
-						
-						var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
-						the_Link = (the_Link).replace("#", "");
-						new WebView (the_Link );
-					});
+					var row = new Ad(ads[adIndex + 3]);
 					rows.push(row);
 					adIndex++;
 				}
 				
 				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
-					var the_Ad = (ads[adIndex + 6].ad).replace("#", "");
-					the_Ad = (the_Ad).replace("#", "");
-					var row = new Ad(the_Ad, adIndex + 6);
-					
-					//Ti.API.info(the_Link);
-					row.addEventListener('click', function(e) {
-						
-						var the_Link = (ads[e.row.linkIndex].link).replace("#", "");
-						the_Link = (the_Link).replace("#", "");
-						new WebView (the_Link );
-					});
+					var row = new Ad(ads[adIndex + 6]);
 					rows.push(row);
 					adIndex++;
 				}
@@ -151,31 +128,22 @@ function MasterView(feed) {
 					
 					var row = new FeatureRow(post);
 					featureSet = true;
-					row.addEventListener('click', function(e) {
-						
-						new WebView (e.row.link);
-					});
 					row.addEventListener('swipe', function(e){
 				 		self.fireEvent('swipeToggle');
 					});
 					rows.push(row);
 				}
+				
 				else if (feed == 'http://iowalum.com/calendar/feed_xml.cfm'){
 					if ((Counter == 0) ||(tempDate != post.pubDate && Counter != 0)){
 						var header = new HeaderRow(post);
 						
-						if (headerCounter != 0 && (headerCounter % 3) == 0 && adEIndex < 3 ){
-							
-							var the_Ad = (ads[adEIndex].ad).replace("#", "");
-							the_Ad = (the_Ad).replace("#", "");
-							var row = new Ad(the_Ad, adEIndex);
-							
-				
-					
+						if (headerCounter != 0 && (headerCounter % 3) == 0 && adIndex < 3 ){
+							var row = new Ad(ads[adIndex]);
 							rows.push(row);
-							adEIndex++;
-							if (adEIndex == 3){
-								adEIndex = 0;
+							adIndex++;
+							if (adIndex == 3){
+								adIndex = 0;
 							} 
 						}
 						rows.push(header);
@@ -185,13 +153,10 @@ function MasterView(feed) {
 					
 					rows.push(row);
 				}
+				
 				else {
-					var row = (post.imageheight!=null) ? new Row(post) : new TextRow(post);
-					
-					row.addEventListener('click', function(e) {
-						
-						new WebView (e.row.link);
-					});
+					var row =  new Row(post);
+
 					if(groupCount >= 1) {
 						group.push(row);
 						rows.push(new PostGroup(group));
@@ -205,18 +170,14 @@ function MasterView(feed) {
 						groupCount++;
 					}
 				}
+				
 				Counter++;
 				tempDate = post.pubDate;
 			}
 			
-			
-			
-			table.setData(rows);
-			
-			
-			
-		}
-		
+
+			table.setData(rows);	
+		}	
 	}
 	function refreshRSS() {
 		

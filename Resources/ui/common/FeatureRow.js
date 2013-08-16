@@ -74,7 +74,7 @@ function FeatureRow(post) {
 	var posted = Ti.UI.createLabel({
 		text: 'Posted ' + (new DateObject(post.pubDate)).prettyDate() + ' in Kudos to Iowa People',
 		top: 8,
-		left: 15,
+		left: 10,
 		bottom: 10,
 		height: 15,
 		textAlign:'left',
@@ -88,6 +88,11 @@ function FeatureRow(post) {
 	container.add(posted);
 
 	row.add(container);
+	
+	row.addEventListener('click', function(e) {
+		new WebView (post.url);
+	});
+					
 	
 	return row;
 
@@ -131,7 +136,7 @@ function getTitleLabel(title,postheight) {
 	
 	var titlelbl = Ti.UI.createLabel({
 		text: title,
-		left: 15,
+		left: 10,
 		bottom:10,
 		height:theheight,
 		textAlign:'left',
@@ -161,7 +166,7 @@ function getDescriptionLabel(description,postheight) {
 
 	var text = Ti.UI.createLabel({
 		text: description,
-		left: 15,
+		left: 10,
 		top: 0,
 		bottom: 10,
 		height: 55,

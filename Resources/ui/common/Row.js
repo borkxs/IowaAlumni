@@ -83,6 +83,10 @@ function Row(post) {
 
 	row.add(container);
 	
+	row.addEventListener('click', function(e) {
+		new WebView (e.row.link);
+	});
+	
 	return row;
 }
 
