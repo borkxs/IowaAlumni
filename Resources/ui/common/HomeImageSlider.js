@@ -17,16 +17,16 @@ function HomeImageSlider(){
 		row.add(container);
 		
 		
-		
+		var imageArray = new GetFeed ('http://iowalum.com/mobile-app/root_homeImages_feed.cfm');
 		var imagebox = Ti.UI.createImageView({
-			image: 'http://www.iowalum.com/about/images/index_photo.jpg',
+			image: imageArray[3].url,
 			width: 300,
 			height: 250,
 			hires: true,
 			top: 30
 		});
 		
-		var imageArray = new GetFeed ('http://iowalum.com/mobile-app/root_homeImages_feed.cfm');;
+		
 		 
 		 var counter = 0;
 		function imageSlider(n){

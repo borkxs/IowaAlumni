@@ -111,7 +111,7 @@ function RootWindow(data) {
 			
 			var events = new GetFeed ('http://iowalum.com/mobile-app/root_events_feed.cfm');
 			for (var i = 0; i < events.length; i++) {
-				var row = new SingleRow (events[0]);
+				var row = new SingleRow (events[i]);
 				
 				rows.push(row);
 			}
@@ -171,9 +171,26 @@ function RootWindow(data) {
 	var ad = new StaticAd(9,392);
 	
 	self.add(ad);
-
-
-
+	/*
+	if(Titanium.Network.networkType != Titanium.Network.NETWORK_NONE){
+     var alertDialog = Titanium.UI.createAlertDialog({
+              title: 'WARNING!',
+              message: 'Your device is not online.',
+              buttonNames: ['OK']
+            });
+            alertDialog.show();
+           }
+self.addEventListener('startup', function(e) {
+if(Titanium.Network.networkType != Titanium.Network.NETWORK_NONE){
+     var alertDialog = Titanium.UI.createAlertDialog({
+              title: 'WARNING!',
+              message: 'Your device is not online.',
+              buttonNames: ['OK']
+            });
+            alertDialog.show();
+}
+});
+*/
 	return self;
 
 }
