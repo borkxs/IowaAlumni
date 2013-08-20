@@ -89,9 +89,11 @@ function  MemberCardWindow(title){
 	wrongPasswordLabel.setVisible(false);
 	loginButton.addEventListener('click',function(){
 		var password = (new GetFeed('http://iowalum.com/membership/password_feed_xml.cfm')[0]);
-		password =  password.replace(" ","");
-		password =  password.replace(" ","");
-   		if (passwordTextField.value == password) {
+		password.pass =  password.pass.replace(" ","");
+		password.pass =  password.pass.replace(" ","");
+		password.pass2 =  password.pass2.replace(" ","");
+		password.pass2 =  password.pass2.replace(" ","");
+   		if (passwordTextField.value == password.pass) {
 			passwordWin.remove(passwordLabel);
 			passwordWin.remove(passwordInfoLabel);
 			passwordWin.remove(passwordHeaderLabel);
@@ -102,9 +104,23 @@ function  MemberCardWindow(title){
 			passwordWin.add(image);
 			
 		}
+		
+		else if (passwordTextField.value == password.pass2) {
+			passwordWin.remove(passwordLabel);
+			passwordWin.remove(passwordInfoLabel);
+			passwordWin.remove(passwordHeaderLabel);
+			passwordWin.remove(passwordTextField);
+			passwordWin.remove(loginButton);
+			passwordWin.backgroundColor = '202020';
+			wrongPasswordLabel.setVisible(false);
+			image.image =  'http://iowalum.com/membership/images/MemberCard2.png'
+			passwordWin.add(image);
+			
+		}
 		else {
 			wrongPasswordLabel.setVisible(true);
 		}
+		
 	});
 
 	

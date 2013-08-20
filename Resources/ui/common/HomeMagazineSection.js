@@ -3,9 +3,9 @@ var DateObject = require('ui/common/DateObject');
 var CachedImageView = require('ui/common/CachedImageView');
 var WebView = require('ui/common/WebView');
 
-function HomeMagazineSection(){
+function HomeMagazineSection(article){
 	
-	var article = new GetFeed ('http://iowalum.com/mobile-app/root_feed.cfm');
+	
 	
 	var table = Ti.UI.createTableView({
 		separatorColor: 	'd5d5d5',
@@ -27,7 +27,7 @@ function HomeMagazineSection(){
 	    });
 
 	 rowText.addEventListener('click', function(e) {
-			new WebView ( article[0].url);
+			new WebView ( article.url);
 			
 	 });
 	 
@@ -55,17 +55,40 @@ function HomeMagazineSection(){
 		
 		
 		
-		var titleLabel = getTitleLabel(article[0].title);
+		var titleLabel = getTitleLabel(article.title);
 		rowText.add(titleLabel);
 		
-		var desclbl = getDescriptionLabel(article[0].description);
-		rowText.add(desclbl);
+		if (article.image != 'NA'){
+			var imageContainer = Ti.UI.createView({
+				width: 			60,
+				height: 		60,
+				right: 			15,
+				top: 			titleLabel.height+20,
+				borderRadius:	4,
+				borderColor: 	'#d5d5d5',
+				borderWidth: 	1
+		
+			});
+			var postImage = getPostImage(article.image);
+			new CachedImageView('imageDirectoryName', article.image, postImage);
+			imageContainer.add(postImage);
+			rowText.add(imageContainer);
+			
+			var desclbl = getDescriptionLabel(article.description, 200);
+			rowText.add(desclbl);
+		}
+		
+		else{
+			var desclbl = getDescriptionLabel(article.description, 280);
+			rowText.add(desclbl);
+		}
+		
 		
 		desclbl.top = titleLabel.height + 10;
 		
 		
 		var posted = Ti.UI.createLabel({
-			text: 			(new DateObject(article[0].pubDate)).prettyDate(),
+			text: 			(new DateObject(article.pubDate)).prettyDate(),
 			left: 			10,
 			bottom: 		10,
 			height: 		15,
@@ -83,20 +106,6 @@ function HomeMagazineSection(){
 		//row = rowText.height + 30;
 		
 		
-		var imageContainer = Ti.UI.createView({
-			width: 			60,
-			height: 		60,
-			right: 			15,
-			top: 			titleLabel.height+20,
-			borderRadius:	4,
-			borderColor: 	'#d5d5d5',
-			borderWidth: 	1
-	
-		});
-		var postImage = getPostImage(article[0].image);
-		new CachedImageView('imageDirectoryName', article[0].image, postImage);
-		imageContainer.add(postImage);
-		rowText.add(imageContainer);
 		rowText.height = titleLabel.height + desclbl.height + posted.height + 30;
 		table.height = rowText.height;
 		row.height = rowText.height + 10;
@@ -141,7 +150,7 @@ function getTitleLabel(title) {
 
 }
 
-function getDescriptionLabel(description) {
+function getDescriptionLabel(description, descWidth) {
 
 	var text = Ti.UI.createLabel({
 		text: description,
@@ -150,7 +159,7 @@ function getDescriptionLabel(description) {
 		top: 0,
 		height: 70,
 		textAlign:'left',
-		width: 200,
+		width: descWidth,
 		color:'#000000',
 		font:{fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	});

@@ -38,7 +38,7 @@ function HeaderRow(post) {
 
 	var row = Ti.UI.createTableViewRow({
 		hasChild: true,
-		height: table.height,
+		height: table.height + 8,
 		padding: 0,
 		top: 0,
 		bottom: 0,
@@ -70,10 +70,10 @@ function getpubDateLabel(pubDate) {
 	var text = Ti.UI.createLabel({
 		text: pubDate,
 		left: 15,
-		top: 10,
+		bottom: 15,
 		textAlign:'left',
 		width: 200,
-		height: 20,
+		height: 25,
 		color:'#5c4e1a',
 		font:{fontFamily:'Helvetica-Bold',fontSize:20,fontWeight:'normal'}
 	});

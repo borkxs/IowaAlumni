@@ -11,7 +11,7 @@ var HomeSMSection = require('ui/common/HomeSMSection');
 var Row = require('ui/common/Row');
 var FormatDate = require('ui/common/FormatDate');
 var StaticAd = require('ui/common/StaticAd');
-
+var HomeRow = require('ui/common/HomeRow');
 var WebView = require('ui/common/WebView');
 function RootWindow(data) {
 	
@@ -21,7 +21,7 @@ function RootWindow(data) {
 	
 	
 	var tableView = new PostTable();
-	tableView.top = 45;
+	tableView.top = 43;
 	tableView.bottom = 70;
 	tableView.selectionStyle ='none';
 	
@@ -92,6 +92,33 @@ function RootWindow(data) {
 		
 		row.add(introLabel);
 		rows.push(row);
+		
+		
+	//-----------------------------------------------------------------------------------------
+	
+	var alerts = new GetFeed ('http://iowalum.com/mobile-app/root_alert_feed.cfm');
+	
+	
+	if (alerts.length > 0){
+		for (var i = 0; i < alerts.length; i++){
+			var headerLabel = Ti.UI.createLabel({
+				text: alerts[i].header,
+				width: 300,
+				top: 10,
+				left: 10,
+				font:{fontFamily:'Helvetica-Bold',fontSize:20,fontWeight:'normal'}
+			});
+			
+			var row = Ti.UI.createTableViewRow();
+			
+			row.add(headerLabel);
+			rows.push(row);
+			
+			var row = new HomeMagazineSection(alerts[i]);
+			rows.push(row);
+		}
+	}	
+	
 	//-----------------------------------------------------------------------------------------	
 		var events = new GetFeed ('http://iowalum.com/mobile-app/root_events_feed.cfm');
 		
@@ -118,7 +145,7 @@ function RootWindow(data) {
 		}
 	//-----------------------------------------------------------------------------------------
 		var magazineHeaderLabel = Ti.UI.createLabel({
-			text: "Article of the Day",
+			text: "Article of the Week",
 			width: 300,
 			top: 10,
 			left: 10,
@@ -130,8 +157,8 @@ function RootWindow(data) {
 		
 		rows.push(row);
 	
-		
-		var row = new HomeMagazineSection();
+		var article = new GetFeed ('http://iowalum.com/mobile-app/root_feed.cfm');
+		var row = new HomeMagazineSection(article[0]);
 		
 		rows.push(row);
 	//----------------------------------------------------------------------------	
@@ -143,10 +170,10 @@ function RootWindow(data) {
 			font:{fontFamily:'Helvetica-Bold',fontSize:20,fontWeight:'normal'}
 		});
 		
-		var row = Ti.UI.createTableViewRow();
+		//var row = Ti.UI.createTableViewRow();
 		
-		row.add(iowaInsiderLabel);
-		rows.push(row);
+		//row.add(iowaInsiderLabel);
+		//rows.push(row);
 	
 		//var row = new HomeInsiderSection();
 		//rows.push(row);

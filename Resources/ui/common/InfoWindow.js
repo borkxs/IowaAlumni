@@ -81,7 +81,6 @@ function InfoWindow(title) {
 	});
 	
 	levittLabel.addEventListener('click', function(e) {
-		vistedLink (levittLabel, levittline, "purple" );
 		new WebView ('http://www.iowalum.com/about/levitt.cfm');
 	}); 
 	

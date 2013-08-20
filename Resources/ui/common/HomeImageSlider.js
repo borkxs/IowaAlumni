@@ -19,7 +19,7 @@ function HomeImageSlider(){
 		
 		var imageArray = new GetFeed ('http://iowalum.com/mobile-app/root_homeImages_feed.cfm');
 		var imagebox = Ti.UI.createImageView({
-			image: imageArray[3].url,
+			image: imageArray[0].url,
 			width: 300,
 			height: 250,
 			hires: true,

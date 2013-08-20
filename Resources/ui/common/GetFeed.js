@@ -24,6 +24,13 @@ function GetFeed (feed){
 					
 					});
 			}
+	else if (feed == "http://iowalum.com/membership/password_feed_xml.cfm"){
+		data.push({
+			pass: getRssText (item, 'pass'),
+			pass2: getRssText (item, 'pass2')
+		});
+				
+	}
 	
 	else{
 		for (var i = 0; i < items.length; i++) {
@@ -39,6 +46,24 @@ function GetFeed (feed){
 					latitude: getRssText(item, 'latitude'),
 					longitude: getRssText(item, 'longitude'),
 					street: getRssText(item, 'street')
+					});
+			}
+			else if (feed == "http://www.iowalum.com/membership/feed_benefits_xml.cfm"){
+				data.push({
+					title:  getRssText(item, 'title'),
+					link:  getRssText(item, 'link'),
+					description: getRssText(item, 'description')
+					});
+			}
+			else if (feed == "http://iowalum.com/mobile-app/root_alert_feed.cfm"){
+				data.push({
+					title:  getRssText(item, 'title'),
+					header:  getRssText(item, 'header'),
+					url:  getRssText(item, 'link'),
+					image: getRssText(item, 'image'),
+					description: getRssText(item, 'description'),
+					pubDate: getRssText(item, 'pubDate')
+					
 					});
 			}
 			else if (feed == "http://iowalum.com/mobile-app/feed_xml.cfm"){
@@ -86,12 +111,7 @@ function GetFeed (feed){
 				});
 				
 			}
-			else if (feed == "http://iowalum.com/membership/password_feed_xml.cfm"){
-				data.push(
-					getRssText (item, 'pass')
-				);
-				
-			}
+			
 			
 			else {
 				data.push({
