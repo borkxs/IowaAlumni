@@ -27,7 +27,7 @@
     <guid>0d268600-4584-4b3f-9837-3546725ec1e6</guid>
     <iphone>
         <orientations device="iphone">
-            <orientation>Ti.UI.PORTRAIT</orientation>
+             <orientation>Ti.UI.PORTRAIT</orientation>
         </orientations>
         <orientations device="ipad">
             <orientation>Ti.UI.PORTRAIT</orientation>

@@ -3,7 +3,7 @@ var GetFeed = require('ui/common/GetFeed');
 
 function  MemberCardWindow(title){
 	var self = new ApplicationWindow(title);
-
+	
 	
 	var passwordWin = Ti.UI.createWindow({
 	    top: 43,
@@ -58,6 +58,21 @@ function  MemberCardWindow(title){
 		font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 		
 	});
+	
+	var activityIndicator = Ti.UI.createActivityIndicator({
+		  font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'},
+		  message: 'Checking Password...',
+		  style:Ti.UI.iPhone.ActivityIndicatorStyle.DARK,
+		  top:105,
+		  left:90,
+		  height:'auto',
+		  width:'auto'
+	});
+	
+	
+  	passwordWin.add(activityIndicator);
+	
+	
 	var wrongPasswordLabel = Ti.UI.createLabel({
 		text: "You may have typed the password incorrectly, try again.",
 		textAlign: 'center',
@@ -87,39 +102,49 @@ function  MemberCardWindow(title){
 	passwordWin.add(people);
 	passwordWin.add(wrongPasswordLabel);
 	wrongPasswordLabel.setVisible(false);
+	
+	function getMemberCard(isCard2){
+			passwordWin.remove(passwordLabel);
+			passwordWin.remove(passwordInfoLabel);
+			passwordWin.remove(passwordHeaderLabel);
+			passwordWin.remove(passwordTextField);
+			passwordWin.remove(loginButton);
+			passwordWin.backgroundColor = '202020';
+			wrongPasswordLabel.setVisible(false);
+			if (isCard2 == true){
+				image.image =  'http://iowalum.com/membership/images/MemberCard2.png'
+			}
+			passwordWin.add(image);
+			
+	}
+	
+	
 	loginButton.addEventListener('click',function(){
-		var password = (new GetFeed('http://iowalum.com/membership/password_feed_xml.cfm')[0]);
+		wrongPasswordLabel.setVisible(false);
+		activityIndicator.show();
+		setTimeout(function(){activityIndicator.hide();}, 3000);
+		setTimeout(function(){
+			var password = (new GetFeed('http://iowalum.com/membership/password_feed_xml.cfm')[0]);
 		password.pass =  password.pass.replace(" ","");
 		password.pass =  password.pass.replace(" ","");
 		password.pass2 =  password.pass2.replace(" ","");
 		password.pass2 =  password.pass2.replace(" ","");
    		if (passwordTextField.value == password.pass) {
-			passwordWin.remove(passwordLabel);
-			passwordWin.remove(passwordInfoLabel);
-			passwordWin.remove(passwordHeaderLabel);
-			passwordWin.remove(passwordTextField);
-			passwordWin.remove(loginButton);
-			passwordWin.backgroundColor = '202020';
-			wrongPasswordLabel.setVisible(false);
-			passwordWin.add(image);
+			 getMemberCard(false);
 			
 		}
 		
 		else if (passwordTextField.value == password.pass2) {
-			passwordWin.remove(passwordLabel);
-			passwordWin.remove(passwordInfoLabel);
-			passwordWin.remove(passwordHeaderLabel);
-			passwordWin.remove(passwordTextField);
-			passwordWin.remove(loginButton);
-			passwordWin.backgroundColor = '202020';
-			wrongPasswordLabel.setVisible(false);
-			image.image =  'http://iowalum.com/membership/images/MemberCard2.png'
-			passwordWin.add(image);
-			
+			 getMemberCard(true);
 		}
 		else {
 			wrongPasswordLabel.setVisible(true);
 		}
+			
+			
+			
+}, 4000);
+		
 		
 	});
 

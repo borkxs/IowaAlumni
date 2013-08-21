@@ -1,6 +1,6 @@
 var WebView = require('ui/common/WebView');
 var GetFeed = require('ui/common/GetFeed');
-
+var SocialMediaIcons = require('ui/common/SocialMediaIcons');
 
 function HomeSMSection(){
 	var socialMediaView = Ti.UI.createView({
@@ -15,66 +15,17 @@ function HomeSMSection(){
 		var row = Ti.UI.createTableViewRow();
 		row.add(socialMediaView);
 		
-	var facebookimage = Ti.UI.createImageView({
-		  image:    'facebook.png',
-		  top:    0,
-		  left: 0,
-		});
+		var icon = new SocialMediaIcons();
+	
+	var facebookimage = icon.facebook(0,0);
+	var twitterimage = icon.twitter(0,53.6);
+	var instagramimage = icon.instagram(0,107.2);
+	var linkedInimage = icon.linkedIn(0,160.8);
+	var foursquareimage = icon.foursquare(0,214.4);
+	var pinterestimage = icon.pinterest(0,268);
+	
 		
-		facebookimage.addEventListener('click', function(e) {
-			new WebView ('https://www.facebook.com/UIowaAlumni');
-		}); 
-		
-		var twitterimage = Ti.UI.createImageView({
-		  image:    'twitter.png',
-		  top:    0,
-		  left: 53.6
-		});
-		
-		twitterimage.addEventListener('click', function(e) {
-			new WebView ('https://twitter.com/uiowaAlumni');
-		}); 
-		
-		var instagramimage = Ti.UI.createImageView({
-		  image:    'instagram.png',
-		  top:    0,
-		  left: 107.2
-		});
-		
-		instagramimage.addEventListener('click', function(e) {
-			new WebView ('http://instagram.com/uiowaalumni');
-		}); 
-		
-		var linkedInimage = Ti.UI.createImageView({
-		  image:    'linkedin.png',
-		  top:    0,
-		  left: 160.8
-		});
-		
-		linkedInimage.addEventListener('click', function(e) {
-			new WebView ('http://www.linkedin.com/groups?gid=1814071&trk=hb_side_g');
-		}); 
-		
-		var foursquareimage = Ti.UI.createImageView({
-		  image:    'fourquare.png',
-		  top:   0,
-		  left: 214.4
-		});
-		
-		foursquareimage.addEventListener('click', function(e) {
-			new WebView ('https://foursquare.com/uiowaalumni');
-		}); 
-		
-		var pinterestimage = Ti.UI.createImageView({
-		  image:    'pinterest.png',
-		   top:    0,
-		  left: 268
-		});
-		
-		pinterestimage.addEventListener('click', function(e) {
-			new WebView ('https://www.pinterest.com/uiowaalumni');
-		}); 
-		
+	
 		//Width (Images)
 		pinterestimage.width =  foursquareimage.width = linkedInimage.width = instagramimage.width = twitterimage.width = facebookimage.width = 32;
 		

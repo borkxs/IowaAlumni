@@ -7,9 +7,16 @@ function NationalBenefitsWindow(){
 	var self = new ApplicationWindow('National Member Benefits');
 	
 	var textView = Ti.UI.createView({
-		backgroundColor: 	'#e2e2e2',
-		height:				70,
-		top:				43,
+		//backgroundColor: 	'#ebc22f',//#ebc22f  e2e2e2
+		backgroundImage:	'gray-broder.png',
+		height:				90,
+		width:				316,
+		top:				44,
+		left:				2,
+		//borderRadius:		15,
+		//borderColor: 		'#444444',
+		//borderWidth: 		2
+
 		
 	});
 	var introLabel = Ti.UI.createLabel({
@@ -25,14 +32,15 @@ function NationalBenefitsWindow(){
 	
 	var table = Ti.UI.createTableView({
 		height: 'auto',
-		top: 113
+		//top: 134
+		top: 114
 	});
 	
 	var linkLabel = Ti.UI.createLabel({
 			 text: 'IC benefits',
 			 //textAlign: 'left',
 			 left: 250,
-			 top: 60,
+			 top: 50,
 			 color: 'blue',
 			font: {fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
 			        
@@ -87,9 +95,9 @@ function NationalBenefitsWindow(){
 	table.setData(data);
 	
 	textView.add(linkLabel);
-	self.add(textView);
-	self.add(table);
 	
+	self.add(table);
+	self.add(textView);
 	return self;
 	
 }

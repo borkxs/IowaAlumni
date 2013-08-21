@@ -1,6 +1,7 @@
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var WebView = require('ui/common/WebView');
 var GetFeed = require('ui/common/GetFeed');
+var SocialMediaIcons = require('ui/common/SocialMediaIcons');
 
 
 function InfoWindow(title) {
@@ -125,74 +126,14 @@ function InfoWindow(title) {
 		top: 10
 	});
 	
-	var facebookimage = Ti.UI.createImageView({
-	  image:    'facebook.png',
-	  top:    37,
-	  left: 55
-	});
+	var icon = new SocialMediaIcons();
 	
-	facebookimage.addEventListener('click', function(e) {
-		new WebView ('https://www.facebook.com/UIowaAlumni');
-	}); 
-	
-	
-	var twitterimage = Ti.UI.createImageView({
-	  image:    'twitter.png',
-	  top:    37,
-	  left: 115
-	});
-
-	
-	twitterimage.addEventListener('click', function(e) {
-		new WebView ('https://twitter.com/uiowaAlumni');
-	}); 
-	
-	
-	var foursquareimage = Ti.UI.createImageView({
-	  image:    'fourquare.png',
-	  top:   97,
-	  left: 175
-	});
-	
-	foursquareimage.addEventListener('click', function(e) {
-		new WebView ('https://foursquare.com/uiowaalumni');
-	}); 
-	
-
-	var linkedInimage = Ti.UI.createImageView({
-	  image:    'linkedin.png',
-	  top:    97,
-	  left: 55
-	});
-	
-	
-	linkedInimage.addEventListener('click', function(e) {
-		new WebView ('http://www.linkedin.com/groups?gid=1814071&trk=hb_side_g');
-	}); 
-	
-	
-	var pinterestimage = Ti.UI.createImageView({
-	  image:    'pinterest.png',
-	   top:    97,
-	  left: 115
-	});
-
-	pinterestimage.addEventListener('click', function(e) {
-		new WebView ('https://www.pinterest.com/uiowaalumni');
-	}); 
-	
-	
-	var instagramimage = Ti.UI.createImageView({
-	  image:    'instagram.png',
-	  top:    37,
-	  left: 175
-	});
-	
-	instagramimage.addEventListener('click', function(e) {
-		new WebView ('http://instagram.com/uiowaalumni');
-	
-	}); 
-	
+	var facebookimage = icon.facebook(37,55);
+	var twitterimage = icon.twitter(37,115);
+	var foursquareimage = icon.foursquare(37,175);
+	var linkedInimage = icon.linkedIn(97,55);
+	var pinterestimage = icon.pinterest(97,115);
+	var instagramimage = icon.instagram(97,175);
 	
 	
 	

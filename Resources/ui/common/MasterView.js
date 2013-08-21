@@ -1,7 +1,6 @@
 var Post = require('ui/common/Post'),
 	FeatureRow = require('ui/common/FeatureRow'),
 	Row = require('ui/common/Row'),
-	TextRow = require('ui/common/TextRow'),
 	SingleRow = require('ui/common/SingleRow'),
 	HeaderRow = require('ui/common/HeaderRow'),
 	IIBIntroRow = require('ui/common/IIBIntroRow'),
@@ -179,11 +178,15 @@ function MasterView(feed) {
 			table.setData(rows);	
 		}	
 	}
+	
+
+	
+	
 	function refreshRSS() {
 		
 		 rssfeed.loadRssFeed({
 			success: function(data) {
-	    		refreshRssTable(data);
+	    	refreshRssTable(data);
 	    				
 	    }
 		});

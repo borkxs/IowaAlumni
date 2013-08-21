@@ -6,19 +6,16 @@ var SingleRow = require('ui/common/SingleRow');
 var PostTable = require('ui/common/PostTable');
 var HomeImageSlider = require('ui/common/HomeImageSlider');
 var HomeMagazineSection = require('ui/common/HomeMagazineSection');
-var HomeInsiderSection = require('ui/common/HomeInsiderSection');
 var HomeSMSection = require('ui/common/HomeSMSection');
 var Row = require('ui/common/Row');
 var FormatDate = require('ui/common/FormatDate');
 var StaticAd = require('ui/common/StaticAd');
-var HomeRow = require('ui/common/HomeRow');
 var WebView = require('ui/common/WebView');
 function RootWindow(data) {
 	
 	var self = new ApplicationWindow("Home");
 	
-	
-	
+
 	
 	var tableView = new PostTable();
 	tableView.top = 43;
@@ -170,14 +167,6 @@ function RootWindow(data) {
 			font:{fontFamily:'Helvetica-Bold',fontSize:20,fontWeight:'normal'}
 		});
 		
-		//var row = Ti.UI.createTableViewRow();
-		
-		//row.add(iowaInsiderLabel);
-		//rows.push(row);
-	
-		//var row = new HomeInsiderSection();
-		//rows.push(row);
-	
 		
 		var row = new HomeSMSection();
 		
@@ -198,26 +187,7 @@ function RootWindow(data) {
 	var ad = new StaticAd(9,392);
 	
 	self.add(ad);
-	/*
-	if(Titanium.Network.networkType != Titanium.Network.NETWORK_NONE){
-     var alertDialog = Titanium.UI.createAlertDialog({
-              title: 'WARNING!',
-              message: 'Your device is not online.',
-              buttonNames: ['OK']
-            });
-            alertDialog.show();
-           }
-self.addEventListener('startup', function(e) {
-if(Titanium.Network.networkType != Titanium.Network.NETWORK_NONE){
-     var alertDialog = Titanium.UI.createAlertDialog({
-              title: 'WARNING!',
-              message: 'Your device is not online.',
-              buttonNames: ['OK']
-            });
-            alertDialog.show();
-}
-});
-*/
+
 	return self;
 
 }

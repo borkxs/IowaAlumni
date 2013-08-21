@@ -68,8 +68,7 @@ function HeaderRow(post) {
 function getpubDateLabel(pubDate) {
 
 	var text = Ti.UI.createLabel({
-		text: pubDate,
-		left: 15,
+		text: pubDate,		left: 15,
 		bottom: 15,
 		textAlign:'left',
 		width: 200,
@@ -81,7 +80,5 @@ function getpubDateLabel(pubDate) {
 	return text;
 
 }
-
-
 
 module.exports = HeaderRow;
