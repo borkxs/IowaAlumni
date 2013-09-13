@@ -123,7 +123,7 @@ function MasterView(feed) {
 				
 				
 				
-				if(post.imageheight != null && post.imageheight > 150 && post.imageheight < 300 && featureSet == false) {
+				if(post.imageheight != null && post.imageheight > 150 && post.imageheight < 300 && featureSet == false && feed != 'http://iowalum.com/calendar/feed_xml.cfm') {
 					
 					var row = new FeatureRow(post);
 					featureSet = true;

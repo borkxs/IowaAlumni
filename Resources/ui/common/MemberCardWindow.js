@@ -4,7 +4,6 @@ var GetFeed = require('ui/common/GetFeed');
 function  MemberCardWindow(title){
 	var self = new ApplicationWindow(title);
 	
-	
 	var passwordWin = Ti.UI.createWindow({
 	    top: 43,
 	    backgroundColor:'#cccccc',
@@ -111,10 +110,14 @@ function  MemberCardWindow(title){
 			passwordWin.remove(loginButton);
 			passwordWin.backgroundColor = '202020';
 			wrongPasswordLabel.setVisible(false);
+			
 			if (isCard2 == true){
 				image.image =  'http://iowalum.com/membership/images/MemberCard2.png'
 			}
 			passwordWin.add(image);
+		
+			
+			
 			
 	}
 	
@@ -122,7 +125,7 @@ function  MemberCardWindow(title){
 	loginButton.addEventListener('click',function(){
 		wrongPasswordLabel.setVisible(false);
 		activityIndicator.show();
-		setTimeout(function(){activityIndicator.hide();}, 3000);
+		setTimeout(function(){activityIndicator.hide();}, 2000);
 		setTimeout(function(){
 			var password = (new GetFeed('http://iowalum.com/membership/password_feed_xml.cfm')[0]);
 		password.pass =  password.pass.replace(" ","");
@@ -143,7 +146,7 @@ function  MemberCardWindow(title){
 			
 			
 			
-}, 4000);
+}, 3000);
 		
 		
 	});
