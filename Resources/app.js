@@ -38,6 +38,7 @@ else {
 		var RootWindow = require('ui/common/RootWindow');
 		var MenuRow = require('ui/common/MenuRow');
 		var NationalBenefitsWindow = require('ui/common/NationalBenefitsWindow');
+		var EventsHomeWindow = require('ui/common/EventsHomeWindow');
 
 		//// ---- Menu window, positioned on the left
 		var menuWindow = Ti.UI.createWindow({
@@ -236,7 +237,8 @@ else {
 			}
 			
 			else if(e.row.feedTitle==eventsTitle) {
-				var win = new Window(e.row.feed,e.row.feedTitle);
+				//var win = new Window(e.row.feed,e.row.feedTitle);
+				var win = new EventsHomeWindow(eventsTitle);
 				menuTitles = [
 					(new MenuRow(home,'home','http://iowalum.com/calendar/feed_xml.cfm',false)),
 				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',true)),

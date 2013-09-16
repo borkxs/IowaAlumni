@@ -169,7 +169,7 @@ function timeLabel (){
 function getTime (snl){
 
 	var text = Ti.UI.createLabel({
-		text: snl,
+		text: (new EditText (snl)).adjustedText(),
 		left: 55,
 		top: 0,
 		textAlign:'left',

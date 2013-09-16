@@ -1,20 +1,22 @@
-var ApplicationWindow = require('ui/common/ApplicationWindow');
 var WebView = require('ui/common/WebView');
 
 function GameWatchWindow(clubData, clubInfoData) {
 	
 //-----------	Game Watch Window -----------//
 
+
+	var windowtitle = clubData[0].state;
+	
 	var self = Ti.UI.createWindow({
 	    backgroundColor:'#e2e2e2',
 		navBarHidden: true
 	});
 
 
-	windowTitle = setStateTitle (clubData[0].state);
+	
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title: windowTitle,
+		title: windowtitle,
 		navBarHidden:false,
 		barImage:'navbar.png',
 		//hires:true,
@@ -43,9 +45,6 @@ function GameWatchWindow(clubData, clubInfoData) {
 		window:masterContainerWindow
 	});
 	self.add(navGroup);
-	
-	
-	
 	
 	
 	var mapWin = Ti.UI.createWindow({

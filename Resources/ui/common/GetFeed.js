@@ -55,6 +55,11 @@ function GetFeed (feed){
 					description: getRssText(item, 'description')
 					});
 			}
+			else if (feed == "http://www.iowalum.com/mobile-app/events_category_feed.cfm"){
+				data.push({
+					category:getRssText(item, 'category')
+					});
+			}
 			else if (feed == "http://iowalum.com/mobile-app/root_alert_feed.cfm"){
 				data.push({
 					title:  getRssText(item, 'title'),
@@ -66,6 +71,19 @@ function GetFeed (feed){
 					
 					});
 			}
+			else if (feed == "http://iowalum.com/calendar/feed_xml.cfm"){
+					data.push({
+					snl: getRssText(item, 'snl'),
+					place: getRssText(item, 'place'),
+					title: getRssText(item, 'title'),
+					link: getRssText(item, 'link'),
+					description: getRssText(item, 'description'),
+					pubDate: getRssText(item, 'pubDate'),
+					hlink: getRssText(item, 'hlink'),
+					category:getRssText(item, 'category'),
+					});
+			}
+			
 			else if (feed == "http://iowalum.com/mobile-app/feed_xml.cfm"){
 				data.push({
 					ad:   getRssText(item, 'ad'),

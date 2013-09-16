@@ -10,7 +10,7 @@ var Post = require('ui/common/Post'),
 	Ad = require('ui/common/Ad'),
 	GetFeed = require('ui/common/GetFeed'),
 	FormatDate = require('ui/common/FormatDate'),
-	RSS = require('services/rss');
+	RSS = require('services/rss'),
 	WebView = require('ui/common/WebView'),
 	StaticAd = require('ui/common/StaticAd');
 

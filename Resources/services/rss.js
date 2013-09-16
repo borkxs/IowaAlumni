@@ -70,6 +70,7 @@ RSS.prototype.loadRssFeed = function(o, tries) {
 					description: getRssText(item, 'description'),
 					pubDate: getRssText(item, 'pubDate'),
 					hlink: getRssText(item, 'hlink'),
+					category:getRssText(item, 'category'),
 					image: image
 					});
 			}
