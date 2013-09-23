@@ -19,11 +19,16 @@ var Post = require('ui/common/Post'),
 
 function EventsWindow(events, title){
 	
-	var self = new NavigateWindow(title);
-	
+	//var self = new NavigateWindow(title);
+	var self = Ti.UI.createWindow({
+	    backgroundColor:'#e2e2e2',
+		navBarHidden: true,
+		top: 43
+	});
+
 	
 		var tableView = new PostTable();
-	tableView.top = 43;
+	tableView.top = 0;
 	tableView.bottom = 70;
 	tableView.selectionStyle ='none';
 	
@@ -77,44 +82,55 @@ function EventsWindow(events, title){
 
 
 	function refreshRssTable() {
-		
+			
+			if (events.length != 0){
+			var rows = [];
+			var Counter = 0;
+			var headerCounter = 0;
+			var adIndex = 0;
+			var ads = new GetFeed('http://iowalum.com/advertising/feed_xml.cfm');
+			var tempDate = "";
+			for (var i = 0; i < events.length; i++) {
+				var post = new Post(events[i]);
 	
-		var rows = [];
-		var Counter = 0;
-		var headerCounter = 0;
-		var adIndex = 0;
-		var ads = new GetFeed('http://iowalum.com/advertising/feed_xml.cfm');
-		var tempDate = "";
-		for (var i = 0; i < events.length; i++) {
-			var post = new Post(events[i]);
-
-			if ((Counter == 0) ||(tempDate != post.pubDate && Counter != 0)){
-					var header = new HeaderRow(post);
-						
-					if (headerCounter != 0 && (headerCounter % 3) == 0 && adIndex < 3 ){
-						var row = new Ad(ads[adIndex]);
-						rows.push(row);
-						adIndex++;
-						if (adIndex == 3){
-							adIndex = 0;
-						} 
+				if ((Counter == 0) ||(tempDate != post.pubDate && Counter != 0)){
+						var header = new HeaderRow(post);
+							
+						if (headerCounter != 0 && (headerCounter % 3) == 0 && adIndex < 3 ){
+							var row = new Ad(ads[adIndex]);
+							rows.push(row);
+							adIndex++;
+							if (adIndex == 3){
+								adIndex = 0;
+							} 
+						}
+						rows.push(header);
+						headerCounter++;
 					}
-					rows.push(header);
-					headerCounter++;
-				}
-					var row = new SingleRow(post);
+						var row = new SingleRow(post);
+						
+						rows.push(row);
 					
-					rows.push(row);
-				
-				
-				
-				Counter++;
-				tempDate = post.pubDate;
-				
+					
+					
+					Counter++;
+					tempDate = post.pubDate;
+					
+			}
+		
+			tableView.setData(rows);
+			self.add(tableView);
 		}
-	
-		tableView.setData(rows);
-		self.add(tableView);
+		else{
+			 var label = Ti.UI.createLabel({
+		        text: "More events coming soon, please check back later!",
+		        textAlign: 'left',
+		        width: 300,
+		        top: 53,
+		        left: 10,
+		        font: {fontFamily:'Helvetica-Bold',fontSize:16,fontWeight:'normal'}
+		    });
+		}
 	}
 	
 	function refreshRSS() {	
@@ -125,7 +141,7 @@ function EventsWindow(events, title){
 	// load initial rss feed
 	refreshRSS();
 
-	var ad = new StaticAd(15,392);
+	var ad = new StaticAd(15,349);
 	
 	self.add(ad);
 

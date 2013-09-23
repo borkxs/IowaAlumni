@@ -40,12 +40,13 @@ function FeatureRow(post) {
 	row.height 			 = this.containerheight + 100 + 8;
 
 	var imagebox = Ti.UI.createImageView({
+		image: post.image,
 		width: 300,
 		height: this.containerheight,
 		hires: true,
 		top: 30
 	});
-	new CachedImageView('imageDirectoryName', post.image, imagebox);
+	//new CachedImageView('imageDirectoryName', post.image, imagebox);
 	var overlay = Ti.UI.createImageView({
 		width: 300,
 		height: 40,
@@ -107,7 +108,7 @@ function getContainerHeight(img) {
 		height: 'auto',
 		hires: true,
 	});
-    new CachedImageView('imageDirectoryName', img, tempimagebox);
+    //new CachedImageView('imageDirectoryName', img, tempimagebox);
 	
 	var height = tempimagebox.toImage().height;
 	var width = tempimagebox.toImage().width;

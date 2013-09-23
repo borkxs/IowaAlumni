@@ -8,7 +8,7 @@ function StaticAd(index, topPosition){
 	  image:    currentAd[index].ad,
 	  width: 320,
 	  height: 70,
-	  top: topPosition,
+	  bottom:0,
 	  left: 0
 	  
 	});

@@ -237,8 +237,8 @@ else {
 			}
 			
 			else if(e.row.feedTitle==eventsTitle) {
-				//var win = new Window(e.row.feed,e.row.feedTitle);
-				var win = new EventsHomeWindow(eventsTitle);
+				var win = new Window(e.row.feed,e.row.feedTitle);
+				//var win = new EventsHomeWindow(eventsTitle);
 				menuTitles = [
 					(new MenuRow(home,'home','http://iowalum.com/calendar/feed_xml.cfm',false)),
 				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',true)),

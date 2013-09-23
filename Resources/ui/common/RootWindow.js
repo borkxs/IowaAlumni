@@ -186,6 +186,7 @@ function RootWindow(data) {
 
 	var ad = new StaticAd(9,392);
 	
+	
 	self.add(ad);
 
 	return self;

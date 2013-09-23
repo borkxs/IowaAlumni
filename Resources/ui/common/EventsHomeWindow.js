@@ -7,7 +7,21 @@ var EventsWindow = require('ui/common/EventsWindow');
 
 function EventsHomeWindow(title){
 	
+	
 	var self = new ApplicationWindow(title);
+	
+	var events = new GetFeed ("http://iowalum.com/calendar/feed_xml.cfm");
+	var categories = new GetFeed("http://www.iowalum.com/mobile-app/events_category_feed.cfm");
+	
+	mainWindow = new EventsWindow(events, "All Events");
+	self.add(mainWindow);
+	
+	var categoryWindow = Ti.UI.createWindow({
+	    backgroundColor:'#e2e2e2',
+		navBarHidden: true,
+		top: 43
+	});
+
 	
 	var introLabel = Ti.UI.createLabel({
 			 text: 'Please select the category of events you want to view.',
@@ -28,8 +42,7 @@ function EventsHomeWindow(title){
 	
 
 	
-	var events = new GetFeed ("http://iowalum.com/calendar/feed_xml.cfm");
-	var categories = new GetFeed("http://www.iowalum.com/mobile-app/events_category_feed.cfm");
+	
 	var data = [];
 	var rowCounter = 0;
 	for (var i = 0; i <= categories.length - 1; i++) {

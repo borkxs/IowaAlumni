@@ -210,6 +210,8 @@ function MasterView(feed) {
 	}
 	
 	self.add(ad);
+	
+	
 
 	return self;
 }
