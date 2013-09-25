@@ -72,7 +72,7 @@ function Row(post) {
 
 	});
 	var postImage = getPostImage(post.image);
-	new CachedImageView('imageDirectoryName', post.image, postImage);
+	//new CachedImageView('imageDirectoryName', post.image, postImage);
 	imageContainer.add(postImage);
 	container.add(imageContainer);
 
@@ -102,7 +102,7 @@ function getContainerHeight(img) {
 		hires: true,
 		//top: -10, // this works for some reason
 	});
-    new CachedImageView('imageDirectoryName', img, tempimagebox);
+    //new CachedImageView('imageDirectoryName', img, tempimagebox);
 	
 	var height = tempimagebox.toImage().height;
 	var width = tempimagebox.toImage().width;
@@ -175,7 +175,7 @@ function getPostImage(image) {
 		hires: true,
 		//top: -10, // this works for some reason
 	});
-    new CachedImageView('imageDirectoryName', image, tempimagebox);
+    //new CachedImageView('imageDirectoryName', image, tempimagebox);
 	
 	var height = tempimagebox.toImage().height;
 	var width = tempimagebox.toImage().width;
@@ -184,7 +184,7 @@ function getPostImage(image) {
 	var adjustedWidth = Math.floor(60 * ratio);
 
 	var imagebox = Ti.UI.createImageView({
-		image: this.image,
+		image: image,
 		hires: true,
 		width: adjustedWidth,
 		top: 0

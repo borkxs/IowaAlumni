@@ -70,7 +70,7 @@ function HomeMagazineSection(article){
 		
 			});
 			var postImage = getPostImage(article.image);
-			new CachedImageView('imageDirectoryName', article.image, postImage);
+			//new CachedImageView('imageDirectoryName', article.image, postImage);
 			imageContainer.add(postImage);
 			rowText.add(imageContainer);
 			
@@ -177,7 +177,7 @@ function getPostImage(image) {
 		hires: true,
 		//top: -10, // this works for some reason
 	});
-    new CachedImageView('imageDirectoryName', image, tempimagebox);
+    //new CachedImageView('imageDirectoryName', image, tempimagebox);
 	
 	var height = tempimagebox.toImage().height;
 	var width = tempimagebox.toImage().width;
@@ -186,7 +186,7 @@ function getPostImage(image) {
 	var adjustedWidth = Math.floor(60 * ratio);
 
 	var imagebox = Ti.UI.createImageView({
-		image: this.image,
+		image: image,
 		hires: true,
 		width: adjustedWidth,
 		top: 0

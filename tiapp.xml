@@ -10,12 +10,12 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <id>com.appcelerator.sample.rss</id>
-    <name>Sample.RSS</name>
+    <name>Alumni</name>
     <version>1.0</version>
-    <publisher>tlukasavage</publisher>
-    <url>http://appcelerator.com</url>
+    <publisher>University of Iowa Alumni Association</publisher>
+    <url>http://www.iowalum.com/</url>
     <description>not specified</description>
-    <copyright>2011 by tlukasavage</copyright>
+    <copyright>2013 by University of Iowa Alumni Association</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
