@@ -38,7 +38,7 @@ function InfoWindow(title) {
 	});
 		
 	var scrollMainView = Ti.UI.createScrollView({
-	  top: 45,
+	  top: 63,
 	  contentWidth: 320,
 	  contentHeight: 420,
 	  showVerticalScrollIndicator: false,
@@ -110,7 +110,7 @@ function InfoWindow(title) {
 	
 	emailLabel.addEventListener('click', function(e) {
 		vistedLink (emailLabel, emailline, "purple" );
-		var emailDialog = Ti.UI.createEmailDialog()
+		var emailDialog = Ti.UI.createEmailDialog();
 		emailDialog.toRecipients = ['alumni@uiowa.edu'];
 		var f = Ti.Filesystem.getFile('cricket.wav');
 		emailDialog.addAttachment(f);

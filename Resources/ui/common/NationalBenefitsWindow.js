@@ -11,7 +11,7 @@ function NationalBenefitsWindow(){
 		backgroundImage:	'gray-broder.png',
 		height:				90,
 		width:				316,
-		top:				44,
+		top:				63,
 		left:				2,
 		//borderRadius:		15,
 		//borderColor: 		'#444444',
@@ -33,7 +33,7 @@ function NationalBenefitsWindow(){
 	var table = Ti.UI.createTableView({
 		height: 'auto',
 		//top: 134
-		top: 114
+		top: 134
 	});
 	
 	var linkLabel = Ti.UI.createLabel({

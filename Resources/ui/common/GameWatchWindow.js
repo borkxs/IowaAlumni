@@ -47,8 +47,8 @@ function GameWatchWindow(clubData, clubInfoData) {
 	self.add(navGroup);
 	
 	
-	var mapWin = Ti.UI.createWindow({
-	    top: 43,
+	var mapWin = Ti.UI.createView({
+	    top: 63,
 	    backgroundColor:'#ffffff',
 		navBarHidden: true
 	});
@@ -251,7 +251,7 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 	
 	var table = Ti.UI.createTableView({
 		height: 'auto',
-		top: 45
+		top: 63
 	});
 
 	
@@ -305,7 +305,7 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 		        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 		    });
 		    row.add(phoneLabel);
-		    currentTop = currentTop + 15
+		    currentTop = currentTop + 15;
 	    }
 	    if (clubInfoData[i].email != 'NA'){
 		    var emailLabel = Ti.UI.createLabel({
@@ -321,7 +321,7 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 	    	emailLabel.addEventListener('click', function(e) {
 	    		//data[e.index].emailLabel.color = 'purple'
 	    		//Ti.API.info(e.row);
-				var emailDialog = Ti.UI.createEmailDialog()
+				var emailDialog = Ti.UI.createEmailDialog();
 				emailDialog.toRecipients = [clubInfoData[e.index].email];
 				var f = Ti.Filesystem.getFile('cricket.wav');
 				emailDialog.addAttachment(f);
@@ -329,7 +329,7 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 	}); 
 	
 		    row.add(emailLabel);
-	    	currentTop = currentTop + 15
+	    	currentTop = currentTop + 15;
 	    	
 	    }
 	    
@@ -454,28 +454,28 @@ function addRows(i, data, flag){
 
 function setStateTitle (string){
 	if (string.toUpperCase() == 'DISTRICT OF COLUMBIA'){
-		return 'Washington, DC'
+		return 'Washington, DC';
 	}
 	else if (string.toUpperCase() == 'MASSACHUSETTS'){
-		return 'MA'
+		return 'MA';
 	}
 	else if (string.toUpperCase() == 'NEW MEXICO'){
-		return 'NM'
+		return 'NM';
 	}
 	else if (string.toUpperCase() == 'NEW YORK'){
-		return 'New York'
+		return 'New York';
 	}
 	else if (string.toUpperCase() == 'NORTH CAROLINA'){
-		return 'NC'
+		return 'NC';
 	}
 	else if (string.toUpperCase() == 'SOUTH CAROLINA'){
-		return 'SC'
+		return 'SC';
 	}
 	else if (string.toUpperCase() == 'PENNSYLVANIA'){
-		return 'PA'
+		return 'PA';
 	}
 	else if (string.toUpperCase() == 'WASHINGTON'){
-		return 'WA'
+		return 'WA';
 	}
 	else{
 		return string.charAt(0).toUpperCase() + (string.slice(1)).toLowerCase();

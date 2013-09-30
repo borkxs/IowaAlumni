@@ -32,8 +32,11 @@ function HomeImageSlider(){
 		function imageSlider(n){
 			 return imageArray[(n + 1) % imageArray.length].url;
 		}
-		setInterval(function(){imagebox.image = imageSlider(counter++) },3000);
-	
+		setInterval(imageCounter,3000);
+		
+		function imageCounter (){
+			imagebox.image = imageSlider(counter++);
+			}
 		
 		var overlay = Ti.UI.createImageView({
 			width: 300,

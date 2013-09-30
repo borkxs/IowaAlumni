@@ -1,5 +1,6 @@
 
 
+
 if (Ti.version < 1.8 ) {
 	alert('Sorry - this application template requires Titanium Mobile SDK 1.8 or later');
 }
@@ -30,7 +31,7 @@ else {
 				Window = require('ui/handheld/ios/ApplicationWindow');
 			}
 		}
-		
+		var Window2 = require('ui/common/ApplicationWindow2');
 		var InfoWindow = require('ui/common/InfoWindow');
 		var ClubsWindow = require('ui/common/ClubsWindow');
 		var MapWindow = require('ui/common/MapWindow');
@@ -118,6 +119,7 @@ else {
 			separatorColor: '000000',
 			backgroundImage: 'menubg.jpg',
 		    //footerTitle:'',
+		    backgroundColor: "#000000",
 		    height: 270,
 		    top: 105
 		});
@@ -127,6 +129,7 @@ else {
 		// Main window
 		
 		var win = new RootWindow();
+		//win = new Window2('http://iowalum.com/calendar/feed_xml.cfm', home, homeWindow);
 		win.moving = false;
 		win.axis = 0;
 		win.navBarHidden = true;

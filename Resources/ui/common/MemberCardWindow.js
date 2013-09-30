@@ -4,10 +4,10 @@ var GetFeed = require('ui/common/GetFeed');
 function  MemberCardWindow(title){
 	var self = new ApplicationWindow(title);
 	
-	var passwordWin = Ti.UI.createWindow({
-	    top: 43,
+	var passwordWin = Ti.UI.createView({
+	    top: 63,
 	    backgroundColor:'#cccccc',
-		navBarHidden: true
+	    navBarHidden: true
 	});
 	
 	
@@ -112,7 +112,7 @@ function  MemberCardWindow(title){
 			wrongPasswordLabel.setVisible(false);
 			
 			if (isCard2 == true){
-				image.image =  'http://iowalum.com/membership/images/MemberCard2.png'
+				image.image =  'http://iowalum.com/membership/images/MemberCard2.png';
 			}
 			passwordWin.add(image);
 		
@@ -162,6 +162,7 @@ function  MemberCardWindow(title){
 	passwordWin.add(passwordHeaderLabel);
 	passwordWin.add(passwordTextField);
 	passwordWin.add(loginButton);
+	
 	self.add(passwordWin);
 	return self;
 }

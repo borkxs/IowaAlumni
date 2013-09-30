@@ -16,14 +16,14 @@ FormatDate.prototype.getDate = function() {
 	}
 	
 	return datestr;
-}
+};
 
 
 
 FormatDate.prototype.getMonthString = function(month) {
 	var monthname = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 	return monthname[month];
-}
+};
 
 function minute (min){
 	if (min < 9){

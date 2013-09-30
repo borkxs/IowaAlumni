@@ -14,7 +14,7 @@ function ClubsWindow(title){
 			 textAlign: 'left',
 			 left: 10,
 			 width: 300,
-			 top: 53,
+			 top: 68,
 			font: {fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
 			        
 		});
@@ -23,12 +23,12 @@ function ClubsWindow(title){
 	var table = Ti.UI.createTableView({
 		height: 'auto',
 		bottom: 70,
-		top: 185
+		top: 205
 	});
 	
 	var people = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/mobile/clubs.png',
-	  top:   130
+	  top:   135
 	});
 	
 	self.add(people);

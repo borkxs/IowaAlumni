@@ -43,8 +43,8 @@ function MapWindow() {
 	
 	
 	
-	var mapWin = Ti.UI.createWindow({
-	    top: 43,
+	var mapWin = Ti.UI.createView({
+	    top: 63,
 	    backgroundColor:'#ffffff',
 		navBarHidden: true
 	});

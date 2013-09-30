@@ -23,5 +23,5 @@ function EditText(text) {
 
 EditText.prototype.adjustedText = function(){
 	return newText;
-}
+};
 module.exports = EditText;

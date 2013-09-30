@@ -189,6 +189,7 @@ function getPostImage(image) {
 		image: image,
 		hires: true,
 		width: adjustedWidth,
+		height: 60,
 		top: 0
 	});
 

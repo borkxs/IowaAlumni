@@ -18,7 +18,7 @@ function RootWindow(data) {
 
 	
 	var tableView = new PostTable();
-	tableView.top = 43;
+	tableView.top = 63;
 	tableView.bottom = 70;
 	tableView.selectionStyle ='none';
 	

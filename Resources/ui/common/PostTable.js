@@ -61,17 +61,17 @@ function PostTable() {
 
 	self.updateLabelText = function(text) {
 		statusLabel.text = text;
-	}
+	};
 	self.updateDateText = function(text) {
 		lastUpdatedLabel.text = text;
-	}
+	};
 
 	self.hideActInd = function() {
 		actInd.hide();
-	}
+	};
 	self.showActInd = function() {
 		actInd.show();
-	}
+	};
 
 	return self;
 

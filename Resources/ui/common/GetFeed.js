@@ -153,7 +153,7 @@ var getRssText = function(item, key) {
 	return osname === 'mobileweb' ?
 			item.getElementsByTagName(key).item(0).textContent : 
 			item.getElementsByTagName(key).item(0).text;
-}
+};
 
 function loadXMLDoc(dname){
 	var xmlhttp = Titanium.Network.createHTTPClient();

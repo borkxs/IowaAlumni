@@ -31,7 +31,7 @@ DateObject.prototype.dateString = function() {
 		
 	return textdate + ' ' + texttime;
 	
-}
+};
 
 DateObject.prototype.magazineDateString = function() {
 	
@@ -46,7 +46,7 @@ DateObject.prototype.magazineDateString = function() {
 		
 	return textdate + ' ' + date.getYear();
 	
-}
+};
 
 DateObject.prototype.prettyDate = function() {
 	var monthname = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -84,6 +84,6 @@ DateObject.prototype.prettyDate = function() {
 	day_diff == 1 && "Yesterday" ||
 	day_diff < 7 && day_diff + " days ago" ||
 	day_diff < 31 && Math.ceil( day_diff / 7 ) + " week" + ((Math.ceil( day_diff / 7 )) == 1 ? "" : "s") + " ago";
-}
+};
 
 module.exports = DateObject;

@@ -22,7 +22,7 @@ Description.prototype.getImage = function() {
 	else imageurlstr = null;
 	return imageurlstr;
 	
-}
+};
 
 Description.prototype.getImageMagazine = function() {
 	var imageregex  = /(img|src)=("|')[^"'>]+/;
@@ -30,7 +30,7 @@ Description.prototype.getImageMagazine = function() {
 	var imageurlstr = imageurl.substring(imageurl.length - 52, 52);
 	return imageurlstr;
 
-}
+};
 
 Description.prototype.getDescription = function() {
 	
@@ -52,6 +52,6 @@ Description.prototype.getDescription = function() {
 	}
 	
 	return description;
-}
+};
 
 module.exports = Description;
