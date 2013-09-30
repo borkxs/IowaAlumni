@@ -20,6 +20,7 @@ function NavigateWindow(windowtitle) {
 		
 		title: 'Back',
 		height: 30,
+		left: 10,
 		width: 63,
 		backgroundImage: 'backbutton.png',
 		font: {fontFamily:'Helvetica Neue',fontSize:14,fontWeight:'bold'},

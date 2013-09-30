@@ -108,7 +108,7 @@ function getContainerHeight(img) {
 		height: 'auto',
 		hires: true,
 	});
-    //new CachedImageView('imageDirectoryName', img, tempimagebox);
+    new CachedImageView('imageDirectoryName', img, tempimagebox);
 	
 	var height = tempimagebox.toImage().height;
 	var width = tempimagebox.toImage().width;

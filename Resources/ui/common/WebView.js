@@ -1,7 +1,14 @@
+var NavigateWindow = require('ui/common/NavigateWindow');
 function WebView (link){
-	var webview = Titanium.UI.createWebView({url: link});
-	    var win2 = Titanium.UI.createWindow();
+	var webview = Titanium.UI.createWebView({
+		url: link,
+		top:63
+		
+		});
+	    var win2 = new NavigateWindow("");
 	    win2.add(webview);
+	    win2.open();
+	    /*
 	    win2.open({modal:true});
 		 
 		 
@@ -25,7 +32,7 @@ function WebView (link){
 		
 		win2.setLeftNavButton(closeButton);
 		win2.setBarImage('navbar.png');
-		
+		*/
 		return win2;
 }
 

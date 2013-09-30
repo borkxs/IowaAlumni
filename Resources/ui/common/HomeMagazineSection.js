@@ -23,7 +23,7 @@ function HomeMagazineSection(article){
 	});
 
 	 var rowText = Ti.UI.createTableViewRow({
-	        height: 100
+	        height: 120
 	    });
 
 	 rowText.addEventListener('click', function(e) {
@@ -106,7 +106,7 @@ function HomeMagazineSection(article){
 		//row = rowText.height + 30;
 		
 		
-		rowText.height = titleLabel.height + desclbl.height + posted.height + 30;
+		rowText.height = titleLabel.height + desclbl.height + posted.height;
 		table.height = rowText.height;
 		row.height = rowText.height + 10;
 		
@@ -177,7 +177,7 @@ function getPostImage(image) {
 		hires: true,
 		//top: -10, // this works for some reason
 	});
-    //new CachedImageView('imageDirectoryName', image, tempimagebox);
+    new CachedImageView('imageDirectoryName', image, tempimagebox);
 	
 	var height = tempimagebox.toImage().height;
 	var width = tempimagebox.toImage().width;
@@ -189,7 +189,6 @@ function getPostImage(image) {
 		image: image,
 		hires: true,
 		width: adjustedWidth,
-		height: 60,
 		top: 0
 	});
 

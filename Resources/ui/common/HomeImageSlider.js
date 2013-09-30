@@ -49,7 +49,7 @@ function HomeImageSlider(){
 			width: 300,
 			height: 100,
 			hires: true,
-			top:60,
+			bottom: 65,
 			image: 'shadow.png'
 		});
 		
@@ -75,8 +75,8 @@ function HomeImageSlider(){
 			backgroundColor: '#0c0c0c',
 			backgroundImage: 'dark.jpg',
 			width: 300,
-			height: 85,
-			top: 140
+			height: 75,
+			bottom: 0
 		});
 		var titlelbl = Ti.UI.createLabel({
 			text: 'Welcome',
@@ -112,12 +112,14 @@ function HomeImageSlider(){
 	        shadowOffset:{x:0, y:1},
 			font:{fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
 		});
-		imagebox.add(shadow);
+		//imagebox.add(shadow);
 		view.add(text);
-		imagebox.add(view);
+		//imagebox.add(view);
 		
 		container.add(imagebox);
 		container.add(overlay);
+		container.add(shadow);
+		container.add(view);
 		
 		return row;
 } 
