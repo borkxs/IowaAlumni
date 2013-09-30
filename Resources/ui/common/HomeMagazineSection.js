@@ -16,7 +16,7 @@ function HomeMagazineSection(article){
 		top:				10,
 		bottom:				0,
 		padding:			0,
-		borderRadius:		5,
+		borderRadius:		5, 
 		borderColor: 		'#d5d5d5',
 		borderWidth: 		1,
 		scrollable: 		false
