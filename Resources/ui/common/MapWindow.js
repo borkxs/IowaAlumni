@@ -72,16 +72,16 @@ function MapWindow() {
 	
 	var map = Ti.Map.createView({
 		mapType: Titanium.Map.STANDARD_TYPE,
-		region: {latitude: businessesInfo[0].latitude, longitude: businessesInfo[0].longitude,
-			latitudeDelta:0.01, longitudeDelta:0.01 },
+		region: {latitude: companyInfo[0].latitude, longitude: companyInfo[0].longitude,
+				latitudeDelta:0.01, longitudeDelta:0.01 },
 		animate: true,
 		regionFit: true,
-		userLocation: true,
+		userLocation:true,
 		height: 200,
 	    annotations: companyInfo,
 		top: 0
 	});
-	
+	map.selectAnnotation(companyInfo[0]);
 	
 	var textView = Ti.UI.createView({
 		backgroundColor: 	'#e2e2e2',
@@ -168,7 +168,7 @@ function MapWindow() {
 	mapWin.add(textView);
 	mapWin.add(table);
 	
-	//self.add(mapWin);
+   
 	
 	
 
@@ -192,7 +192,11 @@ function MapWindow() {
 	});
 	
 	self.add(mapWin);
-		
+	
+	
+        
+
+    
 return self;
 
 

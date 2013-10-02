@@ -10,7 +10,7 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <id>com.appcelerator.sample.rss</id>
-    <name>UI Alumni</name>
+    <name>UIowa Alumni</name>
     <version>1.0</version>
     <publisher>University of Iowa Alumni Association</publisher>
     <url>http://www.iowalum.com/</url>
