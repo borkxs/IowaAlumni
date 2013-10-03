@@ -64,7 +64,7 @@ function MapWindow() {
 			    title: businessesInfo[i].company,
 			    subtitle: businessesInfo[i].street,
 			    pincolor: Titanium.Map.ANNOTATION_RED,
-			    animate:true,
+			    animate:true
 			})
 		);
 	}
@@ -81,7 +81,15 @@ function MapWindow() {
 	    annotations: companyInfo,
 		top: 0
 	});
-	map.selectAnnotation(companyInfo[0]);
+	
+	
+	
+	map.addEventListener('loading', function(e){
+		map.setLocation({latitude: companyInfo[0].latitude , longitude: companyInfo[0].longitude,
+				latitudeDelta: 0.01, longitudeDelta: 0.01 });	
+	});
+	
+
 	
 	var textView = Ti.UI.createView({
 		backgroundColor: 	'#e2e2e2',
@@ -174,6 +182,7 @@ function MapWindow() {
 
 	table.addEventListener('click', function(e){
 		
+		
 		map = Ti.Map.createView({
 			mapType: Titanium.Map.STANDARD_TYPE,
 			region: {latitude: e.row.latitude, longitude: e.row.longitude,
@@ -190,6 +199,7 @@ function MapWindow() {
 		
 		map.selectAnnotation(companyInfo[e.index]);
 	});
+	
 	
 	self.add(mapWin);
 	

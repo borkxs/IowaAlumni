@@ -1,4 +1,5 @@
 var WebView = require('ui/common/WebView');
+var EditText = require('ui/common/EditText');
 
 function GameWatchWindow(clubData, clubInfoData) {
 	
@@ -34,8 +35,9 @@ function GameWatchWindow(clubData, clubInfoData) {
 	});
 	masterContainerWindow.setLeftNavButton(menuButton);
 
-	//menuButton event
+	//backButton event
 	menuButton.addEventListener('click', function(e){
+		
 		tabGroup.close();
 		self.close();
 		
@@ -86,6 +88,15 @@ function GameWatchWindow(clubData, clubInfoData) {
 	    annotations: gameWatchInfo,
 		top: 0
 	});
+	
+	map.addEventListener('loading', function(e){
+		map.setLocation({latitude: clubData[0].latitude , longitude: clubData[0].longitude,
+				latitudeDelta: 0.01, longitudeDelta: 0.01 });	
+	});
+	map.addEventListener('postlayout', function(e){
+		map.setLocation({latitude: clubData[0].latitude , longitude: clubData[0].longitude,
+				latitudeDelta: 0.01, longitudeDelta: 0.01 });	
+	});
 
 	var table = Ti.UI.createTableView({
 		height: 'auto',
@@ -132,7 +143,7 @@ function GameWatchWindow(clubData, clubInfoData) {
 	        font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	    });
 	    var streetLabel = Ti.UI.createLabel({
-	        text: (clubData[i].street),
+	        text: clubData[i].street,//new EditText(clubData[i].street).adjustedText(),
 	        textAlign: 'left',
 	        left: 10,
 	        top: 46,
