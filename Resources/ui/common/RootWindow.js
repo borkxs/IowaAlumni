@@ -14,8 +14,8 @@ var WebView = require('ui/common/WebView');
 function RootWindow(data) {
 	
 	var self = new ApplicationWindow("Home");
-	
-
+	//Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
+	//Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
 	
 	var tableView = new PostTable();
 	tableView.top = 63;

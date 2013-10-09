@@ -83,6 +83,7 @@ function  MemberCardWindow(title){
 		font: {fontFamily:'HelveticaNeue-Light',fontSize:12,fontWeight:'bold'}
 	});
 	
+	
 	var image = Ti.UI.createImageView({
 	  image:    'http://iowalum.com/membership/images/MemberCard.png',
 	  top:    0,

@@ -40,6 +40,8 @@ else {
 		var MenuRow = require('ui/common/MenuRow');
 		var NationalBenefitsWindow = require('ui/common/NationalBenefitsWindow');
 		var EventsHomeWindow = require('ui/common/EventsHomeWindow');
+		
+		
 
 		//// ---- Menu window, positioned on the left
 		var menuWindow = Ti.UI.createWindow({
@@ -73,19 +75,27 @@ else {
 		menuWindow.add(logorow);
 		menuWindow.add(logo);
 		
+		var taglineTop = 400;
+		var tableHeight = 270;
+		if(height > 500){
+			taglineTop = 500;
+			tableHeight = 355;
+		}
+		
 		//"Once a Hawkeye" Image
 		var taglinerow = Ti.UI.createImageView({
-			height: 125,
+			height: 250,
 			width: 270,
 			top: 350,
 			backgroundImage: 'menubg.jpg'
 			
 		});
+		
 		var tagline = Ti.UI.createImageView({
 			image: 'tagline.png',
 			width: 200,
 			height: 40,
-			top: 400,
+			top: taglineTop,
 			left: 10
 		});
 
@@ -120,7 +130,7 @@ else {
 			backgroundImage: 'menubg.jpg',
 		    //footerTitle:'',
 		    backgroundColor: "#000000",
-		    height: 270,
+		    height: tableHeight,
 		    top: 105
 		});
 		tableView.setData(menuTitles); // Set the menu in the Home page
@@ -129,6 +139,8 @@ else {
 		// Main window
 		
 		var win = new RootWindow();
+		
+		
 		//win = new Window2('http://iowalum.com/calendar/feed_xml.cfm', home, homeWindow);
 		win.moving = false;
 		win.axis = 0;
@@ -203,6 +215,7 @@ else {
 				tableView.setData(menuTitles); 
 				menuWindow.add(tableView);
 				win.navBarHidden = true;
+				
 			}
 			
 			else if(e.row.feedTitle==home) {

@@ -2,6 +2,7 @@ var ApplicationWindow = require('ui/common/ApplicationWindow');
 var WebView = require('ui/common/WebView');
 var GetFeed = require('ui/common/GetFeed');
 var SocialMediaIcons = require('ui/common/SocialMediaIcons');
+var StaticAd = require('ui/common/StaticAd');
 
 
 function InfoWindow(title) {
@@ -45,19 +46,7 @@ function InfoWindow(title) {
 	  showHorizontalScrollIndicator: false
 	});
 	
-	var currentAd =  new GetFeed ('http://iowalum.com/mobile-app/feed_xml.cfm');
-	
-	var ad = Ti.UI.createImageView({
-	  image:    currentAd[14].ad,
-	  width: 300,
-	  height: 52,
-	  top: 350,
-	  left: 10
-	  
-	});
-	ad.addEventListener('click', function(e) {
-		new WebView (currentAd[14].adUrl);
-	}); 
+	var ad = new StaticAd(14,392);
 	
 	
 	
@@ -109,7 +98,6 @@ function InfoWindow(title) {
 	});
 	
 	emailLabel.addEventListener('click', function(e) {
-		vistedLink (emailLabel, emailline, "purple" );
 		var emailDialog = Ti.UI.createEmailDialog();
 		emailDialog.toRecipients = ['alumni@uiowa.edu'];
 		var f = Ti.Filesystem.getFile('cricket.wav');

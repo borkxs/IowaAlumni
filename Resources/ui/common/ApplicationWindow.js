@@ -2,7 +2,9 @@ function ApplicationWindow(windowtitle) {
 	
 	var self = Ti.UI.createWindow({
 	    backgroundColor:'#e2e2e2',
-		navBarHidden: true
+		navBarHidden: true,
+		//barColor:'#99cc66',
+		statusBarStyle: Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK
 	});
 
 	//create master view container
