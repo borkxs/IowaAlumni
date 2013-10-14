@@ -1,4 +1,4 @@
-function NavigateWindow(windowtitle) {
+function NavigateWindow(windowtitle, webview) {
 	
 	var self = Ti.UI.createWindow({
 	    backgroundColor:'#e2e2e2',
@@ -27,6 +27,7 @@ function NavigateWindow(windowtitle) {
     	toggle:false // Custom property for menu toggle
 	});
 	masterContainerWindow.setLeftNavButton(menuButton);
+	masterContainerWindow.add(webview);
 
 	//menuButton event
 	menuButton.addEventListener('click', function(e){

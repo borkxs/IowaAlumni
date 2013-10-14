@@ -139,7 +139,7 @@ else {
 		// Main window
 		
 		var win = new RootWindow();
-		
+		// var win = new Window('http://iowalum.com/calendar/feed_xml.cfm', home);
 		
 		//win = new Window2('http://iowalum.com/calendar/feed_xml.cfm', home, homeWindow);
 		win.moving = false;
@@ -220,6 +220,7 @@ else {
 			
 			else if(e.row.feedTitle==home) {
 				var win =  new RootWindow();
+				
 				menuTitles = [
 					(new MenuRow(home,'home','http://iowalum.com/calendar/feed_xml.cfm',true)),
 				    (new MenuRow(eventsTitle,'events','http://iowalum.com/calendar/feed_xml.cfm',false)),

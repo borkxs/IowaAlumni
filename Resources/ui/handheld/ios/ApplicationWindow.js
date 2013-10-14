@@ -1,4 +1,6 @@
 //Application Window Component Constructor
+var RootWindow = require('ui/common/RootWindow');
+
 function ApplicationWindow(feed,windowtitle) {
 	//declare module dependencies
 	var RSS = require('services/rss'),
@@ -6,7 +8,7 @@ function ApplicationWindow(feed,windowtitle) {
 		DetailView = require('ui/common/DetailView'),	
 		Description = require('ui/common/Description');
 		
-	var rssfeed = new RSS(feed);
+	//var rssfeed = new RSS(feed);
 
 	//create object instance
 	var self = Ti.UI.createWindow({
@@ -16,8 +18,10 @@ function ApplicationWindow(feed,windowtitle) {
 	});
 
 	//construct UI
-	var masterView = new MasterView(feed),
-		detailView = new DetailView();
+	var masterView = new MasterView(feed);
+	var	detailView = new DetailView();
+
+		
 
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
@@ -39,7 +43,7 @@ function ApplicationWindow(feed,windowtitle) {
 	});
 	masterContainerWindow.setLeftNavButton(menuButton);
 	masterContainerWindow.add(masterView);
-
+	
 	//menuButton event
 	menuButton.addEventListener('click', function(e){
 		self.fireEvent('menuClick');
@@ -70,6 +74,7 @@ function ApplicationWindow(feed,windowtitle) {
 		detailView.showArticle(e.link);
 		navGroup.open(detailContainerWindow);
 	});
+
 	
 	
 	return self;

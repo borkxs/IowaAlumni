@@ -4,14 +4,14 @@ var GetFeed = require('ui/common/GetFeed');
 var WebView = require('ui/common/WebView');
 
 function NationalBenefitsWindow(){
-	var self = new ApplicationWindow('National Member Benefits');
 	
+	var masterView = Ti.UI.createView();
 	var textView = Ti.UI.createView({
 		//backgroundColor: 	'#ebc22f',//#ebc22f  e2e2e2
 		backgroundImage:	'gray-broder.png',
 		height:				90,
 		width:				316,
-		top:				63,
+		top:				0,
 		left:				2,
 		//borderRadius:		15,
 		//borderColor: 		'#444444',
@@ -33,7 +33,7 @@ function NationalBenefitsWindow(){
 	var table = Ti.UI.createTableView({
 		height: 'auto',
 		//top: 134
-		top: 134
+		top: 70
 	});
 	
 	var linkLabel = Ti.UI.createLabel({
@@ -96,8 +96,10 @@ function NationalBenefitsWindow(){
 	
 	textView.add(linkLabel);
 	
-	self.add(table);
-	self.add(textView);
+	masterView.add(table);
+	masterView.add(textView);
+	var self = new ApplicationWindow('National Member Benefits', masterView);
+	
 	return self;
 	
 }

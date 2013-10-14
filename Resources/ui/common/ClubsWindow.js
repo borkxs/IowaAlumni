@@ -7,31 +7,31 @@ var StaticAd = require('ui/common/StaticAd');
 
 function ClubsWindow(title){
 	
-	var self = new ApplicationWindow(title);
 	
+	var masterView = Ti.UI.createView();
 	var introLabel = Ti.UI.createLabel({
 			 text: 'Want to connect with fellow UI grads, need a place to watch the next game with fellow Hawkeye fans? IOWA clubs have you covered—find a location near you!',
 			 textAlign: 'left',
 			 left: 10,
 			 width: 300,
-			 top: 68,
+			 top: 10,
 			font: {fontFamily:'HelveticaNeue-Light',fontSize:14,fontWeight:'bold'}
 			        
 		});
-	self.add(introLabel);		
+	masterView.add(introLabel);		
 	
 	var table = Ti.UI.createTableView({
 		height: 'auto',
 		bottom: 70,
-		top: 205
+		top: 145
 	});
 	
 	var people = Ti.UI.createImageView({
 	  image:    'https://www.iowalum.com/mobile/clubs.png',
-	  top:   135
+	  top:   85
 	});
 	
-	self.add(people);
+	masterView.add(people);
 	
 	var clubs = new GetFeed("http://iowalum.com/clubs/feed_xml.cfm");
 	var clubsInfo = new GetFeed("http://iowalum.com/clubs/feed_p2_xml.cfm");
@@ -71,7 +71,7 @@ function ClubsWindow(title){
 	
  
 	table.setData(data);
-	self.add(table);
+	masterView.add(table);
 	table.addEventListener('click', function(e){
 		var stateClubs = getStateList(clubs, clubsInfo, e.row.text);
 		(new GameWatchWindow(stateClubs[0], stateClubs[1])).open();
@@ -79,10 +79,10 @@ function ClubsWindow(title){
 	
 	
 	var ad = new StaticAd(11,395);
-	self.add(ad);
+	masterView.add(ad);
 	
 	
-
+	var self = new ApplicationWindow(title, masterView);
 	return self;
 	
 }

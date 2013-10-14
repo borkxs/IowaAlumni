@@ -6,7 +6,7 @@ var StaticAd = require('ui/common/StaticAd');
 
 
 function InfoWindow(title) {
-	var self = new ApplicationWindow(title);
+	
 
 	//The Different Views
 	var contactView = Ti.UI.createView({
@@ -39,7 +39,7 @@ function InfoWindow(title) {
 	});
 		
 	var scrollMainView = Ti.UI.createScrollView({
-	  top: 63,
+	  top: 0,
 	  contentWidth: 320,
 	  contentHeight: 420,
 	  showVerticalScrollIndicator: false,
@@ -169,7 +169,9 @@ function InfoWindow(title) {
 	//------------------------------------------   Views    ---------------------------------------------------------------------------\\	
 	scrollMainView.add(socialMediaView);	scrollMainView.add(contactView);	scrollMainView.add(ad);
 	
-	self.add(scrollMainView);
+	
+	
+	var self = new ApplicationWindow(title, scrollMainView);
 	return self;
 }
 

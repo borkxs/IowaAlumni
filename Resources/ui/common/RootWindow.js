@@ -12,13 +12,12 @@ var FormatDate = require('ui/common/FormatDate');
 var StaticAd = require('ui/common/StaticAd');
 var WebView = require('ui/common/WebView');
 function RootWindow(data) {
+
 	
-	var self = new ApplicationWindow("Home");
-	//Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
-	//Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
-	
+	var masterView = Ti.UI.createView();
+
 	var tableView = new PostTable();
-	tableView.top = 63;
+	tableView.top = 5;
 	tableView.bottom = 70;
 	tableView.selectionStyle ='none';
 	
@@ -173,7 +172,7 @@ function RootWindow(data) {
 		rows.push(row);
 		
 		tableView.setData(rows);
-		self.add(tableView);
+		masterView.add(tableView);
 	}
 	
 	function refreshRSS() {	
@@ -187,7 +186,8 @@ function RootWindow(data) {
 	var ad = new StaticAd(9,392);
 	
 	
-	self.add(ad);
+	masterView.add(ad);
+	var self = new ApplicationWindow("Home", masterView);
 
 	return self;
 

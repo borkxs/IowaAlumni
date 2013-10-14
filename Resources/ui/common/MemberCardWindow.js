@@ -2,10 +2,10 @@ var ApplicationWindow = require('ui/common/ApplicationWindow');
 var GetFeed = require('ui/common/GetFeed');
 
 function  MemberCardWindow(title){
-	var self = new ApplicationWindow(title);
+	
 	
 	var passwordWin = Ti.UI.createView({
-	    top: 63,
+	    top: 0,
 	    backgroundColor:'#cccccc',
 	    navBarHidden: true
 	});
@@ -164,7 +164,9 @@ function  MemberCardWindow(title){
 	passwordWin.add(passwordTextField);
 	passwordWin.add(loginButton);
 	
-	self.add(passwordWin);
+	
+	
+	var self = new ApplicationWindow(title, passwordWin);
 	return self;
 }
 

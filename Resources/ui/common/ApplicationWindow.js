@@ -1,10 +1,10 @@
-function ApplicationWindow(windowtitle) {
+function ApplicationWindow(windowtitle, masterView) {
 	
 	var self = Ti.UI.createWindow({
 	    backgroundColor:'#e2e2e2',
 		navBarHidden: true,
 		//barColor:'#99cc66',
-		statusBarStyle: Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK
+		
 	});
 
 	//create master view container
@@ -24,6 +24,7 @@ function ApplicationWindow(windowtitle) {
     	toggle:false // Custom property for menu toggle
 	});
 	masterContainerWindow.setLeftNavButton(menuButton);
+	masterContainerWindow.add(masterView);
 
 	//menuButton event
 	menuButton.addEventListener('click', function(e){
