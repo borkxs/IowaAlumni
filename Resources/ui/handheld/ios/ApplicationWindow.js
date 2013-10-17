@@ -21,14 +21,14 @@ function ApplicationWindow(feed,windowtitle) {
 	var masterView = new MasterView(feed);
 	var	detailView = new DetailView();
 
-		
+	
 
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title:windowtitle,
+		title: windowtitle,
 		navBarHidden:false,
 		barImage:'navbar.png',
-		//hires:true,
+		titleControl: Ti.UI.createLabel({ text: windowtitle, color: 'white', font:{fontFamily:'HelveticaNeue-CondensedBold',fontSize:20,fontWeight:'bold'} }),
 		moving:false, // Custom property for movement
 		    axis:0 // Custom property for X axis
 	});

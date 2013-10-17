@@ -9,7 +9,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <id>com.appcelerator.sample.rss</id>
+    <id>com.iowalum.uiowaalumni</id>
     <name>UIowa Alumni</name>
     <version>1.0</version>
     <publisher>University of Iowa Alumni Association</publisher>
@@ -20,22 +20,24 @@
     <persistent-wifi>false</persistent-wifi>
     
     <prerendered-icon>false</prerendered-icon>
-    <statusbar-style>OPAQUE_BLACK</statusbar-style>
+    <statusbar-style>default</statusbar-style> 
+    
+	    <ios>
+	    <plist>
+	        <dict>
+	            <key>UIStatusBarStyle</key><string>UIStatusBarStyleLightContent</string>
+	        </dict>
+	    </plist>
+	</ios>
+    
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
     
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid>0d268600-4584-4b3f-9837-3546725ec1e6</guid>
-    <!--
-<ios>
-    <plist>
-        <dict>
-            <key>UIStatusBarStyle</key><string>UIStatusBarStyleLightContent</string>
-        </dict>
-    </plist>
-</ios>
--->
+   
+
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>

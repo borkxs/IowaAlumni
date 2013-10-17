@@ -99,7 +99,7 @@ function HomeImageSlider(){
 	
 		
 		var text = Ti.UI.createLabel({
-			text: "The Official App of The University of Iowa Alumni Association",
+			text: "The Official App of the University of Iowa Alumni Association",
 			left: 15,
 			top: 22,
 			bottom: 10,

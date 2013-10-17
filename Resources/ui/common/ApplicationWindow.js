@@ -6,12 +6,23 @@ function ApplicationWindow(windowtitle, masterView) {
 		//barColor:'#99cc66',
 		
 	});
+	
+	var statusBar = Ti.UI.createView({
+	    backgroundColor:'#000',
+	    top: 0,
+	    height: 20
+	});
+	
+	self.add(statusBar);
+	
+	
 
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
 		title: windowtitle,
 		navBarHidden:false,
 		barImage:'navbar.png',
+		titleControl: Ti.UI.createLabel({ text: windowtitle, color: 'white', font:{fontFamily:'HelveticaNeue-CondensedBold',fontSize:20,fontWeight:'bold'} }),
 		moving:false, // Custom property for movement
 		    axis:0 // Custom property for X axis
 	});
@@ -25,6 +36,9 @@ function ApplicationWindow(windowtitle, masterView) {
 	});
 	masterContainerWindow.setLeftNavButton(menuButton);
 	masterContainerWindow.add(masterView);
+	
+	
+	
 
 	//menuButton event
 	menuButton.addEventListener('click', function(e){
@@ -48,4 +62,4 @@ function ApplicationWindow(windowtitle, masterView) {
 	
 	return self;
 };
-module.exports = ApplicationWindow;
+module.exports = ApplicationWindow; 

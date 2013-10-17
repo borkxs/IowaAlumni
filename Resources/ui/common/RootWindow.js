@@ -12,7 +12,7 @@ var FormatDate = require('ui/common/FormatDate');
 var StaticAd = require('ui/common/StaticAd');
 var WebView = require('ui/common/WebView');
 function RootWindow(data) {
-
+	Ti.UI.backgroundColor = '#000';
 	
 	var masterView = Ti.UI.createView();
 

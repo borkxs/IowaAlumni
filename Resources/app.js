@@ -31,7 +31,7 @@ else {
 				Window = require('ui/handheld/ios/ApplicationWindow');
 			}
 		}
-		var Window2 = require('ui/common/ApplicationWindow2');
+		
 		var InfoWindow = require('ui/common/InfoWindow');
 		var ClubsWindow = require('ui/common/ClubsWindow');
 		var MapWindow = require('ui/common/MapWindow');
