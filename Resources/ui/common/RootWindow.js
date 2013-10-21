@@ -12,8 +12,9 @@ var FormatDate = require('ui/common/FormatDate');
 var StaticAd = require('ui/common/StaticAd');
 var WebView = require('ui/common/WebView');
 function RootWindow(data) {
-	Ti.UI.backgroundColor = '#000';
-	
+	//
+	//Ti.UI.backgroundColor = '#000';
+	//Titanium.UI.iPhone.showStatusBar();
 	var masterView = Ti.UI.createView();
 
 	var tableView = new PostTable();

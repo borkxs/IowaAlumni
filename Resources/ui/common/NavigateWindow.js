@@ -5,7 +5,13 @@ function NavigateWindow(windowtitle, webview) {
 		navBarHidden: true
 	});
 
-
+	 var statusBar = Ti.UI.createView({
+	    backgroundColor:'#000',
+	    top: 0,
+	    height: 20
+	});
+	
+	self.add(statusBar);
 	
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
@@ -18,11 +24,12 @@ function NavigateWindow(windowtitle, webview) {
 	});
 	var menuButton = Ti.UI.createButton({
 		
-		title: 'Back',
-		height: 30,
+		//title: 'Back',
+		height: 32,
+		width:31,
 		left: 10,
-		width: 63,
-		backgroundImage: 'backbutton.png',
+		
+		backgroundImage: 'back.png',
 		font: {fontFamily:'Helvetica Neue',fontSize:14,fontWeight:'bold'},
     	toggle:false // Custom property for menu toggle
 	});

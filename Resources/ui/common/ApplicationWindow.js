@@ -5,6 +5,7 @@ function ApplicationWindow(windowtitle, masterView) {
 		navBarHidden: true,
 		//barColor:'#99cc66',
 		
+		
 	});
 	
 	var statusBar = Ti.UI.createView({
