@@ -16,6 +16,14 @@ function ApplicationWindow(feed,windowtitle) {
 		//barImage: 'navbar.png'
 		navBarHidden: true
 	});
+	
+	var statusBar = Ti.UI.createView({
+	    backgroundColor:'#000',
+	    top: 0,
+	    height: 20
+	});
+	
+	self.add(statusBar);
 
 	//construct UI
 	var masterView = new MasterView(feed);

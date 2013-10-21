@@ -13,7 +13,13 @@ function GameWatchWindow(clubData, clubInfoData) {
 		navBarHidden: true
 	});
 
-
+	 var statusBar = Ti.UI.createView({
+	    backgroundColor:'#000',
+	    top: 0,
+	    height: 20
+	});
+	
+	self.add(statusBar);
 	
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
@@ -221,6 +227,9 @@ var mainWinTab1 = Titanium.UI.createWindow({
     navBarHidden: true,
     backgroundColor:'#e2e2e2'
 });
+
+
+	mainWinTab1.add(statusBar);
 
 var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
     window: mainWinTab1

@@ -42,7 +42,7 @@ else {
 		var EventsHomeWindow = require('ui/common/EventsHomeWindow');
 		
 		
-
+		
 		//// ---- Menu window, positioned on the left
 		var menuWindow = Ti.UI.createWindow({
 		    top: 		0,
@@ -152,6 +152,7 @@ else {
 			navBarHidden:true
 		});
 		menuWindow.open();
+		
 		navWindow.open();
 		menuWindow.width = 270;
 
