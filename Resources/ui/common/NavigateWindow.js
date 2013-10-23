@@ -25,8 +25,8 @@ function NavigateWindow(windowtitle, webview) {
 	var menuButton = Ti.UI.createButton({
 		
 		//title: 'Back',
-		height: 32,
-		width:31,
+		height: 26,
+		width:15,
 		left: 10,
 		
 		backgroundImage: 'back.png',

@@ -32,10 +32,10 @@ function GameWatchWindow(clubData, clubInfoData) {
 	});
 	var menuButton = Ti.UI.createButton({
 		
-		title: 'Back',
-		height: 30,
-		width: 63,
-		backgroundImage: 'backbutton.png',
+		//title: 'Back',
+		height: 26,
+		width: 15,
+		backgroundImage: 'back.png',
 		font: {fontFamily:'Helvetica Neue',fontSize:14,fontWeight:'bold'},
     	toggle:false // Custom property for menu toggle
 	});
@@ -247,10 +247,10 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 	});
 	var menuButton = Ti.UI.createButton({
 		
-		title: 'Back',
-		height: 30,
-		width: 63,
-		backgroundImage: 'backbutton.png',
+		//title: 'Back',
+		height: 26,
+		width: 15,
+		backgroundImage: 'back.png',
 		//left: 15,
 		font: {fontFamily:'Helvetica Neue',fontSize:14,fontWeight:'bold'},
     	toggle:false // Custom property for menu toggle

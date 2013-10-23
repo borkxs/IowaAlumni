@@ -45,7 +45,7 @@ function ApplicationWindow(feed,windowtitle) {
 		backgroundSelectedImage: 'newmenubuttonselected.png',
 		title: '',
 		height: 22,
-		width: 37,
+		width: 30,
 		//left: 15,
     	toggle:false // Custom property for menu toggle
 	});
