@@ -18,7 +18,7 @@ function RootWindow(data) {
 	var masterView = Ti.UI.createView();
 
 	var tableView = new PostTable();
-	tableView.top = 5;
+	tableView.top = 0;
 	tableView.bottom = 70;
 	tableView.selectionStyle ='none';
 	
