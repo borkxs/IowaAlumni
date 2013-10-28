@@ -1,22 +1,23 @@
 var GetFeed = require('ui/common/GetFeed');
 var ApplicationWindow = require('ui/common/ApplicationWindow');
-var CachedImageView = require('ui/common/CachedImageView');
-var DateObject = require('ui/common/DateObject');
 var SingleRow = require('ui/common/SingleRow');
 var PostTable = require('ui/common/PostTable');
 var HomeImageSlider = require('ui/common/HomeImageSlider');
-var HomeMagazineSection = require('ui/common/HomeMagazineSection');
+var SinglePost = require('ui/common/SinglePost');
 var HomeSMSection = require('ui/common/HomeSMSection');
 var Row = require('ui/common/Row');
 var FormatDate = require('ui/common/FormatDate');
 var StaticAd = require('ui/common/StaticAd');
 var WebView = require('ui/common/WebView');
-function RootWindow(data) {
-	//
-	//Ti.UI.backgroundColor = '#000';
-	//Titanium.UI.iPhone.showStatusBar();
-	var masterView = Ti.UI.createView();
+var Feed = require('ui/common/Feed');
 
+/*
+ * Home Window
+ */
+function RootWindow(data) {
+	
+	var masterView = Ti.UI.createView();
+	var Feeds = new Feed();
 	var tableView = new PostTable();
 	tableView.top = 0;
 	tableView.bottom = 70;
@@ -73,6 +74,8 @@ function RootWindow(data) {
 
 	function refreshRssTable() {
 		var rows = [];
+		
+	//---------------------------------------------------------------------------------------
 	
 		var row = new HomeImageSlider();
 		rows.push(row);
@@ -93,7 +96,7 @@ function RootWindow(data) {
 		
 	//-----------------------------------------------------------------------------------------
 	
-	var alerts = new GetFeed ('http://iowalum.com/mobile-app/root_alert_feed.cfm');
+	var alerts = new GetFeed (Feeds.mobileAlertsFeed());
 	
 	
 	if (alerts.length > 0){
@@ -111,13 +114,13 @@ function RootWindow(data) {
 			row.add(headerLabel);
 			rows.push(row);
 			
-			var row = new HomeMagazineSection(alerts[i]);
+			var row = new SinglePost(alerts[i]);
 			rows.push(row);
 		}
 	}	
 	
 	//-----------------------------------------------------------------------------------------	
-		var events = new GetFeed ('http://iowalum.com/mobile-app/root_events_feed.cfm');
+		var events = new GetFeed (Feeds.todayEventsFeed());
 		
 		if(events.length > 0){
 			var eventHeaderLabel = Ti.UI.createLabel({
@@ -133,7 +136,7 @@ function RootWindow(data) {
 			
 			rows.push(row);
 			
-			var events = new GetFeed ('http://iowalum.com/mobile-app/root_events_feed.cfm');
+			
 			for (var i = 0; i < events.length; i++) {
 				var row = new SingleRow (events[i]);
 				
@@ -154,8 +157,8 @@ function RootWindow(data) {
 		
 		rows.push(row);
 	
-		var article = new GetFeed ('http://iowalum.com/mobile-app/root_feed.cfm');
-		var row = new HomeMagazineSection(article[0]);
+		var article = new GetFeed (Feeds.articleOfTheWeekFeed());
+		var row = new SinglePost(article[0]);
 		
 		rows.push(row);
 	//----------------------------------------------------------------------------	

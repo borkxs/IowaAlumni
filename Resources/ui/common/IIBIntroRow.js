@@ -1,7 +1,6 @@
 var WebView = require('ui/common/WebView');
 /*
- * Single Post Object
- * Essential attributes
+ * Return Iowa Insider Blog's Window Header
  */
 
 function IIBIntroRow(post) {
@@ -75,7 +74,7 @@ function getText (){
 		width: 290,
 		//height: 20,
 		color:'#000000',
-		font: {fontFamily:'HelveticaNeue-Bold',fontSize:12,fontWeight:'bold'}
+		font: {fontFamily:'HelveticaNeueBold',fontSize:12,fontWeight:'bold'}
 	});
 	
 

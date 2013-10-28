@@ -2,9 +2,10 @@ var MapWindow = require('ui/common/MapWindow');
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var GetFeed = require('ui/common/GetFeed');
 var WebView = require('ui/common/WebView');
+var Feed = require('ui/common/Feed');
 
 function NationalBenefitsWindow(){
-	
+	var Feeds = new Feed();
 	var masterView = Ti.UI.createView();
 	var textView = Ti.UI.createView({
 		//backgroundColor: 	'#ebc22f',//#ebc22f  e2e2e2
@@ -50,7 +51,7 @@ function NationalBenefitsWindow(){
 		(new MapWindow()).open();
 	});
 	
-	var discount = new GetFeed ('http://www.iowalum.com/membership/feed_benefits_xml.cfm');
+	var discount = new GetFeed (Feeds.nationalDiscountFeed());
 	
 	var data = [];
 	for (var i = 0; i <= discount.length - 1; i++) {

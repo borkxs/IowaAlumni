@@ -1,11 +1,13 @@
 var WebView = require('ui/common/WebView');
+var Feed = require('ui/common/Feed');
 
 function RSS(feed) {
 	this.feed = feed;
 }
 
+var Feed = new Feed();
 var osname = Ti.Platform.osname;
-var RSS_URL = osname === 'mobileweb' ? '/feed.xml' : 'http://iowalum.com/blog/?feed=rss2';
+var RSS_URL = osname === 'mobileweb' ? '/feed.xml' : Feed.iowaInsiderFeed();
 
 var MONTH_MAP = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
 

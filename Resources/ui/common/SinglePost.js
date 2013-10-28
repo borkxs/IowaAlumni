@@ -2,8 +2,11 @@ var GetFeed = require('ui/common/GetFeed');
 var DateObject = require('ui/common/DateObject');
 var CachedImageView = require('ui/common/CachedImageView');
 var WebView = require('ui/common/WebView');
-
-function HomeMagazineSection(article){
+/*
+ * Return a Single Post Area that contains
+ * tilte, description, and picture(Not Required)
+ */
+function SinglePost (post){
 	
 	
 	
@@ -27,7 +30,7 @@ function HomeMagazineSection(article){
 	    });
 
 	 rowText.addEventListener('click', function(e) {
-			new WebView ( article.url);
+			new WebView ( post.url);
 			
 	 });
 	 
@@ -55,10 +58,10 @@ function HomeMagazineSection(article){
 		
 		
 		
-		var titleLabel = getTitleLabel(article.title);
+		var titleLabel = getTitleLabel(post.title);
 		rowText.add(titleLabel);
 		
-		if (article.image != 'NA'){
+		if (post.image != 'NA'){
 			var imageContainer = Ti.UI.createView({
 				width: 			60,
 				height: 		60,
@@ -69,17 +72,17 @@ function HomeMagazineSection(article){
 				borderWidth: 	1
 		
 			});
-			var postImage = getPostImage(article.image);
-			//new CachedImageView('imageDirectoryName', article.image, postImage);
+			var postImage = getPostImage(post.image);
+			
 			imageContainer.add(postImage);
 			rowText.add(imageContainer);
 			
-			var desclbl = getDescriptionLabel(article.description, 200);
+			var desclbl = getDescriptionLabel(post.description, 200);
 			rowText.add(desclbl);
 		}
 		
 		else{
-			var desclbl = getDescriptionLabel(article.description, 280);
+			var desclbl = getDescriptionLabel(post.description, 280);
 			rowText.add(desclbl);
 		}
 		
@@ -88,7 +91,7 @@ function HomeMagazineSection(article){
 		
 		
 		var posted = Ti.UI.createLabel({
-			text: 			(new DateObject(article.pubDate)).prettyDate(),
+			text: 			(new DateObject(post.pubDate)).prettyDate(),
 			left: 			10,
 			bottom: 		10,
 			height: 		15,
@@ -175,7 +178,7 @@ function getPostImage(image) {
 		width: 'auto',
 		height: 'auto',
 		hires: true,
-		//top: -10, // this works for some reason
+		
 	});
     new CachedImageView('imageDirectoryName', image, tempimagebox);
 	
@@ -195,4 +198,4 @@ function getPostImage(image) {
 	return imagebox;
 }
 
-module.exports = HomeMagazineSection;
+module.exports = SinglePost;

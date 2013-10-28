@@ -1,6 +1,8 @@
 var WebView = require('ui/common/WebView');
 var EditText = require('ui/common/EditText');
-
+/*
+ * Clubs and Game Watch Tabs 
+ */
 function GameWatchWindow(clubData, clubInfoData) {
 	
 //-----------	Game Watch Window -----------//
@@ -55,13 +57,22 @@ function GameWatchWindow(clubData, clubInfoData) {
 	self.add(navGroup);
 	
 	
+	if (Ti.Platform.version == "6.0"){
+		var top = 43;
+		
+	}
+	else{
+		var top = 63;
+		
+	}
+	
 	var mapWin = Ti.UI.createView({
-	    top: 63,
+	    top: top,
 	    backgroundColor:'#ffffff',
 		navBarHidden: true
 	});
 
-
+	
 	
 	
 	
@@ -180,7 +191,7 @@ function GameWatchWindow(clubData, clubInfoData) {
 	mapWin.add(map);
 	mapWin.add(table);
 	
-	
+	//masterContainerWindow.add(mapWin);
 	self.add(mapWin);
 	
 
@@ -268,10 +279,10 @@ var navTab1 = Titanium.UI.iPhone.createNavigationGroup({
 		window:masterContainerWindow
 	});
 	mainWinTab1.add(navGroup);
-	
+	//masterContainerWindow.add(mainWinTab1);
 	var table = Ti.UI.createTableView({
 		height: 'auto',
-		top: 63
+		top: top
 	});
 
 	
@@ -472,35 +483,6 @@ function addRows(i, data, flag){
 	return data;
 }
 
-function setStateTitle (string){
-	if (string.toUpperCase() == 'DISTRICT OF COLUMBIA'){
-		return 'Washington, DC';
-	}
-	else if (string.toUpperCase() == 'MASSACHUSETTS'){
-		return 'MA';
-	}
-	else if (string.toUpperCase() == 'NEW MEXICO'){
-		return 'NM';
-	}
-	else if (string.toUpperCase() == 'NEW YORK'){
-		return 'New York';
-	}
-	else if (string.toUpperCase() == 'NORTH CAROLINA'){
-		return 'NC';
-	}
-	else if (string.toUpperCase() == 'SOUTH CAROLINA'){
-		return 'SC';
-	}
-	else if (string.toUpperCase() == 'PENNSYLVANIA'){
-		return 'PA';
-	}
-	else if (string.toUpperCase() == 'WASHINGTON'){
-		return 'WA';
-	}
-	else{
-		return string.charAt(0).toUpperCase() + (string.slice(1)).toLowerCase();
-	}
-    
-}
+
 
 module.exports = GameWatchWindow;

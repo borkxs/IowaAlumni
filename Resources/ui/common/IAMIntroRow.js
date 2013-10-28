@@ -1,7 +1,6 @@
 var WebView = require('ui/common/WebView');
 /*
- * Single Post Object
- * Essential attributes
+ * Return Iowa Magazine's Window Header
  */
 
 function IAMIntroRow(post) {
@@ -87,7 +86,7 @@ function getText (){
 		width: 200,
 		//height: 20,
 		color:'#000000',
-		font: {fontFamily:'HelveticaNeue-Bold',fontSize:12,fontWeight:'bold'}
+		font: {fontFamily:'HelveticaNeueBold',fontSize:12,fontWeight:'bold'}
 	});
 	
 

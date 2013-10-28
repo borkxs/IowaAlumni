@@ -2,8 +2,9 @@ var GetFeed = require('ui/common/GetFeed');
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var NavigateWindow = require('ui/common/NavigateWindow');
 var WebView = require('ui/common/WebView');
+var Feed = require('ui/common/Feed');
 function MapWindow() {
-	
+	var Feeds = new Feed();
 	var mapWin = Ti.UI.createView({
 	    
 	    backgroundColor:'#ffffff',
@@ -13,7 +14,7 @@ function MapWindow() {
 
 	
 	
-	var businessesInfo =  new GetFeed ('http://iowalum.com/membership/feed_xml.cfm');
+	var businessesInfo =  new GetFeed (Feeds.iowaCityFeed());
 	
 	var companyInfo = [];
 	for (var i = 0; i <= businessesInfo.length - 1; i++) {

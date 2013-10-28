@@ -1,9 +1,10 @@
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var GetFeed = require('ui/common/GetFeed');
+var Feed = require('ui/common/Feed');
 
 function  MemberCardWindow(title){
 	
-	
+	var Feeds = new Feed();
 	var passwordWin = Ti.UI.createView({
 	    top: 0,
 	    backgroundColor:'#cccccc',
@@ -128,7 +129,7 @@ function  MemberCardWindow(title){
 		activityIndicator.show();
 		setTimeout(function(){activityIndicator.hide();}, 2000);
 		setTimeout(function(){
-			var password = (new GetFeed('http://iowalum.com/membership/password_feed_xml.cfm')[0]);
+			var password = (new GetFeed(Feeds.passwordFeed())[0]);
 		password.pass =  password.pass.replace(" ","");
 		password.pass =  password.pass.replace(" ","");
 		password.pass2 =  password.pass2.replace(" ","");

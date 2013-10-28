@@ -1,7 +1,9 @@
 var GetFeed = require('ui/common/GetFeed');
 var FormatDate = require('ui/common/FormatDate');
+var Feed = require('ui/common/Feed');
 
 function HomeImageSlider(){
+	var Feeds = new Feed();
 	var container =  Titanium.UI.createView({
 			backgroundColor: 'transparent',
 				height:			250,
@@ -17,7 +19,7 @@ function HomeImageSlider(){
 		row.add(container);
 		
 		
-		var imageArray = new GetFeed ('http://iowalum.com/mobile-app/root_homeImages_feed.cfm');
+		var imageArray = new GetFeed (Feeds.sliderImagesFeed());
 		var imagebox = Ti.UI.createImageView({
 			image: imageArray[0].url,
 			width: 300,
@@ -54,7 +56,7 @@ function HomeImageSlider(){
 		});
 		
 		var date = new Date();
-		var currentDate = new GetFeed ("http://iowalum.com/mobile-app/root_date_feed.cfm")[0].date;
+		var currentDate = new GetFeed (Feeds.todayDateFeed())[0].date;
 		var date = Ti.UI.createLabel({
 			text: (new FormatDate()).getMonthString(date.getMonth()) +' '+date.getDate()+', '+date.getFullYear(),
 			top: 8,

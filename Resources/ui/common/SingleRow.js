@@ -2,8 +2,8 @@ var DateObject = require('ui/common/DateObject');
 var EditText = require('ui/common/EditText');
 var WebView = require('ui/common/WebView');
 /*
- * Single Post Object
- * Essential attributes
+ * Return a Single Post Area for Events Window
+ * that contains Tilte, Time, and Place
  */
 
 function SingleRow(post) {

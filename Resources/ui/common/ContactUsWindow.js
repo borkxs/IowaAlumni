@@ -1,11 +1,10 @@
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var WebView = require('ui/common/WebView');
-var GetFeed = require('ui/common/GetFeed');
 var SocialMediaIcons = require('ui/common/SocialMediaIcons');
 var StaticAd = require('ui/common/StaticAd');
 
 
-function InfoWindow(title) {
+function ContactUsWindow(title) {
 	
 
 	//The Different Views
@@ -177,4 +176,4 @@ function InfoWindow(title) {
 
 
 
-module.exports = InfoWindow;
+module.exports = ContactUsWindow;

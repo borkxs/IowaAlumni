@@ -3,11 +3,14 @@ var GameWatchWindow = require('ui/common/GameWatchWindow');
 var WebView = require('ui/common/WebView');
 var ApplicationWindow = require('ui/common/ApplicationWindow');
 var StaticAd = require('ui/common/StaticAd');
-
+var Feed = require('ui/common/Feed');
+/*
+ * Root Window for Clubs and Gamewatches
+ */
 
 function ClubsWindow(title){
 	
-	
+	var Feeds = new Feed();
 	var masterView = Ti.UI.createView();
 	var introLabel = Ti.UI.createLabel({
 			 text: 'Want to connect with fellow UI grads, need a place to watch the next game with fellow Hawkeye fans? IOWA clubs have you covered—find a location near you!',
@@ -33,8 +36,8 @@ function ClubsWindow(title){
 	
 	masterView.add(people);
 	
-	var clubs = new GetFeed("http://iowalum.com/clubs/feed_xml.cfm");
-	var clubsInfo = new GetFeed("http://iowalum.com/clubs/feed_p2_xml.cfm");
+	var clubsInfo = new GetFeed(Feeds.clubsFeed());
+	var clubs = new GetFeed(Feeds.gameWatchFeed());
 	var data = [];
 	var rowCounter = 0;
 	for (var i = 0; i <= clubs.length - 1; i++) {

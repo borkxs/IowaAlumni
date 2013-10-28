@@ -13,15 +13,18 @@ var Post = require('ui/common/Post'),
 	RSS = require('services/rss'),
 	WebView = require('ui/common/WebView'),
 	StaticAd = require('ui/common/StaticAd');
+	Feed = require('ui/common/Feed');
 
 /* 
- * Master View Component Constructor
+ * Master View is the layout
+ * for Events Window, Iowa Magazine Window,
+ *  and Iowa Insider Window
  */
 
 function MasterView(feed) {
 	
 	var minheight = 200;
-
+	var Feeds = new Feed();
 	var rssfeed = new RSS(feed);
 	
 
@@ -92,30 +95,31 @@ function MasterView(feed) {
 			var Counter = 0;
 			var headerCounter = 0;
 			var adIndex = 0;
-			var ads = new GetFeed('http://iowalum.com/advertising/feed_xml.cfm');
+			var ads = new GetFeed(Feeds.adFeed() );
 			var tempDate = "";
 			for (var i = 0; i < data.length; i++) {
 				var post = new Post(data[i]);
 				
+				
 				//Add Feed's Intro Text
-				if (i == 0 && feed == 'http://iowalum.com/blog/?feed=rss2'){
+				if (i == 0 && feed == Feeds.iowaInsiderFeed()){
 						var row = new IIBIntroRow();
 						rows.push(row);
 					}
 				
-				if (i == 0 && feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
+				if (i == 0 && feed == Feeds.magazineFeed()){
 						var row = new IAMIntroRow();
 						rows.push(row);
 					}
 				
 				//Add Feed's Ad
-				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == 'http://iowalum.com/blog/?feed=rss2'){
+				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == Feeds.iowaInsiderFeed()){
 					var row = new Ad(ads[adIndex + 3]);
 					rows.push(row);
 					adIndex++;
 				}
 				
-				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
+				if (Counter != 0 && (Counter % 3) == 0 && adIndex < 3 && feed == Feeds.magazineFeed()){
 					var row = new Ad(ads[adIndex + 6]);
 					rows.push(row);
 					adIndex++;
@@ -123,7 +127,7 @@ function MasterView(feed) {
 				
 				
 				
-				if(post.imageheight != null && post.imageheight > 150 && post.imageheight < 300 && featureSet == false && feed != 'http://iowalum.com/calendar/feed_xml.cfm') {
+				if(post.imageheight != null && post.imageheight > 150 && post.imageheight < 300 && featureSet == false && feed != Feeds.eventsFeed()) {
 					
 					var row = new FeatureRow(post);
 					featureSet = true;
@@ -133,7 +137,7 @@ function MasterView(feed) {
 					rows.push(row);
 				}
 				
-				else if (feed == 'http://iowalum.com/calendar/feed_xml.cfm'){
+				else if (feed == Feeds.eventsFeed()){
 					if ((Counter == 0) ||(tempDate != post.pubDate && Counter != 0)){
 						var header = new HeaderRow(post);
 						
@@ -199,10 +203,10 @@ function MasterView(feed) {
 	self.add(table);
 	
 	
-	if ( feed == 'http://iowalum.com/blog/?feed=rss2'){
+	if ( feed == Feeds.iowaInsiderFeed()){
 		var ad = new StaticAd(13,350);
 	}
-	else if ( feed == 'http://iowalum.com/magazine/feed_xml.cfm'){
+	else if ( feed == Feeds.magazineFeed()){
 		var ad = new StaticAd(12,350);
 	}
 	else {
