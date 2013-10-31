@@ -37,7 +37,7 @@ function ContactUsWindow(title) {
 		
 	});
 		
-	var scrollMainView = Ti.UI.createScrollView({
+	var scrollMainView = Ti.UI.createView({
 	  top: 0,
 	  contentWidth: 320,
 	  contentHeight: 420,
